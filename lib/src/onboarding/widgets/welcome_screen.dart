@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:myapp/common/services/storage.dart';
-import 'package:myapp/common/utils/app_routes.dart';
 import 'package:myapp/common/utils/kcolors.dart';
 import 'package:myapp/common/utils/kstrings.dart';
 import 'package:myapp/common/widgets/app_style.dart';
 import 'package:myapp/common/widgets/custom_button.dart';
+import 'package:myapp/common/widgets/reusable_text.dart';
 import 'package:myapp/const/resource.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -22,13 +21,13 @@ class WelcomeScreen extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(
-              height: 20.h,
+              height: 5.h,
             ),
             Image.asset(
               R.ASSETS_IMAGES_GETSTARTED_PNG,
             ),
             SizedBox(
-              height: 30.h,
+              height: 10.h,
             ),
             Text(
               AppText.kWelcomeHeader,
@@ -36,7 +35,7 @@ class WelcomeScreen extends StatelessWidget {
               style: appStyle(24, Kolors.kPrimary, FontWeight.bold),
             ),
             SizedBox(
-              height: 20.h,
+              height: 10.h,
             ),
             SizedBox(
               width: ScreenUtil().screenWidth - 100,
@@ -57,6 +56,27 @@ class WelcomeScreen extends StatelessWidget {
                 context.go('/home');
               },
             ),
+            SizedBox(
+              height: 5.h,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ReusableText(
+                  text: "Already have an account",
+                  style: appStyle(12, Kolors.kDark, FontWeight.normal),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.go('/login');
+                  },
+                  child: const Text(
+                    "Sign In",
+                    style: TextStyle(fontSize: 12, color: Colors.blue),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),

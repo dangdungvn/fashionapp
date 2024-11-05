@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:myapp/src/auth/views/login_screen.dart';
 import 'package:myapp/src/entrypoint/views/entrypoint.dart';
 import 'package:myapp/src/onboarding/views/onboarding_screen.dart';
 import 'package:myapp/src/splashscreen/views/splashscreen_screen.dart';
@@ -18,7 +19,7 @@ final GoRouter _router = GoRouter(
     ),
     GoRoute(
       path: '/home',
-      builder: (context, state) => const AppEntryPoint(),
+      builder: (context, state) => AppEntryPoint(),
     ),
     GoRoute(
       path: '/onboarding',
@@ -48,10 +49,10 @@ final GoRouter _router = GoRouter(
     //   path: '/orders',
     //   builder: (context, state) => const OrdersPage(),
     // ),
-    // GoRoute(
-    //   path: '/login',
-    //   builder: (context, state) => const LoginPage(),
-    // ),
+    GoRoute(
+      path: '/login',
+      builder: (context, state) => const LoginPage(),
+    ),
     // GoRoute(
     //   path: '/register',
     //   builder: (context, state) => const RegistrationPage(),
