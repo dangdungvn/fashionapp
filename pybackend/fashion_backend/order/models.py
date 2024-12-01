@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from extras.models import Address
 
+
 # Create your models here.
 class Order(models.Model):
     PENDING = "pending"
@@ -12,7 +13,7 @@ class Order(models.Model):
         (DELIVERED, "Delivered"),
         (CANCELLED, "Cancelled"),
     )
-    
+
     PAID = "paid"
     FAILED = "failed"
     PAYMENTSTATUS = (
@@ -27,10 +28,12 @@ class Order(models.Model):
     total_quantity = models.IntegerField()
     subtotal = models.FloatField()
     total = models.FloatField()
-    delivery_status = models.CharField(max_length=255, choices=ORDERSTATUS,default=PENDING)
+    delivery_status = models.CharField(
+        max_length=255, choices=ORDERSTATUS, default=PENDING
+    )
     payment_status = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return f"Order {self.id} by {self.user.username} to {self.address.address}"
