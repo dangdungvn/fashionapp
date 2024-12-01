@@ -23,11 +23,11 @@ FetchOrders fetchOrders(FetchOrdersTypes o) {
           break;
         case FetchOrdersTypes.delivered:
           url = Uri.parse(
-              '${Environment.appBaseUrl}/api/orders/me/?status=Delivered');
+              '${Environment.appBaseUrl}/api/orders/me/?status=delivered');
           break;
         case FetchOrdersTypes.cancelled:
           url = Uri.parse(
-              '${Environment.appBaseUrl}/api/orders/me/?status=Cancelled');
+              '${Environment.appBaseUrl}/api/orders/me/?status=cancelled');
           break;
         default:
       }

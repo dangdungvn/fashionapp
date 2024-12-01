@@ -51,6 +51,7 @@ class WishlistNotifier with ChangeNotifier {
     _wishlist.clear();
     _wishlist = w;
     notifyListeners();
+    print(w);
   }
 
   void setToList(int v) {
