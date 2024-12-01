@@ -1,0 +1,8 @@
+build/
+.idea/
+*.log
+*.exe
+*.dll
+.flutter-plugins-dependencies
+.flutter-plugins
+.dart_tool/
