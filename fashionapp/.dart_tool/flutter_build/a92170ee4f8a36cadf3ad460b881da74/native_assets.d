@@ -1,0 +1,1 @@
+ D:\\Workspace\\flutter\\fullstack-fashionapp-master\\fashionapp\\.dart_tool\\flutter_build\\a92170ee4f8a36cadf3ad460b881da74\\native_assets.yaml: 
