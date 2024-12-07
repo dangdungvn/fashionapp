@@ -22,7 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _navigator() async {
     await Future.delayed(const Duration(seconds: 3), () {
-      if (Storage().getBool('firstOpen') == null) {
+      bool isFirstOpen = Storage().getBool('firstOpen') ?? true;
+      if (isFirstOpen) {
         GoRouter.of(context).go('/onboarding');
       } else {
         GoRouter.of(context).go('/home');

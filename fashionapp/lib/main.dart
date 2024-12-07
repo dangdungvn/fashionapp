@@ -1,3 +1,4 @@
+import 'package:fashionapp/common/services/storage.dart';
 import 'package:fashionapp/src/addresses/controllers/address_notifier.dart';
 import 'package:fashionapp/src/auth/controllers/auth_notifier.dart';
 import 'package:fashionapp/src/auth/controllers/password_notifier.dart';
@@ -27,6 +28,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: Environment.fileName);
   await GetStorage.init();
+  final isFirstRun = checkFirstRun();
   runApp(
     MultiProvider(
       providers: [
@@ -45,18 +47,31 @@ void main() async {
         ChangeNotifierProvider(create: (_) => NotificationNotifier()),
         ChangeNotifierProvider(create: (_) => RatingNotifier()),
       ],
-      child: const MyApp(),
+      child: MyApp(
+        isFirstRun: isFirstRun,
+      ),
     ),
   );
 }
 
+bool checkFirstRun() {
+  final box = GetStorage();
+  bool isFirstRun = box.read('isFirstRun') ?? true; // Mặc định là true
+  if (isFirstRun) {
+    box.write('isFirstRun', false); // Đánh dấu không còn là lần đầu tiên
+  }
+  return isFirstRun;
+}
+
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool isFirstRun;
+  const MyApp({super.key, required this.isFirstRun});
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    Storage().setBool('firstOpen', checkFirstRun());
     return ScreenUtilInit(
       designSize: screenSize,
       minTextAdapt: true,
