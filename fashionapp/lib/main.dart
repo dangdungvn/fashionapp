@@ -13,6 +13,7 @@ import 'package:fashionapp/src/reviews/controllers/rating_notifier.dart';
 import 'package:fashionapp/src/search/controllers/search_notifier.dart';
 import 'package:fashionapp/src/wishlist/controllers/wishlist_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
@@ -52,6 +53,9 @@ void main() async {
       ),
     ),
   );
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: [
+    SystemUiOverlay.top,
+  ]);
 }
 
 bool checkFirstRun() {
