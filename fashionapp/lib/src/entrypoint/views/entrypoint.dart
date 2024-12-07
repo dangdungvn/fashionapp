@@ -3,12 +3,12 @@ import 'package:fashionapp/src/cart/hooks/fetch_cart_count.dart';
 import 'package:fashionapp/src/entrypoint/controllers/bottom_tab_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/src/cart/views/cart_screen.dart';
 import 'package:fashionapp/src/home/views/home_screen.dart';
 import 'package:fashionapp/src/profile/views/profile_screen.dart';
 import 'package:fashionapp/src/wishlist/views/wishlist_screen.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:google_nav_bar/google_nav_bar.dart'; // Import thư viện
 
@@ -32,43 +32,48 @@ class AppEntryPoint extends HookWidget {
           body: pageList[tabIndexNotifier.index],
           bottomNavigationBar: Container(
             color: Kolors.kOffWhite,
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: GNav(
-              rippleColor: Colors.grey.shade800,
-              hoverColor: Colors.grey.shade700,
               haptic: true,
-              tabActiveBorder: Border.all(color: Colors.black, width: 1),
               gap: 8,
-              color: Colors.grey[800],
+              color: Colors.grey.shade500,
               activeColor: Kolors.kDark,
               iconSize: 24,
               tabBackgroundColor: Colors.grey.shade200,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
               selectedIndex: tabIndexNotifier.index,
               onTabChange: (i) {
                 tabIndexNotifier.setIndex(i);
               },
               tabs: [
                 const GButton(
-                  icon: Ionicons.home_outline,
+                  icon: LineIcons.home,
+                  backgroundColor: Color.fromARGB(255, 249, 213, 255),
                   text: "Home",
                 ),
                 const GButton(
-                  icon: Ionicons.heart_outline,
+                  icon: LineIcons.heart,
+                  backgroundColor: Color.fromARGB(255, 250, 171, 197),
                   text: "Wishlist",
                 ),
                 GButton(
-                  icon: MaterialCommunityIcons.cart_outline,
+                  icon: LineIcons.shoppingBag,
                   text: "Cart",
+                  backgroundColor: const Color.fromARGB(255, 247, 243, 206),
                   leading: Badge(
                     label: Text(data.cartCount.toString()),
-                    child: const Icon(
-                      MaterialCommunityIcons.cart_outline,
+                    child: Icon(
+                      LineIcons.shoppingBag,
+                      color: tabIndexNotifier.index == 2
+                          ? Kolors.kDark
+                          : Colors.grey.shade500,
                     ),
                   ),
                 ),
                 const GButton(
-                  icon: Icons.person_outline,
+                  icon: LineIcons.userEdit,
+                  iconActiveColor: Kolors.kDark,
+                  backgroundColor: Color.fromARGB(255, 213, 238, 250),
                   text: "Profile",
                 ),
               ],
