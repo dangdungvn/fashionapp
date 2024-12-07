@@ -18,19 +18,25 @@ import 'package:fashionapp/src/products/widgets/product_bottom_bar.dart';
 import 'package:fashionapp/src/products/widgets/product_sizes_widget.dart';
 import 'package:fashionapp/src/products/widgets/similar_products.dart';
 import 'package:fashionapp/src/wishlist/controllers/wishlist_notifier.dart';
+import 'package:fashionapp/src/wishlist/hooks/fetch_wishlist.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:like_button/like_button.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends HookWidget {
   const ProductPage({super.key, required this.productId});
   final String productId;
   @override
   Widget build(BuildContext context) {
     String? accessToken = Storage().getString('accessToken');
+    final results = fetchWishlist();
+    final products = results.products;
+    final isLoading = results.isLoading;
+    final refetch = results.refetch;
     return Consumer<ProductNotifier>(
       builder: (context, productNotifier, child) {
         return Scaffold(
@@ -48,9 +54,21 @@ class ProductPage extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 16.0),
                     child: Consumer<WishlistNotifier>(
                       builder: (context, wishlistNotifier, child) {
+                        if (isLoading) {
+                          return const Center(
+                            child: SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                color: Kolors.kOffWhite,
+                              ),
+                            ),
+                          );
+                        }
                         return LikeButton(
                           size: 30,
-                          isLiked: wishlistNotifier.wishlist
+                          isLiked: products
+                              .map((e) => e.id)
                               .contains(productNotifier.product!.id),
                           circleColor: const CircleColor(
                               start: Color(0xff00ddff), end: Color(0xff0099cc)),
@@ -65,6 +83,10 @@ class ProductPage extends StatelessWidget {
                             } else {
                               wishlistNotifier.addRemoveWishlist(
                                   productNotifier.product!.id, () {});
+                              Future.delayed(const Duration(milliseconds: 500),
+                                  () {
+                                refetch();
+                              });
                               return !isLiked;
                             }
                           },
@@ -209,9 +231,9 @@ class ProductPage extends StatelessWidget {
                   ),
                 ),
               ),
-              const SliverToBoxAdapter(
+              SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: ColorColectionWidget(),
                 ),
               ),

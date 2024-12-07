@@ -12,7 +12,6 @@ FetchDefaultAddress fetchDefaultAddress() {
   final isLoading = useState(false);
   final error = useState<String?>(null);
   String? accessToken = Storage().getString('accessToken');
-  final isMounted = useIsMounted();
 
   Future<void> fetchData() async {
     isLoading.value = true;
@@ -32,9 +31,7 @@ FetchDefaultAddress fetchDefaultAddress() {
         address.value = addressModelFromJson(utf8.decode(response.bodyBytes));
       }
     } catch (e) {
-      if (isMounted()) {
-        error.value = e.toString();
-      }
+      error.value = e.toString();
     } finally {
       isLoading.value = false;
     }

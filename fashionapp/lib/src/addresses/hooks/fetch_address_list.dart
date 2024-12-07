@@ -16,7 +16,7 @@ FetchAddress fetchAddress() {
     isLoading.value = true;
 
     try {
-      Uri url = Uri.parse('${Environment.appBaseUrl}/api/address/addresslist');
+      Uri url = Uri.parse('${Environment.appBaseUrl}/api/address/addresslist/');
       String? accessToken = Storage().getString('accessToken');
 
       final response = await http.get(

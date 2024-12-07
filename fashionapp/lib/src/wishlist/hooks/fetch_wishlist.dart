@@ -16,7 +16,7 @@ FetchProduct fetchWishlist() {
     isLoading.value = true;
 
     try {
-      Uri url = Uri.parse('${Environment.appBaseUrl}/api/wishlist/me');
+      Uri url = Uri.parse('${Environment.appBaseUrl}/api/wishlist/me/');
       String? accessToken = Storage().getString('accessToken');
 
       final response = await http.get(

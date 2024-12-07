@@ -1,15 +1,24 @@
 import 'package:fashionapp/common/utils/kcolors.dart';
-import 'package:fashionapp/common/widgets/app_style.dart';
-import 'package:fashionapp/common/widgets/reusable_text.dart';
-import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/src/products/controller/colors_sizes_notifier.dart';
 import 'package:fashionapp/src/products/controller/product_notifier.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class ColorColectionWidget extends StatelessWidget {
-  const ColorColectionWidget({super.key});
+  ColorColectionWidget({super.key});
+
+  final Map<String, Color> colorMap = {
+    'black': Colors.black,
+    'yellow': Colors.yellow,
+    'green': Colors.green,
+    'gray': Colors.grey,
+    'purple': Colors.purple,
+    // Add more colors as needed
+  };
+
+  Color getColorFromName(String colorName) {
+    return colorMap[colorName.toLowerCase()] ?? Colors.transparent;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +37,26 @@ class ColorColectionWidget extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
                   child: Container(
-                    padding: EdgeInsets.only(
-                        right: 20.w, left: 20.w, top: 5.h, bottom: 5.h),
-                    // margin: EdgeInsets.only(right: 20.w,),
+                    width: 40.0,
+                    height: 40.0,
                     decoration: BoxDecoration(
-                      borderRadius: kRadiusAll,
-                      color: c == controller.colors
-                          ? Kolors.kPrimary
-                          : Kolors.kGrayLight,
-                    ),
-                    child: ReusableText(
-                      text: c,
-                      style: appStyle(12, Kolors.kWhite, FontWeight.normal),
+                      shape: BoxShape.circle,
+                      color: getColorFromName(c),
+                      border: Border.all(
+                        color: c == controller.colors
+                            ? Kolors.kPrimary
+                            : Kolors.kGrayLight,
+                        width: 2.0,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: c == controller.colors
+                              ? Kolors.kPrimary
+                              : Kolors.kGrayLight,
+                          blurRadius: 5.0,
+                          spreadRadius: 1.0,
+                        ),
+                      ],
                     ),
                   ),
                 ),
