@@ -14,7 +14,7 @@ FetchCategories fetchCategories() {
   Future<void> fetchData() async {
     isLoading.value = true;
     try {
-      Uri url = Uri.parse('${Environment.appBaseUrl}/api/products/categories');
+      Uri url = Uri.parse('${Environment.appBaseUrl}/api/products/categories/');
 
       final response = await http.get(url);
 
