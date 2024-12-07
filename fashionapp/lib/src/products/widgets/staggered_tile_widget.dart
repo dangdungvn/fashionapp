@@ -11,6 +11,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
 
 class StaggeredTileWidget extends HookWidget {
@@ -50,41 +51,54 @@ class StaggeredTileWidget extends HookWidget {
                         fit: BoxFit.cover,
                         imageUrl: product.imageUrls[0]),
                     Positioned(
-                        right: 10.h,
-                        top: 10.h,
-                        child: Consumer<WishlistNotifier>(
-                          builder: (context, wishlistNotifier, child) {
-                            if (isLoading) {
-                              return const Center(
-                                child: SizedBox(
-                                  width: 20,
-                                  height: 20,
-                                  child: CircularProgressIndicator(
-                                    color: Kolors.kOffWhite,
-                                  ),
+                      top: 8,
+                      right: 8,
+                      child: Consumer<WishlistNotifier>(
+                        builder: (context, wishlistNotifier, child) {
+                          if (isLoading) {
+                            return const Center(
+                              child: SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  color: Kolors.kOffWhite,
                                 ),
-                              );
-                            }
-                            return GestureDetector(
-                              onTap: () {
-                                onTap!();
-                                Future.delayed(
-                                    const Duration(milliseconds: 500), () {
-                                  refetch();
-                                });
-                              },
-                              child: Icon(
-                                Icons.favorite,
-                                color: products
-                                        .map((e) => e.id)
-                                        .contains(product.id)
-                                    ? Kolors.kRed
-                                    : Kolors.kGray,
-                                size: 25,
                               ),
                             );
-                          },
-                        ))
+                          }
+                          return LikeButton(
+                            size: 25,
+                            isLiked:
+                                products.map((e) => e.id).contains(product.id),
+                            circleColor: const CircleColor(
+                                start: Color(0xff00ddff),
+                                end: Color(0xff0099cc)),
+                            bubblesColor: const BubblesColor(
+                              dotPrimaryColor: Colors.pink,
+                              dotSecondaryColor: Colors.white,
+                            ),
+                            onTap: (isLiked) async {
+                              wishlistNotifier.addRemoveWishlist(
+                                  product.id, () {});
+                              Future.delayed(const Duration(milliseconds: 500),
+                                  () {
+                                refetch();
+                              });
+                              return !isLiked;
+                            },
+                            likeBuilder: (bool isLiked) {
+                              return Icon(
+                                Icons.favorite,
+                                color: isLiked
+                                    ? Colors.red
+                                    : Colors.grey.withOpacity(0.5),
+                                size: 25,
+                              );
+                            },
+                          );
+                        },
+                      ),
+                    ),
                   ],
                 ),
               ),

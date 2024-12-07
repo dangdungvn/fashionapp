@@ -71,8 +71,8 @@ class WishlistStaggeredTileWidget extends HookWidget {
                                 color: products
                                         .map((e) => e.id)
                                         .contains(product.id)
-                                    ? Kolors.kRed
-                                    : Kolors.kGray,
+                                    ? Colors.red
+                                    : Colors.grey.withOpacity(0.5),
                                 size: 25,
                               ),
                             );
