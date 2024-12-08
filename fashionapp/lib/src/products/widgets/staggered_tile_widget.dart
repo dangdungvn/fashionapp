@@ -85,11 +85,7 @@ class StaggeredTileWidget extends HookWidget {
                             ),
                             onTap: (isLiked) async {
                               wishlistNotifier.addRemoveWishlist(
-                                  product.id, () {});
-                              Future.delayed(const Duration(milliseconds: 500),
-                                  () {
-                                wishlistRefetch!();
-                              });
+                                  product.id, wishlistRefetch!);
                               return !isLiked;
                             },
                             likeBuilder: (bool isLiked) {

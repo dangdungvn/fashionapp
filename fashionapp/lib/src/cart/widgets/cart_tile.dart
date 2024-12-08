@@ -33,28 +33,32 @@ class CartTile extends StatelessWidget {
           },
           child: Padding(
             padding: EdgeInsets.only(bottom: 8.h),
-            child: Container(
-              width: ScreenUtil().screenWidth,
-              height: 90.h,
-              decoration: BoxDecoration(
-                color: !cartNotifier.selectedCartItemsId.contains(cart.id)
-                    ? Kolors.kWhite
-                    : Kolors.kPrimaryLight.withOpacity(0.1),
-                borderRadius: kRadiusAll,
+            child: Slidable(
+              endActionPane: ActionPane(
+                motion: const StretchMotion(),
+                extentRatio: 0.2,
+                children: [
+                  SlidableAction(
+                    onPressed: (context) {
+                      onDelete!();
+                    },
+                    icon: Icons.delete,
+                    backgroundColor: Colors.red.shade300,
+                    foregroundColor: Kolors.kWhite,
+                    autoClose: true,
+                    label: "Del",
+                    borderRadius: BorderRadius.circular(12),
+                  )
+                ],
               ),
-              child: Slidable(
-                endActionPane: ActionPane(
-                  motion: const StretchMotion(),
-                  extentRatio: 0.2,
-                  children: [
-                    SlidableAction(
-                      onPressed: (context) {
-                        onDelete!();
-                      },
-                      icon: Icons.delete,
-                      backgroundColor: Kolors.kRed,
-                    )
-                  ],
+              child: Container(
+                width: ScreenUtil().screenWidth,
+                height: 90.h,
+                decoration: BoxDecoration(
+                  color: !cartNotifier.selectedCartItemsId.contains(cart.id)
+                      ? Kolors.kWhite
+                      : Kolors.kPrimaryLight.withOpacity(0.1),
+                  borderRadius: kRadiusAll,
                 ),
                 child: SizedBox(
                   height: 85.h,
