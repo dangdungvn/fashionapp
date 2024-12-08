@@ -3,6 +3,7 @@ import 'package:fashionapp/common/widgets/shimmers/list_shimmer.dart';
 import 'package:fashionapp/src/categories/controllers/category_notifier.dart';
 import 'package:fashionapp/src/categories/hooks/fetch_products_by_category.dart';
 import 'package:fashionapp/src/wishlist/controllers/wishlist_notifier.dart';
+import 'package:fashionapp/src/wishlist/hooks/fetch_wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,6 +26,10 @@ class ProductsByCategory extends HookWidget {
         fetchProductsByCategories(context.read<CategoryNotifier>().id);
     final products = results.products;
     final isLoading = results.isLoading;
+    final resultsWishlist = fetchWishlist();
+    final wishlistProduct = resultsWishlist.products;
+    final isLoadingWishlist = resultsWishlist.isLoading;
+    final refetchWishlist = resultsWishlist.refetch;
     // final error = results.error;
     if (isLoading) {
       return const Scaffold(
@@ -63,6 +68,9 @@ class ProductsByCategory extends HookWidget {
                         },
                         i: i,
                         product: product,
+                        wishlistProduct: wishlistProduct,
+                        wishlistIsLoading: isLoadingWishlist,
+                        wishlistRefetch: refetchWishlist,
                       ),
                     ),
                   );

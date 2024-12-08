@@ -65,36 +65,31 @@ class CartPage extends HookWidget {
               context.push('/checkout');
             },
             child: cartNotifier.selectedCartItems.isNotEmpty
-                ? Padding(
-                    padding: EdgeInsets.only(bottom: 50.h),
-                    child: Container(
-                      height: 50.h,
-                      decoration: BoxDecoration(
-                        borderRadius: kRadiusTop,
-                        color: Kolors.kPrimaryLight,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12.w),
-                            child: ReusableText(
-                              text: "Click to Checkout",
-                              style:
-                                  appStyle(15, Kolors.kWhite, FontWeight.w600),
-                            ),
+                ? Container(
+                    height: 50.h,
+                    decoration: BoxDecoration(
+                      borderRadius: kRadiusTop,
+                      color: Kolors.kPrimaryLight,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+                          child: ReusableText(
+                            text: "Click to Checkout",
+                            style: appStyle(15, Kolors.kWhite, FontWeight.w600),
                           ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12.w),
-                            child: ReusableText(
-                              text:
-                                  "\$ ${cartNotifier.totalPrice.toStringAsFixed(2)}",
-                              style:
-                                  appStyle(15, Kolors.kWhite, FontWeight.w600),
-                            ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+                          child: ReusableText(
+                            text:
+                                "\$ ${cartNotifier.totalPrice.toStringAsFixed(2)}",
+                            style: appStyle(15, Kolors.kWhite, FontWeight.w600),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   )
                 : const SizedBox.shrink(),
