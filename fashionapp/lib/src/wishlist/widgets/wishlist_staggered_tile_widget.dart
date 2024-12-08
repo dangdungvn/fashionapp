@@ -5,7 +5,6 @@ import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/src/products/controller/product_notifier.dart';
 import 'package:fashionapp/src/products/models/products_model.dart';
 import 'package:fashionapp/src/wishlist/controllers/wishlist_notifier.dart';
-import 'package:fashionapp/src/wishlist/hooks/fetch_wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -14,18 +13,23 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class WishlistStaggeredTileWidget extends HookWidget {
-  const WishlistStaggeredTileWidget(
-      {super.key, required this.i, required this.product, this.onTap});
+  const WishlistStaggeredTileWidget({
+    super.key,
+    required this.i,
+    required this.product,
+    this.onTap,
+    this.wishListProduct,
+    this.isLoading,
+  });
 
   final int i;
   final Products product;
   final void Function()? onTap;
+  final List<Products>? wishListProduct;
+  final bool? isLoading;
 
   @override
   Widget build(BuildContext context) {
-    final results = fetchWishlist();
-    final products = results.products;
-    final isLoading = results.isLoading;
     return GestureDetector(
       onTap: () {
         context.read<ProductNotifier>().setProduct(product);
@@ -53,7 +57,7 @@ class WishlistStaggeredTileWidget extends HookWidget {
                         top: 10.h,
                         child: Consumer<WishlistNotifier>(
                           builder: (context, wishlistNotifier, child) {
-                            if (isLoading) {
+                            if (isLoading!) {
                               return const Center(
                                 child: SizedBox(
                                   width: 20,
@@ -68,7 +72,7 @@ class WishlistStaggeredTileWidget extends HookWidget {
                               onTap: onTap,
                               child: Icon(
                                 Icons.favorite,
-                                color: products
+                                color: wishListProduct!
                                         .map((e) => e.id)
                                         .contains(product.id)
                                     ? Colors.red

@@ -45,6 +45,8 @@ dependencies:
   persistent_bottom_nav_bar: any
   google_nav_bar: ^5.0.7
   line_icons: ^2.0.2
+  lottie:
+  flutter_slidable:
 
 dev_dependencies:
   flutter_test:

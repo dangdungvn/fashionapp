@@ -6,6 +6,7 @@ import 'package:fashionapp/src/home/controller/home_tab_notifier.dart';
 import 'package:fashionapp/src/products/hooks/fetch_products.dart';
 import 'package:fashionapp/src/products/widgets/staggered_tile_widget.dart';
 import 'package:fashionapp/src/wishlist/controllers/wishlist_notifier.dart';
+import 'package:fashionapp/src/wishlist/hooks/fetch_wishlist.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,6 +22,10 @@ class ExploreProducts extends HookWidget {
     final results = fetchProducts(context.watch<HomeTabNotifier>().queryType);
     final products = results.products;
     final isLoading = results.isLoading;
+    final resultsWishlist = fetchWishlist();
+    final wishlistProduct = resultsWishlist.products;
+    final isLoadingWishlist = resultsWishlist.isLoading;
+    final refetchWishlist = resultsWishlist.refetch;
     // final error = results.error;
     // print(products[0].description);
     if (isLoading) {
@@ -53,8 +58,8 @@ class ExploreProducts extends HookWidget {
                     mainAxisCellCount: mainAxisCellCount,
                     child: Padding(
                       padding: i % 2 == 0
-                          ? EdgeInsets.only(right: 2.w)
-                          : EdgeInsets.only(left: 2.w),
+                          ? EdgeInsets.only(right: 2.w, bottom: 4.h)
+                          : EdgeInsets.only(left: 2.w, bottom: 4.h),
                       child: StaggeredTileWidget(
                         onTap: () {
                           if (accessToken == null) {
@@ -67,6 +72,9 @@ class ExploreProducts extends HookWidget {
                         },
                         i: i,
                         product: product,
+                        wishlistProduct: wishlistProduct,
+                        wishlistIsLoading: isLoadingWishlist,
+                        wishlistRefetch: refetchWishlist,
                       ),
                     ),
                   );

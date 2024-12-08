@@ -20,6 +20,9 @@ class WishListWidget extends HookWidget {
     final results = fetchWishlist();
     final products = results.products;
     final isLoading = results.isLoading;
+    final resultsWishlist = fetchWishlist();
+    final wishlistProduct = resultsWishlist.products;
+    final isLoadingWishlist = resultsWishlist.isLoading;
 
     if (isLoading) {
       return Padding(
@@ -65,6 +68,8 @@ class WishListWidget extends HookWidget {
                             },
                             i: i,
                             product: product,
+                            isLoading: isLoadingWishlist,
+                            wishListProduct: wishlistProduct,
                           ),
                         ),
                       );

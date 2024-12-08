@@ -45,6 +45,12 @@ class AppEntryPoint extends HookWidget {
               onTabChange: (i) {
                 tabIndexNotifier.setIndex(i);
               },
+              tabShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade200,
+                  blurRadius: 10,
+                ),
+              ],
               tabs: [
                 const GButton(
                   icon: LineIcons.home,
@@ -59,7 +65,7 @@ class AppEntryPoint extends HookWidget {
                 GButton(
                   icon: LineIcons.shoppingBag,
                   text: "Cart",
-                  backgroundColor: const Color.fromARGB(255, 247, 243, 206),
+                  backgroundColor: const Color.fromARGB(255, 221, 252, 196),
                   leading: Badge(
                     label: Text(data.cartCount.toString()),
                     child: Icon(
