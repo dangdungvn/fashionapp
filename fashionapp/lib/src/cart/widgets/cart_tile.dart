@@ -103,16 +103,16 @@ class CartTile extends StatelessWidget {
                                 style: appStyle(
                                     12, Kolors.kGray, FontWeight.normal),
                               ),
-                              SizedBox(
-                                width: ScreenUtil().screenWidth * 0.5,
-                                child: Text(
-                                  cart.product.description,
-                                  maxLines: 2,
-                                  textAlign: TextAlign.justify,
-                                  style: appStyle(
-                                      9, Kolors.kGray, FontWeight.normal),
-                                ),
-                              ),
+                              // SizedBox(
+                              //   width: ScreenUtil().screenWidth * 0.5,
+                              //   child: Text(
+                              //     cart.product.description,
+                              //     maxLines: 2,
+                              //     textAlign: TextAlign.justify,
+                              //     style: appStyle(
+                              //         9, Kolors.kGray, FontWeight.normal),
+                              //   ),
+                              // ),
                             ],
                           ),
                         ],
@@ -165,7 +165,7 @@ class CartTile extends StatelessWidget {
                                       style: appStyle(
                                           12, Kolors.kPrimary, FontWeight.w600),
                                     ),
-                                  )
+                                  ),
                           ],
                         ),
                       ),

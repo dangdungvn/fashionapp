@@ -6,7 +6,7 @@ class OfflinePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -15,16 +15,16 @@ class OfflinePage extends StatelessWidget {
           size: 150,
           color: Colors.grey,
         ),
-         Center(
-           child: SizedBox(
-            width: MediaQuery.of(context).size.width* 0.7,
-             child: const Text(
+        Center(
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.7,
+            child: const Text(
               "Oops! Seems like youare not connected to the internet.",
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16, color: Colors.black),
-                     ),
-           ),
-         )
+            ),
+          ),
+        )
       ],
     );
   }

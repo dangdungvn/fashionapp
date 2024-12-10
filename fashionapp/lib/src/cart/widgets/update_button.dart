@@ -1,6 +1,4 @@
 import 'package:fashionapp/common/utils/kcolors.dart';
-import 'package:fashionapp/common/widgets/app_style.dart';
-import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/src/cart/controllers/cart_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,17 +16,12 @@ class UpdateButton extends StatelessWidget {
       },
       child: Container(
         width: 65.w,
-        height: 18.h,
+        height: 30.h,
         decoration: BoxDecoration(
-          color: Kolors.kPrimary,
+          color: Kolors.kOffWhite,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Center(
-          child: ReusableText(
-            text: "Update",
-            style: appStyle(11, Kolors.kWhite, FontWeight.w600),
-          ),
-        ),
+        child: const Icon(Icons.done_outlined, color: Kolors.kPrimary),
       ),
     );
   }

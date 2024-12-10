@@ -74,7 +74,8 @@ class AddressTile extends StatelessWidget {
                   }
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5.w),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
                   decoration: BoxDecoration(
                     borderRadius: kRadiusAll,
                     color: isCheckout
@@ -98,7 +99,8 @@ class AddressTile extends StatelessWidget {
                   : GestureDetector(
                       onTap: onDelete,
                       child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 5.w),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 2.h),
                         decoration: BoxDecoration(
                           color: Kolors.kRed,
                           borderRadius: kRadiusAll,

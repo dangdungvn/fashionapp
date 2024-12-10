@@ -62,11 +62,12 @@ Widget Function(BuildContext, String, Object)? errorWidget =
         );
 
 List<String> images = [
-  "https://firebasestorage.googleapis.com/v0/b/authenification-b4dc9.appspot.com/o/uploads%2Fslider1.png?alt=media&token=8b27e621-e5ea-4ba4-ab15-0302d02c75f3",
-  "https://firebasestorage.googleapis.com/v0/b/authenification-b4dc9.appspot.com/o/uploads%2Fslider1.png?alt=media&token=8b27e621-e5ea-4ba4-ab15-0302d02c75f3",
-  "https://firebasestorage.googleapis.com/v0/b/authenification-b4dc9.appspot.com/o/uploads%2Fslider1.png?alt=media&token=8b27e621-e5ea-4ba4-ab15-0302d02c75f3",
-  "https://firebasestorage.googleapis.com/v0/b/authenification-b4dc9.appspot.com/o/uploads%2Fslider1.png?alt=media&token=8b27e621-e5ea-4ba4-ab15-0302d02c75f3",
-  "https://firebasestorage.googleapis.com/v0/b/authenification-b4dc9.appspot.com/o/uploads%2Fslider1.png?alt=media&token=8b27e621-e5ea-4ba4-ab15-0302d02c75f3",
+  "https://img.freepik.com/free-vector/mega-sale-banner-your-online-store-realistic-style-with-phone-map-cart-bag-gift-vector-illustration_548887-132.jpg?t=st=1733752337~exp=1733755937~hmac=c04bc02fef76ccbccc5c8d6f0231590c970718557359a9f49e23ea1680003717&w=2000",
+  "https://img.freepik.com/free-vector/large-sale-word-with-shopping-cart-gift-boxes-store-map-with-pointer-realistic-style-vector-illustration_548887-126.jpg?t=st=1733752536~exp=1733756136~hmac=321e7ff85af210931a26b2b0c5f3c1210bda43f828a6ec5e6c69b66ca8ca0438&w=2000",
+  "https://img.freepik.com/free-vector/mega-sale-promotion-banner-with-3d-cart-with-gift-platform-shopping-bags-balloons-vector-illustration_548887-172.jpg?t=st=1733752838~exp=1733756438~hmac=16efbd00292bcad8a86565ee1f892f877ccb67dcba3246047dbce10ea6402ad3&w=2000",
+  "https://img.freepik.com/free-vector/e-commerce-colorful-concept_1284-48408.jpg?t=st=1733752869~exp=1733756469~hmac=a06432967f23561a52d8a0ed3200d2e6497876fc4c126985ebc8e2baf915acea&w=1800",
+  "https://img.freepik.com/free-vector/banner-holiday-sale-with-store-gift-bag-gifts-location-realistic-style-vector-illustration_548887-118.jpg?t=st=1733752916~exp=1733756516~hmac=a0cbfeb7fda63e43f803cb360d6427215ebdd05fe50c98a6fa0dabff1ef526de&w=2000",
+  "https://img.freepik.com/free-vector/banner-concept-fast-online-order-with-store-phone-gifts-gift-bags-location-realistic-style-vector-illustration_548887-124.jpg?t=st=1733752966~exp=1733756566~hmac=dbbb7b696bd360aa11565d81549197743031b5e991a3dba8ab4de74e1e67bbef&w=1800",
 ];
 
 // [{"title":"Sneakers","id":3,"imageUrl":"https://firebasestorage.googleapis.com/v0/b/authenification-b4dc9.appspot.com/o/uploads%2Frunning_shoe.svg?alt=media&token=0dcb0e57-315e-457c-89dc-1233f6421368"},{"title":"T-Shirts","id":5,"imageUrl":"https://firebasestorage.googleapis.com/v0/b/authenification-b4dc9.appspot.com/o/uploads%2Fjersey.svg?alt=media&token=6ca7eabd-54b3-47bb-bb8f-41c3a8920171"},{"title":"Jackets","id":4,"imageUrl":"https://firebasestorage.googleapis.com/v0/b/authenification-b4dc9.appspot.com/o/uploads%2Fjacket.svg?alt=media&token=ffdc9a1e-917f-4e8f-b58e-4df2e6e8587e"},{"title":"Dresses","id":2,"imageUrl":"https://firebasestorage.googleapis.com/v0/b/authenification-b4dc9.appspot.com/o/uploads%2Fdress.svg?alt=media&token=cf832383-4c8a-4ee1-9676-b66c4d515a1c"},{"title":"Pants","id":1,"imageUrl":"https://firebasestorage.googleapis.com/v0/b/authenification-b4dc9.appspot.com/o/uploads%2Fjeans.svg?alt=media&token=eb62f916-a4c2-441a-a469-5684f1a62526"}]

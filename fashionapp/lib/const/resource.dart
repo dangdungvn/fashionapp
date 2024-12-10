@@ -1,5 +1,3 @@
-/// Generate by [asset_generator](https://github.com/fluttercandies/flutter_asset_generator) library.
-/// PLEASE DO NOT EDIT MANUALLY.
 // ignore_for_file: constant_identifier_names, unused_field
 class R {
   const R._();
@@ -35,6 +33,8 @@ class R {
   static const String ASSETS_IMAGES_SPLASHSCREEN_PNG =
       'assets/images/splashscreen.png';
 
-  /// ![preview](file:///Volumes/Transfer/Projects/fashion/assets/images/wishlist.png)
   static const String ASSETS_IMAGES_WISHLIST_PNG = 'assets/images/wishlist.png';
+
+  static const String ASSETS_ANIMATIONS_LOADING_JSON =
+      'assets/animations/loading.json';
 }

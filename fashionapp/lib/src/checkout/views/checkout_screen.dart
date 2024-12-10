@@ -41,6 +41,7 @@ class CheckoutPage extends HookWidget {
                   context.pop();
                 },
               ),
+              centerTitle: true,
               title: ReusableText(
                 text: AppText.kCheckout,
                 style: appStyle(16, Kolors.kPrimary, FontWeight.bold),
