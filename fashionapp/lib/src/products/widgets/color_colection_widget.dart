@@ -13,6 +13,19 @@ class ColorColectionWidget extends StatelessWidget {
     'green': Colors.green,
     'gray': Colors.grey,
     'purple': Colors.purple,
+    "khaki": Colors.amber,
+    "navy": Colors.indigo,
+    "blue": Colors.blue,
+    "dark blue": Colors.indigo,
+    "light blue": Colors.lightBlue,
+    "beige": Colors.brown,
+    "pink": Colors.pink,
+    "brown": Colors.brown,
+    "red": Colors.red,
+    "white": Colors.white,
+    "denim blue": Colors.blueGrey,
+    "orange": Colors.orange,
+    "grey": Colors.grey,
     // Add more colors as needed
   };
 

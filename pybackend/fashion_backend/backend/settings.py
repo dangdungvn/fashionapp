@@ -130,7 +130,6 @@ REST_FRAMEWORK = {
 }
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = ["https://positively-genuine-lioness.ngrok-free.app"]
-# CORS_ORIGIN_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 

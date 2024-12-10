@@ -29,7 +29,7 @@ class CartCounter extends StatelessWidget {
                 },
                 child: const Icon(
                   Icons.remove_circle_rounded,
-                  color: Kolors.kPrimary,
+                  color: Kolors.kPrimaryLight,
                   size: 25,
                 ),
               ),
@@ -46,7 +46,7 @@ class CartCounter extends StatelessWidget {
                 },
                 child: const Icon(
                   Icons.add_circle_rounded,
-                  color: Kolors.kPrimary,
+                  color: Kolors.kPrimaryLight,
                   size: 25,
                 ),
               ),
