@@ -10,14 +10,16 @@ import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/src/products/widgets/staggered_tile_widget.dart';
 import 'package:fashionapp/src/search/controllers/search_notifier.dart';
 import 'package:fashionapp/src/wishlist/controllers/wishlist_notifier.dart';
+import 'package:fashionapp/src/wishlist/hooks/fetch_wishlist.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-class SearchPage extends StatefulWidget {
+class SearchPage extends StatefulHookWidget {
   const SearchPage({super.key});
 
   @override
@@ -60,6 +62,10 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     String? accessToken = Storage().getString('accessToken');
+    final resultsWishlist = fetchWishlist();
+    final wishlistProduct = resultsWishlist.products;
+    final isLoadingWishlist = resultsWishlist.isLoading;
+    final refetchWishlist = resultsWishlist.refetch;
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -153,6 +159,9 @@ class _SearchPageState extends State<SearchPage> {
                                 },
                                 i: i,
                                 product: product,
+                                wishlistIsLoading: isLoadingWishlist,
+                                wishlistProduct: wishlistProduct,
+                                wishlistRefetch: refetchWishlist,
                               ),
                             );
                           },

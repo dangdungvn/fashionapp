@@ -20,9 +20,7 @@ class WishListWidget extends HookWidget {
     final results = fetchWishlist();
     final products = results.products;
     final isLoading = results.isLoading;
-    final resultsWishlist = fetchWishlist();
-    final wishlistProduct = resultsWishlist.products;
-    final isLoadingWishlist = resultsWishlist.isLoading;
+    final refetch = results.refetch;
 
     if (isLoading) {
       return Padding(
@@ -61,15 +59,13 @@ class WishListWidget extends HookWidget {
                               } else {
                                 context
                                     .read<WishlistNotifier>()
-                                    .addRemoveWishlist(
-                                        product.id, results.refetch);
+                                    .addRemoveWishlist(product.id, refetch);
                               }
                               // Future.delayed(const Duration(seconds: 1));
                             },
                             i: i,
                             product: product,
-                            isLoading: isLoadingWishlist,
-                            wishListProduct: wishlistProduct,
+                            isLoading: isLoading,
                           ),
                         ),
                       );

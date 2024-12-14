@@ -18,8 +18,7 @@ class AppText {
   static const String kSearchHint = 'Search for products...';
   static const String kSearchResults = 'Search Results';
 
-  static const String kProfilePic =
-      'https://firebasestorage.googleapis.com/v0/b/authenification-b4dc9.appspot.com/o/uploads%2Favatar.png?alt=media&token=7da81de9-a163-4296-86ac-3194c490ce15';
+  static const String kProfilePic = "assets/images/profile.png";
 
   static const String kCollection = 'New Collection';
   static const String kPolicy = 'Privacy Policy';

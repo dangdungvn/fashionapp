@@ -18,14 +18,12 @@ class WishlistStaggeredTileWidget extends HookWidget {
     required this.i,
     required this.product,
     this.onTap,
-    this.wishListProduct,
     this.isLoading,
   });
 
   final int i;
   final Products product;
   final void Function()? onTap;
-  final List<Products>? wishListProduct;
   final bool? isLoading;
 
   @override
@@ -70,13 +68,9 @@ class WishlistStaggeredTileWidget extends HookWidget {
                             }
                             return GestureDetector(
                               onTap: onTap,
-                              child: Icon(
+                              child: const Icon(
                                 Icons.favorite,
-                                color: wishListProduct!
-                                        .map((e) => e.id)
-                                        .contains(product.id)
-                                    ? Colors.red
-                                    : Colors.grey.withOpacity(0.5),
+                                color: Colors.red,
                                 size: 25,
                               ),
                             );

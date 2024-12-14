@@ -39,7 +39,7 @@ class ProfilePage extends StatelessWidget {
                   const CircleAvatar(
                     radius: 35,
                     backgroundColor: Kolors.kOffWhite,
-                    backgroundImage: NetworkImage(AppText.kProfilePic),
+                    backgroundImage: AssetImage(AppText.kProfilePic),
                   ),
                   SizedBox(
                     height: 15.h,
