@@ -37,4 +37,6 @@ class R {
 
   static const String ASSETS_ANIMATIONS_LOADING_JSON =
       'assets/animations/loading.json';
+  static const String ASSETS_ANIMATIONS_SPLASH_SCREEN_JSON =
+      'assets/animations/splashscreen.json';
 }
