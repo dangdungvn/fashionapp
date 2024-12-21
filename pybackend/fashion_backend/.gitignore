@@ -1,1 +1,24 @@
-db.sqlite3
+# Ignore Django's internal files and folders
+*.pyc
+__pycache__/
+*.egg-info/
+
+# Ignore virtual environment files (if you're using one)
+venv/
+
+# Ignore Django's project tmp directory
+tmp/
+
+# Ignore Django's cache directory
+*cache*
+
+# Ignore Python's build-in temp directory
+*.pyd
+
+# Ignore Django's logs
+logs/
+
+# Ignore Pycache
+.cache/
+
+
