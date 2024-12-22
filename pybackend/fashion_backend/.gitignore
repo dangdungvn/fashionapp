@@ -21,4 +21,4 @@ logs/
 # Ignore Pycache
 .cache/
 
-
+*.sqlite3
