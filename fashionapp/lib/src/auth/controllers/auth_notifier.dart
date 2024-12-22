@@ -26,8 +26,8 @@ class AuthNotifier extends ChangeNotifier {
 
   bool get isRLoading => _isRLoading;
 
-  void setRLoading() {
-    _isRLoading = !_isRLoading;
+  void setRLoading(bool v) {
+    _isRLoading = v;
     notifyListeners();
   }
 
@@ -57,8 +57,8 @@ class AuthNotifier extends ChangeNotifier {
   }
 
   void registrationFunc(String data, BuildContext ctx) async {
-    setRLoading();
-    ctx.pop();
+    setRLoading(true);
+    // ctx.pop();
     try {
       var url = Uri.parse('${Environment.appBaseUrl}/auth/users/');
       var response = await http.post(url,
@@ -67,18 +67,19 @@ class AuthNotifier extends ChangeNotifier {
           },
           body: data);
       if (response.statusCode == 201) {
-        setRLoading();
+        setRLoading(false);
+        ctx.pop();
       } else if (response.statusCode == 400) {
-        setRLoading();
+        setRLoading(false);
         var data = jsonDecode(utf8.decode(response.bodyBytes));
         showErrorPopup(ctx, data['password'][0], null, null);
       } else {
-        setRLoading();
-        showErrorPopup(ctx, AppText.kErrorLogin, null, null);
+        setRLoading(false);
+        showErrorPopup(ctx, AppText.kErrorRegistration, null, null);
       }
     } catch (e) {
-      setRLoading();
-      showErrorPopup(ctx, AppText.kErrorLogin, null, null);
+      setRLoading(false);
+      showErrorPopup(ctx, AppText.kErrorRegistration, null, null);
     }
   }
 

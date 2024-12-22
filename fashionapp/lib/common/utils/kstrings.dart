@@ -8,6 +8,8 @@ class AppText {
   static const String kAddShipping = 'Add Shipping Address';
   static const String kErrorLogin =
       'Opps! Unable to log in with provided credentials.';
+  static const String kErrorRegistration =
+      'Opps! Unable to register with provided credentials.';
   static const String kErrorGetUser = 'Opps! Unable to get user data';
   static const String kVerify = 'Verification Code';
   static const String kCartErrorText =

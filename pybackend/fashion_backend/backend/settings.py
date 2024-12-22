@@ -128,6 +128,10 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
     )
 }
+JAZZMIN_UI_TWEAKS = {
+    "theme": "journal",
+    # "dark_mode_theme": "darkly",
+}
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = ["https://positively-genuine-lioness.ngrok-free.app"]
 CORS_ALLOW_ALL_ORIGINS = True

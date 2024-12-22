@@ -4,11 +4,13 @@ import 'package:fashionapp/common/widgets/back_button.dart';
 import 'package:fashionapp/common/widgets/custom_button.dart';
 import 'package:fashionapp/common/widgets/email_textfield.dart';
 import 'package:fashionapp/common/widgets/password_field.dart';
+import 'package:fashionapp/const/resource.dart';
 import 'package:fashionapp/src/auth/controllers/auth_notifier.dart';
 import 'package:fashionapp/src/auth/models/registration_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -45,7 +47,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
       body: ListView(
         children: [
           SizedBox(
-            height: 160.h,
+            height: 100.h,
+          ),
+          Lottie.asset(
+            R.ASSETS_ANIMATIONS_REGISTER_JSON,
+            width: 200.w,
+            height: 200.h,
           ),
           Text(
             "4o Shop",

@@ -39,4 +39,14 @@ class R {
       'assets/animations/loading.json';
   static const String ASSETS_ANIMATIONS_SPLASH_SCREEN_JSON =
       'assets/animations/splashscreen.json';
+  static const String ASSETS_ANIMATIONS_REGISTER_JSON =
+      'assets/animations/register.json';
+
+  static const String ASSETS_HOME_SVG_ICON = "assets/svg_icon/home.svg";
+  static const String ASSETS_HEART_SVG_ICON = "assets/svg_icon/heart.svg";
+  static const String ASSETS_CART_SVG_ICON =
+      "assets/svg_icon/shopping-cart.svg";
+  static const String ASSETS_SEARCH_SVG_ICON = "assets/svg_icon/search.svg";
+  static const String ASSETS_USER_SVG_ICON = "assets/svg_icon/user.svg";
+  static const String ASSETS_BELL_SVG_ICON = "assets/svg_icon/bell.svg";
 }
