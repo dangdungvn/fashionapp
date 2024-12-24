@@ -4,6 +4,8 @@ from rest_framework.views import APIView
 from . import models, serializers
 from django.db.models import Count
 import random
+import unicodedata
+from django.db.models import Q
 
 
 class CategoryList(generics.ListAPIView):
@@ -97,12 +99,23 @@ class SimilarProducts(APIView):
             )
 
 
+def remove_accents(input_str):
+    nfkd_form = unicodedata.normalize("NFKD", input_str)
+    return "".join([c for c in nfkd_form if not unicodedata.combining(c)])
+
+
 class SearchProductByTitle(APIView):
     def get(self, request):
         query = request.query_params.get("q", None)
 
         if query:
-            products = models.Product.objects.filter(title__icontains=query)
+            # Loại bỏ dấu tiếng Việt từ chuỗi tìm kiếm
+            query_no_accents = remove_accents(query)
+
+            # Tìm kiếm sản phẩm với tiêu đề không dấu
+            products = models.Product.objects.filter(
+                Q(title__icontains=query) | Q(title__icontains=query_no_accents)
+            )
             serializer = serializers.ProductSerializer(products, many=True)
             return Response(serializer.data)
         else:
