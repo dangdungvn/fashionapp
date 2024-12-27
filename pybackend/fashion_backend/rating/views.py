@@ -49,7 +49,11 @@ class AddReview(APIView):
                     {"message": "Product value must be provided"},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-
+            if not order_id:
+                return Response(
+                    {"message": "Order value must be provided"},
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
             product = get_object_or_404(Product, id=product_id)
 
             rating = models.Rating(
@@ -88,6 +92,24 @@ class AddReview(APIView):
             )
         except Exception as e:
             print(str(e))
+            return Response(
+                {"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+class GetProductRating(APIView):
+    def get(self, request):
+        pk = request.query_params.get("product")
+        try:
+            product = models.Product.objects.get(id=pk)
+            ratings = models.Rating.objects.filter(product=product)
+            serializer = serializers.RatingSerializer(ratings, many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except models.Product.DoesNotExist:
+            return Response(
+                {"message": "Product not found"}, status=status.HTTP_404_NOT_FOUND
+            )
+        except Exception as e:
             return Response(
                 {"message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
