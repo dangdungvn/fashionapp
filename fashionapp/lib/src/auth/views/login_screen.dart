@@ -119,8 +119,8 @@ class _LoginPageState extends State<LoginPage> {
                           context.read<AuthNotifier>().loginFunc(data, context);
                         },
                         text: "L O G I N",
-                        btnWidth: ScreenUtil().screenWidth,
-                        btnHieght: 40.h,
+                        // btnWidth: ScreenUtil().screenWidth,
+                        btnHieght: 50.h,
                         radius: 20,
                       ),
               ],

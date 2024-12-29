@@ -4,7 +4,6 @@ import 'package:fashionapp/common/utils/kstrings.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/common/widgets/shimmers/list_shimmer.dart';
-import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/src/auth/views/login_screen.dart';
 import 'package:fashionapp/src/cart/controllers/cart_notifier.dart';
 import 'package:fashionapp/src/cart/hooks/fetch_cart.dart';
@@ -40,61 +39,80 @@ class CartPage extends HookWidget {
           style: appStyle(15, Kolors.kPrimary, FontWeight.bold),
         ),
       ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 12.w),
-        children: List.generate(
-          carts.length,
-          (i) {
-            final cart = carts[i];
-            return CartTile(
-              cart: cart,
-              onDelete: () {
-                context.read<CartNotifier>().deleteCart(cart.id, refetch);
+      body: Stack(
+        children: [
+          ListView(
+            padding: EdgeInsets.symmetric(horizontal: 12.w),
+            children: List.generate(
+              carts.length,
+              (i) {
+                final cart = carts[i];
+                return CartTile(
+                  cart: cart,
+                  onDelete: () {
+                    context.read<CartNotifier>().deleteCart(cart.id, refetch);
+                  },
+                  onUpdate: () {
+                    context.read<CartNotifier>().updateCart(cart.id, refetch);
+                  },
+                );
               },
-              onUpdate: () {
-                context.read<CartNotifier>().updateCart(cart.id, refetch);
-              },
-            );
-          },
-        ),
-      ),
-      bottomNavigationBar: Consumer<CartNotifier>(
-        builder: (context, cartNotifier, child) {
-          return GestureDetector(
-            onTap: () {
-              context.push('/checkout');
+            ),
+          ),
+          Consumer<CartNotifier>(
+            builder: (context, cartNotifier, child) {
+              return Positioned(
+                bottom: 100.h,
+                left: 50.w,
+                right: 50.w,
+                child: GestureDetector(
+                  onTap: () {
+                    context.push('/checkout');
+                  },
+                  child: cartNotifier.selectedCartItems.isNotEmpty
+                      ? Container(
+                          height: 60.h,
+                          decoration: BoxDecoration(
+                            color: Kolors.kPrimaryLight,
+                            borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.shade400,
+                                blurRadius: 10,
+                                offset: const Offset(0, 5),
+                              ),
+                            ],
+                          ),
+                          // width: ScreenUtil().screenWidth / 5,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                                child: ReusableText(
+                                  text: "Click to Checkout",
+                                  style: appStyle(
+                                      15, Kolors.kWhite, FontWeight.w600),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                                child: ReusableText(
+                                  text:
+                                      "\$ ${cartNotifier.totalPrice.toStringAsFixed(2)}",
+                                  style: appStyle(
+                                      15, Kolors.kWhite, FontWeight.w600),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : const SizedBox.shrink(),
+                ),
+              );
             },
-            child: cartNotifier.selectedCartItems.isNotEmpty
-                ? Container(
-                    height: 50.h,
-                    decoration: BoxDecoration(
-                      borderRadius: kRadiusTop,
-                      color: Kolors.kPrimaryLight,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 12.w),
-                          child: ReusableText(
-                            text: "Click to Checkout",
-                            style: appStyle(15, Kolors.kWhite, FontWeight.w600),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 12.w),
-                          child: ReusableText(
-                            text:
-                                "\$ ${cartNotifier.totalPrice.toStringAsFixed(2)}",
-                            style: appStyle(15, Kolors.kWhite, FontWeight.w600),
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : const SizedBox.shrink(),
-          );
-        },
+          ),
+        ],
       ),
     );
   }
