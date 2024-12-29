@@ -8,6 +8,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconly/iconly.dart';
 
 class CustomAppBar extends HookWidget {
   const CustomAppBar({super.key});
@@ -84,7 +85,7 @@ class CustomAppBar extends HookWidget {
                       child: Row(
                         children: [
                           const Icon(
-                            Ionicons.search,
+                            IconlyLight.search,
                             size: 20,
                             color: Kolors.kPrimaryLight,
                           ),
@@ -104,11 +105,11 @@ class CustomAppBar extends HookWidget {
                   height: 40.h,
                   width: 40.w,
                   decoration: BoxDecoration(
-                    color: Kolors.kPrimary,
+                    color: Kolors.kPrimaryLight,
                     borderRadius: BorderRadius.circular(9),
                   ),
                   child: const Icon(
-                    FontAwesome.sliders,
+                    IconlyLight.category,
                     color: Kolors.kWhite,
                     size: 20,
                   ),

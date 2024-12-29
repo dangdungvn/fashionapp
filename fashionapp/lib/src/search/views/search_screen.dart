@@ -15,8 +15,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulHookWidget {
@@ -99,7 +99,7 @@ class _SearchPageState extends State<SearchPage> {
                   }
                 },
                 child: const Icon(
-                  AntDesign.search1,
+                  IconlyLight.search,
                   color: Kolors.kPrimary,
                 ),
               ),

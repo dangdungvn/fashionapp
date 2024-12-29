@@ -49,6 +49,7 @@ dependencies:
   flutter_slidable:
   animated_splash_screen:
   flutter_native_splash: ^2.4.1
+  iconly:
 
 dev_dependencies:
   flutter_test:

@@ -93,7 +93,6 @@ class GetUserCart(generics.ListAPIView):
     serializer_class = CartSerializer
 
     def get(self, request):
-        print(request.user)
         user = request.user
         cart_items = Cart.objects.filter(userId=user).order_by("-created_at")
         serializer = CartSerializer(cart_items, many=True)
