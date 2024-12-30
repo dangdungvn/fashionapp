@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element, camel_case_types
+
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/utils/kstrings.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
@@ -159,7 +161,6 @@ class _AddAddressState extends State<AddAddress> {
 
 class _buildtextfield extends StatelessWidget {
   const _buildtextfield({
-    super.key,
     required this.hintText,
     required this.controller,
     required this.onSubmitted,

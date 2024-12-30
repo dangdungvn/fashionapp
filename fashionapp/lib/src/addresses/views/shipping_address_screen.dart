@@ -40,47 +40,61 @@ class ShippingAddress extends HookWidget {
           style: appStyle(16, Kolors.kPrimary, FontWeight.w600),
         ),
       ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 12.w),
-        children: List.generate(
-          addresses.length,
-          (i) {
-            final address = addresses[i];
-            return AddressTile(
-                onDelete: () {
-                  context
-                      .read<AddressNotifier>()
-                      .deleteAddress(address.id, refetch, context);
-                },
-                setDefault: () {
-                  context
-                      .read<AddressNotifier>()
-                      .setAsDefault(address.id, refetch, context);
-                },
-                address: address,
-                isCheckout: false);
-          },
-        ),
-      ),
-      bottomNavigationBar: GestureDetector(
-        onTap: () {
-          context.push('/addaddress');
-        },
-        child: Container(
-          height: 80,
-          width: ScreenUtil().screenWidth,
-          decoration: BoxDecoration(
-            color: Kolors.kPrimaryLight,
-            borderRadius: kRadiusTop,
+      body: Stack(children: [
+        ListView(
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
+          children: List.generate(
+            addresses.length,
+            (i) {
+              final address = addresses[i];
+              return AddressTile(
+                  onDelete: () {
+                    context
+                        .read<AddressNotifier>()
+                        .deleteAddress(address.id, refetch, context);
+                  },
+                  setDefault: () {
+                    context
+                        .read<AddressNotifier>()
+                        .setAsDefault(address.id, refetch, context);
+                  },
+                  address: address,
+                  isCheckout: false);
+            },
           ),
-          child: Center(
-            child: ReusableText(
-              text: "Add Address",
-              style: appStyle(16, Kolors.kWhite, FontWeight.w600),
+        ),
+        Positioned(
+          bottom: 20,
+          left: 50,
+          right: 50,
+          child: GestureDetector(
+            onTap: () {
+              context.push('/addaddress');
+            },
+            child: Container(
+              height: 50.h,
+              width: ScreenUtil().screenWidth,
+              decoration: BoxDecoration(
+                color: Kolors.kPrimaryLight,
+                borderRadius: kRadiusAll,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.shade400,
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: Center(
+                child: ReusableText(
+                  text: "Add Address",
+                  style: appStyle(16, Kolors.kWhite, FontWeight.w600),
+                ),
+              ),
             ),
           ),
         ),
-      ),
+      ]),
     );
   }
 }

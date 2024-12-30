@@ -29,9 +29,7 @@ FetchOrders fetchOrders(FetchOrdersTypes o) {
           url = Uri.parse(
               '${Environment.appBaseUrl}/api/orders/me/?status=cancelled');
           break;
-        default:
       }
-      print(url);
       String? accessToken = Storage().getString('accessToken');
 
       final response = await http.get(
