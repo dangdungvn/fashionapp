@@ -42,7 +42,7 @@ class CartPage extends HookWidget {
       body: Stack(
         children: [
           ListView(
-            padding: EdgeInsets.symmetric(horizontal: 12.w),
+            padding: EdgeInsets.only(left: 12.w, right: 12.w, bottom: 200.h),
             children: List.generate(
               carts.length,
               (i) {
