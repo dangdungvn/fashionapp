@@ -38,7 +38,7 @@ BorderRadiusGeometry kClippingRadius = const BorderRadius.only(
   topRight: Radius.circular(20),
 );
 
-BorderRadiusGeometry kRadiusAll = BorderRadius.circular(12);
+BorderRadiusGeometry kRadiusAll = BorderRadius.circular(20);
 
 BorderRadiusGeometry kRadiusTop = const BorderRadius.only(
   topLeft: Radius.circular(9),

@@ -4,7 +4,6 @@ import 'package:fashionapp/common/utils/kstrings.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/back_button.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
-import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/src/addresses/controllers/address_notifier.dart';
 import 'package:fashionapp/src/addresses/hooks/fetch_defaults.dart';
 import 'package:fashionapp/src/addresses/widgets/address_block.dart';
@@ -49,85 +48,104 @@ class CheckoutPage extends HookWidget {
             ),
             body: Consumer<CartNotifier>(
               builder: (context, cartNotifier, child) {
-                return ListView(
-                  padding: EdgeInsets.symmetric(horizontal: 14.w),
-                  children: [
-                    isLoading
-                        ? const SizedBox.shrink()
-                        : AddressBlock(
-                            address: address,
+                return Stack(children: [
+                  ListView(
+                    padding: EdgeInsets.symmetric(horizontal: 14.w),
+                    children: [
+                      isLoading
+                          ? const SizedBox.shrink()
+                          : AddressBlock(
+                              address: address,
+                            ),
+                      SizedBox(height: 10.h),
+                      SizedBox(
+                        // height: ScreenUtil().scaleHeight * 0.6,
+                        child: Column(
+                          children: List.generate(
+                            cartNotifier.selectedCartItems.length,
+                            (i) {
+                              return CheckoutTile(
+                                cart: cartNotifier.selectedCartItems[i],
+                              );
+                            },
                           ),
-                    SizedBox(height: 10.h),
-                    SizedBox(
-                      // height: ScreenUtil().scaleHeight * 0.6,
-                      child: Column(
-                        children: List.generate(
-                          cartNotifier.selectedCartItems.length,
-                          (i) {
-                            return CheckoutTile(
-                              cart: cartNotifier.selectedCartItems[i],
-                            );
-                          },
                         ),
                       ),
-                    ),
-                  ],
-                );
-              },
-            ),
-            bottomNavigationBar: Consumer<CartNotifier>(
-              builder: (context, cartNotifier, child) {
-                return GestureDetector(
-                  onTap: () {
-                    if (address == null) {
-                      context.push('/addresses');
-                    } else {
-                      List<CartItem> checkoutItems = [];
+                    ],
+                  ),
+                  Positioned(
+                    bottom: 20,
+                    left: 50,
+                    right: 50,
+                    child: Consumer<CartNotifier>(
+                      builder: (context, cartNotifier, child) {
+                        return GestureDetector(
+                          onTap: () {
+                            if (address == null) {
+                              context.push('/addresses');
+                            } else {
+                              List<CartItem> checkoutItems = [];
 
-                      for (var item in cartNotifier.selectedCartItems) {
-                        CartItem data = CartItem(
-                            name: item.product.title,
-                            id: item.product.id,
-                            price: item.product.price.roundToDouble(),
-                            cartQuantity: item.quantity,
-                            size: item.size,
-                            color: item.color);
+                              for (var item in cartNotifier.selectedCartItems) {
+                                CartItem data = CartItem(
+                                    name: item.product.title,
+                                    id: item.product.id,
+                                    price: item.product.price.roundToDouble(),
+                                    cartQuantity: item.quantity,
+                                    size: item.size,
+                                    color: item.color);
 
-                        checkoutItems.add(data);
-                      }
+                                checkoutItems.add(data);
+                              }
 
-                      CreateCheckout data = CreateCheckout(
-                          address:
-                              context.read<AddressNotifier>().address == null
-                                  ? address.id
-                                  : context.read<AddressNotifier>().address!.id,
-                          accesstoken: accessToken.toString(),
-                          fcm: '',
-                          totalAmount: cartNotifier.totalPrice,
-                          cartItems: checkoutItems);
+                              CreateCheckout data = CreateCheckout(
+                                  address:
+                                      context.read<AddressNotifier>().address ==
+                                              null
+                                          ? address.id
+                                          : context
+                                              .read<AddressNotifier>()
+                                              .address!
+                                              .id,
+                                  accesstoken: accessToken.toString(),
+                                  fcm: '',
+                                  totalAmount: cartNotifier.totalPrice,
+                                  cartItems: checkoutItems);
 
-                      String c = createCheckoutToJson(data);
+                              String c = createCheckoutToJson(data);
 
-                      cartNotifier.createCheckout(c);
-                    }
-                  },
-                  child: Container(
-                    height: 80,
-                    width: ScreenUtil().scaleWidth,
-                    decoration: BoxDecoration(
-                      color: Kolors.kPrimaryLight,
-                      borderRadius: kRadiusTop,
-                    ),
-                    child: Center(
-                      child: ReusableText(
-                        text: address == null
-                            ? "Please an Address"
-                            : "Continue to Payment",
-                        style: appStyle(16, Kolors.kWhite, FontWeight.w600),
-                      ),
+                              cartNotifier.createCheckout(c);
+                            }
+                          },
+                          child: Container(
+                            height: 50.h,
+                            width: ScreenUtil().scaleWidth,
+                            decoration: BoxDecoration(
+                              color: Kolors.kPrimaryLight,
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.shade400,
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 5),
+                                ),
+                              ],
+                            ),
+                            child: Center(
+                              child: ReusableText(
+                                text: address == null
+                                    ? "Please an Address"
+                                    : "Continue to Payment",
+                                style: appStyle(
+                                    16, Kolors.kWhite, FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
-                );
+                ]);
               },
             ),
           );

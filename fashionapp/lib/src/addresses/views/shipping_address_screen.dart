@@ -4,7 +4,6 @@ import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/back_button.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/common/widgets/shimmers/list_shimmer.dart';
-import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/src/addresses/controllers/address_notifier.dart';
 import 'package:fashionapp/src/addresses/hooks/fetch_address_list.dart';
 import 'package:fashionapp/src/addresses/widgets/address_tile.dart';
@@ -76,7 +75,7 @@ class ShippingAddress extends HookWidget {
               width: ScreenUtil().screenWidth,
               decoration: BoxDecoration(
                 color: Kolors.kPrimaryLight,
-                borderRadius: kRadiusAll,
+                borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.shade400,
@@ -88,7 +87,7 @@ class ShippingAddress extends HookWidget {
               child: Center(
                 child: ReusableText(
                   text: "Add Address",
-                  style: appStyle(16, Kolors.kWhite, FontWeight.w600),
+                  style: appStyle(16, Kolors.kWhite, FontWeight.w500),
                 ),
               ),
             ),
