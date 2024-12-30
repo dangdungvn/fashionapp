@@ -21,4 +21,4 @@ pybackend/logs/
 # Ignore Pycache
 pybackend/.cache/
 
-pybackend/fashion_backend/*.sqlite3
+pybackend/fashion_backend/db.sqlite3
