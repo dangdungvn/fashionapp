@@ -1,24 +1,22 @@
-# Ignore Django's internal files and folders
-pybackend/*.pyc
-pybackend/__pycache__/
-pybackend/*.egg-info/
+*.pyc
+__pycache__/
+*.egg-info/
 
 # Ignore virtual environment files (if you're using one)
-pybackend/venv
+venv
 
 # Ignore Django's project tmp directory
-pybackend/tmp/
+tmp/
 
 # Ignore Django's cache directory
-pybackend/*cache*
+*cache*
 
 # Ignore Python's build-in temp directory
-pybackend/*.pyd
+*.pyd
 
 # Ignore Django's logs
-pybackend/logs/
+logs/
 
 # Ignore Pycache
-pybackend/.cache/
-
-pybackend/fashion_backend/db.sqlite3
+.cache/
+db.sqlite3
