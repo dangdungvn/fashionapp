@@ -92,3 +92,14 @@ class OrderDetails(APIView):
 
         serializer = serializers.OrderSerializer(order)
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class StatisticsOrderByCategory(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        category = request.query_params.get("category")
+        orders = models.Order.objects.filter(category=category).order_by("-created_at")
+
+        serializer = serializers.OrderSerializer(orders, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

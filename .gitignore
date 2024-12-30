@@ -1,0 +1,24 @@
+# Ignore Django's internal files and folders
+pybackend/*.pyc
+pybackend/__pycache__/
+pybackend/*.egg-info/
+
+# Ignore virtual environment files (if you're using one)
+pybackend/venv
+
+# Ignore Django's project tmp directory
+pybackend/tmp/
+
+# Ignore Django's cache directory
+pybackend/*cache*
+
+# Ignore Python's build-in temp directory
+pybackend/*.pyd
+
+# Ignore Django's logs
+pybackend/logs/
+
+# Ignore Pycache
+pybackend/.cache/
+
+pybackend/*.sqlite3
