@@ -50,6 +50,8 @@ dependencies:
   animated_splash_screen:
   flutter_native_splash: ^2.4.1
   iconly:
+  fl_chart:
+  custom_refresh_indicator:
 
 dev_dependencies:
   flutter_test:

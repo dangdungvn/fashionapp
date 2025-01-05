@@ -98,8 +98,18 @@ class StatisticsOrderByCategory(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        category = request.query_params.get("category")
-        orders = models.Order.objects.filter(category=category).order_by("-created_at")
+        user = request.user
+        orders = models.Order.objects.filter(user=user).order_by("-created_at")
 
-        serializer = serializers.OrderSerializer(orders, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        categories = {}
+        for order in orders:
+            for product in order.order_products:
+                product_id = product["product_id"]
+                product_obj = get_object_or_404(Product, id=product_id)
+                category = product_obj.category.title
+                if category in categories:
+                    categories[category] += 1
+                else:
+                    categories[category] = 1
+
+        return Response(categories, status=status.HTTP_200_OK)

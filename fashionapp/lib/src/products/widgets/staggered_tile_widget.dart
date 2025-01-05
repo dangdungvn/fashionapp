@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
+import 'package:fashionapp/const/resource.dart';
 import 'package:fashionapp/src/products/controller/product_notifier.dart';
 import 'package:fashionapp/src/products/models/products_model.dart';
 import 'package:fashionapp/src/wishlist/controllers/wishlist_notifier.dart';
@@ -11,6 +12,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:like_button/like_button.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class StaggeredTileWidget extends HookWidget {
@@ -51,10 +53,15 @@ class StaggeredTileWidget extends HookWidget {
                 child: Stack(
                   children: [
                     CachedNetworkImage(
-                        width: double.infinity,
-                        height: i % 2 == 0 ? 163.h : 180.h,
-                        fit: BoxFit.cover,
-                        imageUrl: product.imageUrls[0]),
+                      width: double.infinity,
+                      height: i % 2 == 0 ? 163.h : 180.h,
+                      fit: BoxFit.cover,
+                      imageUrl: product.imageUrls[0],
+                      placeholder: (context, url) => Lottie.asset(
+                          R.ASSETS_ANIMATIONS_LOADING_JSON,
+                          height: 50,
+                          width: 50),
+                    ),
                     Positioned(
                       top: 8,
                       right: 8,

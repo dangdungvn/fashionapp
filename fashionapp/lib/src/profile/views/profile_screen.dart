@@ -9,19 +9,27 @@ import 'package:fashionapp/src/auth/controllers/auth_notifier.dart';
 import 'package:fashionapp/src/auth/models/profile_model.dart';
 import 'package:fashionapp/src/auth/views/login_screen.dart';
 import 'package:fashionapp/src/entrypoint/controllers/bottom_tab_notifier.dart';
+// import 'package:fashionapp/src/orders/hooks/fetch_statistics.dart';
+// import 'package:fashionapp/src/orders/widgets/statistics_tile.dart';
 import 'package:fashionapp/src/profile/widgets/tile_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends HookWidget {
   const ProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     String? accessToken = Storage().getString('accessToken');
+    // final statisticsResults = fetchStatistics();
+    // final statistics = statisticsResults.statistics;
+    // final isLoading = statisticsResults.isLoading;
+    // final error = statisticsResults.error;
+    // final refetch = statisticsResults.refetch;
     if (accessToken == null) {
       return const LoginPage();
     }
@@ -117,6 +125,17 @@ class ProfilePage extends StatelessWidget {
                   },
                 ),
               ),
+              SizedBox(
+                height: 30.h,
+              ),
+              // SizedBox(
+              //   height: 200.h,
+              //   child: StatisticsTile(
+              //       statistics: statistics,
+              //       isLoading: isLoading,
+              //       error: error,
+              //       refetch: refetch),
+              // ),
             ],
           );
         },

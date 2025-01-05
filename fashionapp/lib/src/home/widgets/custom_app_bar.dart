@@ -1,12 +1,12 @@
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/reusable_text.dart';
+import 'package:fashionapp/common/widgets/shimmers/shimmer_widget.dart';
 import 'package:fashionapp/src/addresses/hooks/fetch_defaults.dart';
 import 'package:fashionapp/src/home/widgets/notification_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconly/iconly.dart';
 
@@ -17,6 +17,7 @@ class CustomAppBar extends HookWidget {
   Widget build(BuildContext context) {
     final result = fetchDefaultAddress();
     final address = result.address;
+    final isLoading = result.isLoading;
     return AppBar(
       elevation: 0,
       automaticallyImplyLeading: false,
@@ -36,23 +37,29 @@ class CustomAppBar extends HookWidget {
           Row(
             children: [
               const Icon(
-                Ionicons.location,
+                IconlyLight.location,
                 size: 16,
                 color: Kolors.kPrimary,
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 6),
-                child: SizedBox(
-                  width: ScreenUtil().screenWidth * 0.7,
-                  child: Text(
-                    address == null
-                        ? "Please select your location"
-                        : address.address,
-                    maxLines: 1,
-                    style: appStyle(14, Kolors.kDark, FontWeight.w500),
-                  ),
-                ),
-              ),
+              isLoading
+                  ? const ShimmerWidget(
+                      shimmerHieght: 20,
+                      shimmerWidth: 100,
+                      shimmerRadius: 12,
+                    )
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 6),
+                      child: SizedBox(
+                        width: ScreenUtil().screenWidth * 0.7,
+                        child: Text(
+                          address == null
+                              ? "Please select your location"
+                              : address.address,
+                          maxLines: 1,
+                          style: appStyle(14, Kolors.kDark, FontWeight.w500),
+                        ),
+                      ),
+                    ),
             ],
           )
         ],

@@ -74,12 +74,13 @@ class AddressTile extends StatelessWidget {
                   }
                 },
                 child: Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+                  padding: isCheckout
+                      ? EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h)
+                      : EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
                   decoration: BoxDecoration(
                     borderRadius: kRadiusAll,
                     color: isCheckout
-                        ? Kolors.kPrimary
+                        ? Kolors.kPrimaryLight
                         : addressNotifier.address == null
                             ? address.isDefault == true
                                 ? Colors.green
@@ -90,7 +91,9 @@ class AddressTile extends StatelessWidget {
                   ),
                   child: ReusableText(
                     text: _getButtonText(isCheckout, addressNotifier, address),
-                    style: appStyle(11, Kolors.kWhite, FontWeight.w400),
+                    style: isCheckout
+                        ? appStyle(13, Kolors.kWhite, FontWeight.w400)
+                        : appStyle(11, Kolors.kWhite, FontWeight.w400),
                   ),
                 ),
               ),

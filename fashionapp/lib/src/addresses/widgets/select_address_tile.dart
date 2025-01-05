@@ -4,8 +4,8 @@ import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/src/addresses/controllers/address_notifier.dart';
 import 'package:fashionapp/src/addresses/models/addresses_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 
 class SelectAddressTile extends StatelessWidget {
@@ -29,8 +29,8 @@ class SelectAddressTile extends StatelessWidget {
             radius: 28,
             backgroundColor: Kolors.kSecondaryLight,
             child: Icon(
-              MaterialIcons.location_pin,
-              color: Kolors.kPrimary,
+              IconlyBold.location,
+              color: Kolors.kPrimaryLight,
               size: 30,
             ),
           ),
