@@ -4,8 +4,8 @@ import 'package:fashionapp/common/widgets/login_bottom_sheet.dart';
 import 'package:fashionapp/src/notification/hooks/fetch_count.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:go_router/go_router.dart';
+import 'package:iconly/iconly.dart';
 
 class NotificationWidget extends HookWidget {
   const NotificationWidget({super.key});
@@ -30,7 +30,8 @@ class NotificationWidget extends HookWidget {
           backgroundColor: Kolors.kGrayLight.withOpacity(.3),
           child: Badge(
             label: Text(isLoading ? '...' : data.unreadCount.toString()),
-            child: const Icon(Ionicons.notifications, color: Kolors.kPrimary),
+            child: const Icon(IconlyBold.notification,
+                color: Kolors.kPrimaryLight),
           ),
         ),
       ),

@@ -3,6 +3,7 @@ import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 Future<dynamic> showHelpCenterBottomSheet(BuildContext context) {
   return showModalBottomSheet<void>(
@@ -101,7 +102,9 @@ Future<dynamic> showHelpCenterBottomSheet(BuildContext context) {
               SizedBox(height: 20.h),
 
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  launchFacebook();
+                },
                 child: const Text('Visit Full Help Center'),
               ),
             ],
@@ -110,4 +113,13 @@ Future<dynamic> showHelpCenterBottomSheet(BuildContext context) {
       );
     },
   );
+}
+
+void launchFacebook() async {
+  const url = 'https://www.messenger.com/t/100013745354364?locale=vi_VN';
+  if (await canLaunchUrl(Uri.parse(url))) {
+    await launchUrl(Uri.parse(url));
+  } else {
+    throw 'Could not launch $url';
+  }
 }

@@ -4,8 +4,8 @@ import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/src/notification/models/notification_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get_time_ago/get_time_ago.dart';
+import 'package:iconly/iconly.dart';
 
 class NotificationTile extends StatelessWidget {
   const NotificationTile({
@@ -34,8 +34,8 @@ class NotificationTile extends StatelessWidget {
             children: [
               const CircleAvatar(
                 backgroundColor: Kolors.kWhite,
-                child: Icon(Ionicons.notifications,
-                    color: Kolors.kPrimary, size: 28),
+                child: Icon(IconlyBold.notification,
+                    color: Kolors.kPrimaryLight, size: 28),
               ),
               SizedBox(width: 10.w),
               Padding(

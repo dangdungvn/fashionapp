@@ -22,7 +22,7 @@ class Order(models.Model):
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     customer_id = models.CharField(max_length=255)
-    address = models.ForeignKey(Address, on_delete=models.PROTECT)
+    address = models.ForeignKey(Address, on_delete=models.CASCADE)
     order_products = models.JSONField(default=list)
     rated = models.JSONField(default=list)
     total_quantity = models.IntegerField()

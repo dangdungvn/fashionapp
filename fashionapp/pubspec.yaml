@@ -52,6 +52,7 @@ dependencies:
   iconly:
   fl_chart:
   custom_refresh_indicator:
+  url_launcher:
 
 dev_dependencies:
   flutter_test:
