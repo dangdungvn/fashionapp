@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/connectivity_plus/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/connectivity_plus/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/connectivity_plus/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/connectivity_plus/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/connectivity_plus/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/connectivity_plus/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/flutter_local_notifications_linux/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/flutter_local_notifications_linux/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/flutter_local_notifications_linux/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/path_provider_linux/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/webview_universal/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/webview_universal/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/webview_universal/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/webview_universal/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/webview_universal/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/linux/flutter/ephemeral/.plugin_symlinks/webview_universal/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/connectivity_plus/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/connectivity_plus/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/connectivity_plus/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/connectivity_plus/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/connectivity_plus/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/connectivity_plus/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/firebase_core/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/firebase_core/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/firebase_core/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/firebase_core/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/firebase_core/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/firebase_core/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/webview_universal/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/webview_universal/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/webview_universal/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/webview_universal/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/webview_universal/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fashionapp/windows/flutter/ephemeral/.plugin_symlinks/webview_universal/example/build" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

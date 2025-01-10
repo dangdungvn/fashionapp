@@ -5,7 +5,6 @@ import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/src/orders/models/order_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 class NotificationOrderTile extends StatelessWidget {
   final Order order;
@@ -24,7 +23,7 @@ class NotificationOrderTile extends StatelessWidget {
               child: Container(
                 width: ScreenUtil().screenWidth,
                 height: 90,
-                color: Kolors.kWhite,
+                color: Kolors.kOffWhite,
                 child: SizedBox(
                   height: 85.h,
                   child: Row(
@@ -66,28 +65,6 @@ class NotificationOrderTile extends StatelessWidget {
                                           .toUpperCase(),
                                   style: appStyle(
                                       12, Kolors.kGray, FontWeight.normal)),
-                              GestureDetector(
-                                onTap: () {
-                                  context.push('/review');
-                                },
-                                child: Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 8),
-                                  decoration: BoxDecoration(
-                                      color: order.rated
-                                              .contains(product.productId)
-                                          ? Kolors.kGray
-                                          : Kolors.kPrimary,
-                                      borderRadius: BorderRadius.circular(6)),
-                                  child: ReusableText(
-                                      text: order.rated
-                                              .contains(product.productId)
-                                          ? "Reviewed"
-                                          : "Review",
-                                      style: appStyle(12, Kolors.kWhite,
-                                          FontWeight.normal)),
-                                ),
-                              )
                             ],
                           ),
                         ],
