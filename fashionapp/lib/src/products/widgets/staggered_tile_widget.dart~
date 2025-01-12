@@ -48,13 +48,13 @@ class StaggeredTileWidget extends HookWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: i % 2 == 0 ? 158.h : 180.h,
+                height: i % 2 == 0 ? 160.h : 180.h,
                 color: Kolors.kOffWhite,
                 child: Stack(
                   children: [
                     CachedNetworkImage(
                       width: double.infinity,
-                      height: i % 2 == 0 ? 158.h : 180.h,
+                      height: i % 2 == 0 ? 160.h : 180.h,
                       fit: BoxFit.cover,
                       imageUrl: product.imageUrls[0],
                       placeholder: (context, url) => Lottie.asset(
