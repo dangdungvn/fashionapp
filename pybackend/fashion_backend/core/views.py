@@ -6,11 +6,13 @@ from django.db.models import Count
 import random
 import unicodedata
 from django.db.models import Q
+from rest_framework.pagination import PageNumberPagination
 
 
 class CategoryList(generics.ListAPIView):
     serializer_class = serializers.CategorySerializer
     queryset = models.Category.objects.all()
+    pagination_class = PageNumberPagination
 
 
 class HomeCategoryList(generics.ListAPIView):
@@ -31,13 +33,11 @@ class BrandList(generics.ListAPIView):
 
 class ProductList(generics.ListAPIView):
     serializer_class = serializers.ProductSerializer
+    pagination_class = PageNumberPagination
 
     def get_queryset(self):
         queryset = models.Product.objects.all()
-        queryset = queryset.annotate(random_order=Count("id"))
-        queryset = list(queryset)
-        random.shuffle(queryset)
-        return queryset[:20]
+        return queryset  # Bỏ slicing
 
 
 class PopularProductList(generics.ListAPIView):
