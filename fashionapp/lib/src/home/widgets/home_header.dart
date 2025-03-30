@@ -10,23 +10,45 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        ReusableText(
-          text: AppText.kCategory,
-          style: appStyle(13, Kolors.kDark, FontWeight.w600),
-        ),
-        GestureDetector(
-          onTap: () {
-            context.push('/categories');
-          },
-          child: ReusableText(
-            text: AppText.kViewAll,
-            style: appStyle(13, Kolors.kGray, FontWeight.w600),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Category title with modern styling
+          const Text(
+            AppText.kCategory,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Kolors.kDark,
+              letterSpacing: 0.5,
+            ),
           ),
-        ),
-      ],
+
+          // View All button with enhanced styling
+          GestureDetector(
+            onTap: () {
+              context.push('/categories');
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: Kolors.kPrimary.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: const Text(
+                AppText.kViewAll,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: Kolors.kPrimary,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

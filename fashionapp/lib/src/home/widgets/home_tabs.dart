@@ -5,34 +5,60 @@ import 'package:fashionapp/src/home/views/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class HomeTabs extends StatelessWidget {
+class HomeTabs extends StatefulWidget {
   const HomeTabs({super.key, required TabController tabController})
       : _tabController = tabController;
 
   final TabController _tabController;
 
   @override
+  State<HomeTabs> createState() => _HomeTabsState();
+}
+
+class _HomeTabsState extends State<HomeTabs> {
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    // Lắng nghe sự thay đổi tab để cập nhật UI
+    widget._tabController.addListener(_handleTabSelection);
+    _selectedIndex = widget._tabController.index;
+  }
+
+  @override
+  void dispose() {
+    widget._tabController.removeListener(_handleTabSelection);
+    super.dispose();
+  }
+
+  void _handleTabSelection() {
+    if (widget._tabController.indexIsChanging ||
+        _selectedIndex != widget._tabController.index) {
+      setState(() {
+        _selectedIndex = widget._tabController.index;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 22.h,
+      height: 45.h,
       child: TabBar(
-        controller: _tabController,
-        indicator: BoxDecoration(
-          color: Kolors.kPrimary,
-          borderRadius: BorderRadius.circular(25),
-        ),
-        labelPadding: EdgeInsets.zero,
-        labelColor: Kolors.kWhite,
+        controller: widget._tabController,
+        indicator: const BoxDecoration(), // Ẩn indicator mặc định
+        labelPadding: EdgeInsets.symmetric(horizontal: 4.w),
+        padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 5.h),
         dividerColor: Colors.transparent,
         tabAlignment: TabAlignment.start,
         isScrollable: true,
-        labelStyle: appStyle(11, Kolors.kPrimary, FontWeight.w600),
-        unselectedLabelStyle: appStyle(11, Kolors.kGray, FontWeight.normal),
         tabs: List.generate(
           homeTabs.length,
-          (i) => Tab(
+          (index) => Tab(
             child: TabWidget(
-              text: homeTabs[i],
+              text: homeTabs[index],
+              isSelected: _selectedIndex == index,
             ),
           ),
         ),

@@ -9,58 +9,93 @@ class ProductBottomBar extends StatelessWidget {
   const ProductBottomBar({super.key, required this.price, this.onPressed});
   final String price;
   final void Function()? onPressed;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 68.h,
-      color: Colors.white.withOpacity(.6),
-      child: Padding(
-        padding: EdgeInsets.fromLTRB(16.w, 0, 12.w, 12.h),
+    return SafeArea(
+      child: Container(
+        height: 80.h,
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 60.h,
-              width: 120.h,
+            // Price container
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
+              decoration: BoxDecoration(
+                color: Kolors.kPrimaryLight.withOpacity(0.2),
+                borderRadius: BorderRadius.circular(16),
+              ),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 4.0),
-                    child: ReusableText(
-                      text: 'Total Price',
-                      style: appStyle(14, Kolors.kGray, FontWeight.w400),
+                  const Text(
+                    'Total Price',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Kolors.kGray,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  ReusableText(
-                    text: "\$ $price",
-                    style: appStyle(16, Kolors.kDark, FontWeight.w600),
+                  SizedBox(height: 2.h),
+                  Text(
+                    "\$$price",
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Kolors.kPrimary,
+                    ),
                   ),
                 ],
               ),
             ),
-            ElevatedButton(
-              onPressed: onPressed,
-              style: const ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(Kolors.kPrimary),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const Icon(
-                    FontAwesome.shopping_bag,
-                    size: 16,
-                    color: Kolors.kWhite,
+
+            // Add to cart button
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(left: 15.w),
+                height: 50.h,
+                child: ElevatedButton(
+                  onPressed: onPressed,
+                  style: ElevatedButton.styleFrom(
+                    elevation: 0,
+                    backgroundColor: Kolors.kPrimary,
+                    foregroundColor: Kolors.kWhite,
+                    padding: EdgeInsets.symmetric(horizontal: 20.w),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    shadowColor: Kolors.kPrimary.withOpacity(0.3),
                   ),
-                  SizedBox(
-                    width: 8.w,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(6),
+                        decoration: BoxDecoration(
+                          color: Kolors.kWhite.withOpacity(0.3),
+                          shape: BoxShape.circle,
+                        ),
+                        child: const Icon(
+                          FontAwesome.shopping_bag,
+                          size: 14,
+                          color: Kolors.kWhite,
+                        ),
+                      ),
+                      SizedBox(width: 12.w),
+                      const Text(
+                        "Add to Cart",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Kolors.kWhite,
+                        ),
+                      )
+                    ],
                   ),
-                  ReusableText(
-                      text: "Checkout",
-                      style: appStyle(14, Kolors.kWhite, FontWeight.bold))
-                ],
+                ),
               ),
             ),
           ],

@@ -41,7 +41,7 @@ class WishlistStaggeredTileWidget extends HookWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: i % 2 == 0 ? 163.h : 180.h,
+                height: i % 2 == 0 ? 159.h : 180.h,
                 color: Kolors.kOffWhite,
                 child: Stack(
                   children: [

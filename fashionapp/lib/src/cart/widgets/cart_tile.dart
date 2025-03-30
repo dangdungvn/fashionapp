@@ -27,12 +27,15 @@ class CartTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CartNotifier>(
       builder: (context, cartNotifier, child) {
+        final bool isSelected =
+            cartNotifier.selectedCartItemsId.contains(cart.id);
+
         return GestureDetector(
           onTap: () {
             cartNotifier.selectOrDeselect(cart.id, cart);
           },
           child: Padding(
-            padding: EdgeInsets.only(bottom: 8.h),
+            padding: EdgeInsets.only(bottom: 10.h),
             child: Slidable(
               endActionPane: ActionPane(
                 motion: const StretchMotion(),
@@ -43,134 +46,206 @@ class CartTile extends StatelessWidget {
                       onDelete!();
                     },
                     icon: Icons.delete,
-                    backgroundColor: Colors.red.shade300,
+                    backgroundColor: Kolors.kRed,
                     foregroundColor: Kolors.kWhite,
                     autoClose: true,
-                    label: "Del",
-                    borderRadius: BorderRadius.circular(12),
+                    label: "Delete",
+                    borderRadius: BorderRadius.circular(16),
                   )
                 ],
               ),
               child: Container(
-                width: ScreenUtil().screenWidth,
-                height: 90.h,
+                width: double.infinity,
+                height: 105.h,
                 decoration: BoxDecoration(
-                  color: !cartNotifier.selectedCartItemsId.contains(cart.id)
-                      ? Kolors.kWhite
-                      : Kolors.kPrimaryLight.withOpacity(0.1),
-                  borderRadius: kRadiusAll,
+                  color: Kolors.kWhite,
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Kolors.kDark.withOpacity(0.05),
+                      blurRadius: 10,
+                      spreadRadius: 1,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                  border: isSelected
+                      ? Border.all(color: Kolors.kPrimary, width: 2)
+                      : null,
                 ),
-                child: SizedBox(
-                  height: 85.h,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: Kolors.kWhite,
-                              borderRadius: BorderRadius.only(
-                                bottomRight: Radius.circular(12),
-                                topRight: Radius.circular(12),
-                              ),
-                            ),
-                            child: ClipRRect(
-                              borderRadius: kRadiusAll,
-                              child: SizedBox(
-                                width: 76.w,
-                                height: double.infinity,
-                                child: CachedNetworkImage(
-                                  imageUrl: cart.product.imageUrls[0],
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: 10.w),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              ReusableText(
-                                text: cart.product.title,
-                                style: appStyle(
-                                    12, Kolors.kPrimary, FontWeight.normal),
-                              ),
-                              ReusableText(
-                                text:
-                                    "Size: ${cart.size}   ||   Color: ${cart.color}",
-                                style: appStyle(
-                                    12, Kolors.kGray, FontWeight.normal),
-                              ),
-                              // SizedBox(
-                              //   width: ScreenUtil().screenWidth * 0.5,
-                              //   child: Text(
-                              //     cart.product.description,
-                              //     maxLines: 2,
-                              //     textAlign: TextAlign.justify,
-                              //     style: appStyle(
-                              //         9, Kolors.kGray, FontWeight.normal),
-                              //   ),
-                              // ),
-                            ],
-                          ),
-                        ],
+                child: Row(
+                  children: [
+                    // Checkbox indicator
+                    Container(
+                      width: 30.w,
+                      decoration: BoxDecoration(
+                        color: isSelected
+                            ? Kolors.kPrimaryLight.withOpacity(0.2)
+                            : Colors.transparent,
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+                        ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 6.0),
+                      child: Center(
+                        child: Checkbox(
+                          value: isSelected,
+                          onChanged: (_) {
+                            cartNotifier.selectOrDeselect(cart.id, cart);
+                          },
+                          shape: const CircleBorder(),
+                          activeColor: Kolors.kPrimary,
+                          checkColor: Kolors.kWhite,
+                        ),
+                      ),
+                    ),
+
+                    // Product image
+                    Container(
+                      width: 85.w,
+                      height: 85.h,
+                      margin: EdgeInsets.all(10.w),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        color: Kolors.kOffWhite,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: CachedNetworkImage(
+                          imageUrl: cart.product.imageUrls[0],
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+
+                    // Product details
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 8.w),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            cartNotifier.selectedCart != null &&
-                                    cartNotifier.selectedCart == cart.id
-                                ? const CartCounter()
-                                : GestureDetector(
-                                    onTap: () {
-                                      cartNotifier.setSelectedCounter(
-                                          cart.id, cart.quantity);
-                                    },
-                                    onDoubleTap: () {},
-                                    child: Container(
-                                      width: 40.w,
-                                      height: 20.h,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: Kolors.kPrimary,
-                                          width: 0.5.w,
+                            // Product name
+                            Text(
+                              cart.product.title,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: Kolors.kDark,
+                              ),
+                            ),
+
+                            SizedBox(height: 5.h),
+
+                            // Product options (size & color)
+                            Row(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 8.w, vertical: 3.h),
+                                  decoration: BoxDecoration(
+                                    color: Kolors.kGrayLight.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    "Size: ${cart.size}",
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                      color: Kolors.kGray,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 6.w),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 8.w, vertical: 3.h),
+                                  decoration: BoxDecoration(
+                                    color: Kolors.kGrayLight.withOpacity(0.5),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Text(
+                                    "Color: ${cart.color}",
+                                    style: const TextStyle(
+                                      fontSize: 10,
+                                      color: Kolors.kGray,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: 10.h),
+
+                            // Price and quantity controller
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                // Price
+                                Text(
+                                  "\$${(cart.product.price * cart.quantity).toStringAsFixed(2)}",
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Kolors.kPrimary,
+                                  ),
+                                ),
+
+                                // Quantity control
+                                cartNotifier.selectedCart != null &&
+                                        cartNotifier.selectedCart == cart.id
+                                    ? Row(
+                                        children: [
+                                          const CartCounter(),
+                                          SizedBox(width: 8.w),
+                                          UpdateButton(onUpdate: onUpdate),
+                                        ],
+                                      )
+                                    : GestureDetector(
+                                        onTap: () {
+                                          cartNotifier.setSelectedCounter(
+                                              cart.id, cart.quantity);
+                                        },
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 10.w, vertical: 6.h),
+                                          decoration: BoxDecoration(
+                                            color: Kolors.kPrimaryLight
+                                                .withOpacity(0.2),
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              const Icon(
+                                                Icons.edit,
+                                                size: 14,
+                                                color: Kolors.kPrimary,
+                                              ),
+                                              SizedBox(width: 4.w),
+                                              Text(
+                                                "Qty: ${cart.quantity}",
+                                                style: const TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Kolors.kPrimary,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        borderRadius:
-                                            BorderRadius.circular(4.0),
                                       ),
-                                      child: ReusableText(
-                                        text: "* ${cart.quantity}",
-                                        style: appStyle(12, Kolors.kPrimary,
-                                            FontWeight.normal),
-                                      ),
-                                    ),
-                                  ),
-                            SizedBox(height: 6.h),
-                            cartNotifier.selectedCart != null &&
-                                    cartNotifier.selectedCart == cart.id
-                                ? UpdateButton(
-                                    onUpdate: onUpdate,
-                                  )
-                                : Padding(
-                                    padding: EdgeInsets.only(right: 6.w),
-                                    child: ReusableText(
-                                      text:
-                                          "\$ ${(cart.product.price * cart.quantity).toStringAsFixed(2)}",
-                                      style: appStyle(
-                                          12, Kolors.kPrimary, FontWeight.w600),
-                                    ),
-                                  ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),

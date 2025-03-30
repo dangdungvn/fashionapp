@@ -1,0 +1,2 @@
+D:/Workspace/flutter/fullstack-fashionapp/fashionapp/android/app/.cxx/Debug/505g3m6f/x86_64/CMakeFiles/edit_cache.dir
+D:/Workspace/flutter/fullstack-fashionapp/fashionapp/android/app/.cxx/Debug/505g3m6f/x86_64/CMakeFiles/rebuild_cache.dir

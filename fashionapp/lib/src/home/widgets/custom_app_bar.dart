@@ -18,29 +18,41 @@ class CustomAppBar extends HookWidget {
     final result = fetchDefaultAddress();
     final address = result.address;
     final isLoading = result.isLoading;
+
     return AppBar(
       elevation: 0,
+      backgroundColor: Kolors.kOffWhite,
       automaticallyImplyLeading: false,
       title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 3),
-            child: ReusableText(
-              text: "Location",
-              style: appStyle(12, Kolors.kGray, FontWeight.normal),
+          const Padding(
+            padding: EdgeInsets.only(left: 3),
+            child: Text(
+              "Location",
+              style: TextStyle(
+                fontSize: 13,
+                color: Kolors.kGray,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
-          SizedBox(
-            height: 5.h,
-          ),
+          SizedBox(height: 5.h),
           Row(
             children: [
-              const Icon(
-                IconlyLight.location,
-                size: 16,
-                color: Kolors.kPrimary,
+              Container(
+                padding: const EdgeInsets.all(6),
+                decoration: BoxDecoration(
+                  color: Kolors.kPrimary.withOpacity(0.1),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  IconlyLight.location,
+                  size: 14,
+                  color: Kolors.kPrimary,
+                ),
               ),
+              SizedBox(width: 5.w),
               isLoading
                   ? const ShimmerWidget(
                       shimmerHieght: 20,
@@ -50,13 +62,18 @@ class CustomAppBar extends HookWidget {
                   : Padding(
                       padding: const EdgeInsets.only(left: 6),
                       child: SizedBox(
-                        width: ScreenUtil().screenWidth * 0.7,
+                        width: ScreenUtil().screenWidth * 0.65,
                         child: Text(
                           address == null
                               ? "Please select your location"
                               : address.address,
                           maxLines: 1,
-                          style: appStyle(14, Kolors.kDark, FontWeight.w500),
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Kolors.kDark,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ),
                     ),
@@ -68,61 +85,90 @@ class CustomAppBar extends HookWidget {
         NotificationWidget(),
       ],
       bottom: PreferredSize(
-        preferredSize: Size.fromHeight(55.h),
-        child: GestureDetector(
-          onTap: () {
-            context.push("/search");
-          },
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 12.h, vertical: 8.h),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: 6.w),
+        preferredSize: Size.fromHeight(60.h),
+        child: Container(
+          padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 10.h),
+          child: Row(
+            children: [
+              // Search bar with modern styling
+              Expanded(
+                child: GestureDetector(
+                  onTap: () {
+                    context.push("/search");
+                  },
                   child: Container(
-                    height: 40.h,
-                    width: ScreenUtil().screenWidth - 80,
+                    height: 45.h,
+                    padding: EdgeInsets.symmetric(horizontal: 15.w),
                     decoration: BoxDecoration(
-                      border: Border.all(width: 0.5, color: Kolors.kGrayLight),
-                      borderRadius: BorderRadius.circular(12),
+                      color: Kolors.kWhite,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Kolors.kDark.withOpacity(0.05),
+                          blurRadius: 10,
+                          spreadRadius: 1,
+                        ),
+                      ],
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          const Icon(
-                            IconlyLight.search,
-                            size: 20,
-                            color: Kolors.kPrimaryLight,
+                    child: Row(
+                      children: [
+                        const Icon(
+                          IconlyLight.search,
+                          size: 20,
+                          color: Kolors.kPrimary,
+                        ),
+                        SizedBox(width: 12.w),
+                        const Text(
+                          "Search products",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Kolors.kGray,
+                            fontWeight: FontWeight.w400,
                           ),
-                          SizedBox(
-                            width: 20.w,
-                          ),
-                          ReusableText(
-                            text: "Search",
-                            style: appStyle(14, Kolors.kGray, FontWeight.w400),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
-                Container(
-                  height: 40.h,
-                  width: 40.w,
+              ),
+
+              SizedBox(width: 10.w),
+
+              // Filter button with modernized style
+              GestureDetector(
+                onTap: () {
+                  // TODO: Implement filter functionality
+                },
+                child: Container(
+                  height: 45.h,
+                  width: 45.w,
                   decoration: BoxDecoration(
-                    color: Kolors.kPrimaryLight,
-                    borderRadius: BorderRadius.circular(9),
+                    gradient: const LinearGradient(
+                      colors: [
+                        Kolors.kPrimary,
+                        Kolors.kPrimaryLight,
+                      ],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Kolors.kPrimary.withOpacity(0.25),
+                        blurRadius: 8,
+                        spreadRadius: 1,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
                   child: const Icon(
-                    IconlyLight.category,
+                    IconlyLight.filter,
                     color: Kolors.kWhite,
                     size: 20,
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ),
       ),

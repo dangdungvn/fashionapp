@@ -12,42 +12,79 @@ class CartCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<CartNotifier>(
-      builder: (
-        context,
-        cartNotifier,
-        child,
-      ) {
-        return SizedBox(
-          height: 23.h,
-          width: 80.w,
+      builder: (context, cartNotifier, child) {
+        return Container(
+          height: 32.h,
+          decoration: BoxDecoration(
+            color: Kolors.kPrimaryLight.withOpacity(0.15),
+            borderRadius: BorderRadius.circular(20),
+          ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              GestureDetector(
-                onTap: () {
-                  cartNotifier.decrement();
-                },
-                child: const Icon(
-                  Icons.remove_circle_rounded,
-                  color: Kolors.kPrimaryLight,
-                  size: 25,
+              // Decrement button
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    cartNotifier.decrement();
+                  },
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    bottomLeft: Radius.circular(20),
+                  ),
+                  child: Container(
+                    width: 32.w,
+                    height: 32.h,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.remove,
+                      color: Kolors.kPrimary,
+                      size: 18,
+                    ),
+                  ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 3.0),
-                child: ReusableText(
-                  text: "${cartNotifier.qty}",
-                  style: appStyle(13, Kolors.kDark, FontWeight.w500),
+
+              // Quantity display
+              Container(
+                width: 30.w,
+                alignment: Alignment.center,
+                child: Text(
+                  "${cartNotifier.qty}",
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: Kolors.kDark,
+                  ),
                 ),
               ),
-              GestureDetector(
-                onTap: () {
-                  cartNotifier.increment();
-                },
-                child: const Icon(
-                  Icons.add_circle_rounded,
-                  color: Kolors.kPrimaryLight,
-                  size: 25,
+
+              // Increment button
+              Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () {
+                    cartNotifier.increment();
+                  },
+                  borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                  child: Container(
+                    width: 32.w,
+                    height: 32.h,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.add,
+                      color: Kolors.kPrimary,
+                      size: 18,
+                    ),
+                  ),
                 ),
               ),
             ],

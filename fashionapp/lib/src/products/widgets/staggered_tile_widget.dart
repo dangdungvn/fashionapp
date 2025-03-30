@@ -25,7 +25,6 @@ class StaggeredTileWidget extends HookWidget {
     this.wishlistIsLoading,
     this.wishlistRefetch,
   });
-
   final int i;
   final Products product;
   final void Function()? onTap;
@@ -40,90 +39,188 @@ class StaggeredTileWidget extends HookWidget {
         context.read<ProductNotifier>().setProduct(product);
         context.push('/product/${product.id}');
       },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
-        child: Container(
-          color: Kolors.kOffWhite,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Kolors.kWhite,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Kolors.kDark.withOpacity(0.05),
+              blurRadius: 10,
+              spreadRadius: 1,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Phần hình ảnh sản phẩm
               Container(
-                height: i % 2 == 0 ? 158.h : 180.h,
-                color: Kolors.kOffWhite,
+                height: i % 2 == 0 ? 127.h : 148.h,
+                decoration: const BoxDecoration(
+                  color: Kolors.kOffWhite,
+                ),
                 child: Stack(
+                  fit: StackFit.expand,
                   children: [
-                    CachedNetworkImage(
-                      width: double.infinity,
-                      height: i % 2 == 0 ? 158.h : 180.h,
-                      fit: BoxFit.cover,
-                      imageUrl: product.imageUrls[0],
-                      placeholder: (context, url) => Lottie.asset(
-                          R.ASSETS_ANIMATIONS_LOADING_JSON,
-                          height: 50,
-                          width: 50),
+                    // Hình ảnh sản phẩm
+                    Hero(
+                      tag: 'product_${product.id}',
+                      child: CachedNetworkImage(
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                        imageUrl: product.imageUrls[0],
+                        placeholder: (context, url) => Center(
+                          child: Lottie.asset(
+                            R.ASSETS_ANIMATIONS_LOADING_JSON,
+                            height: 50,
+                            width: 50,
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => const Icon(
+                          Icons.image_not_supported_outlined,
+                          color: Kolors.kGray,
+                        ),
+                      ),
                     ),
+
+                    // Gradient overlay ở phần dưới để làm nổi bật mức giá
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        height: 40,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Kolors.kDark.withOpacity(0.5),
+                              Colors.transparent,
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // Nút thích
                     Positioned(
                       top: 8,
                       right: 8,
-                      child: Consumer<WishlistNotifier>(
-                        builder: (context, wishlistNotifier, child) {
-                          if (wishlistIsLoading!) {
-                            return const Center(
-                              child: SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  color: Kolors.kOffWhite,
-                                ),
-                              ),
-                            );
-                          }
-                          return LikeButton(
-                            size: 25,
-                            isLiked: wishlistProduct!
-                                .map((e) => e.id)
-                                .contains(product.id),
-                            circleColor: const CircleColor(
-                                start: Color(0xff00ddff),
-                                end: Color(0xff0099cc)),
-                            bubblesColor: const BubblesColor(
-                              dotPrimaryColor: Colors.pink,
-                              dotSecondaryColor: Colors.white,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Kolors.kWhite.withOpacity(0.9),
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Kolors.kDark.withOpacity(0.1),
+                              spreadRadius: 1,
+                              blurRadius: 5,
                             ),
-                            onTap: (isLiked) async {
-                              wishlistNotifier.addRemoveWishlist(
-                                  product.id, wishlistRefetch!);
-                              return !isLiked;
-                            },
-                            likeBuilder: (bool isLiked) {
-                              return Icon(
-                                Icons.favorite,
-                                color: isLiked
-                                    ? Colors.red
-                                    : Colors.grey.withOpacity(0.5),
-                                size: 25,
+                          ],
+                        ),
+                        child: Consumer<WishlistNotifier>(
+                          builder: (context, wishlistNotifier, child) {
+                            if (wishlistIsLoading!) {
+                              return const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  height: 16,
+                                  width: 16,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Kolors.kPrimary,
+                                  ),
+                                ),
                               );
-                            },
-                          );
-                        },
+                            }
+                            return LikeButton(
+                              size: 20,
+                              padding: const EdgeInsets.all(8),
+                              isLiked: wishlistProduct!
+                                  .map((e) => e.id)
+                                  .contains(product.id),
+                              circleColor: const CircleColor(
+                                start: Kolors.kRed,
+                                end: Kolors.kRed,
+                              ),
+                              bubblesColor: BubblesColor(
+                                dotPrimaryColor: Kolors.kRed,
+                                dotSecondaryColor: Kolors.kRed.withOpacity(0.5),
+                              ),
+                              onTap: (isLiked) async {
+                                wishlistNotifier.addRemoveWishlist(
+                                  product.id,
+                                  wishlistRefetch!,
+                                );
+                                return !isLiked;
+                              },
+                              likeBuilder: (bool isLiked) {
+                                return Icon(
+                                  isLiked
+                                      ? Icons.favorite
+                                      : Icons.favorite_border,
+                                  color: isLiked ? Kolors.kRed : Kolors.kGray,
+                                  size: 20,
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+
+                    // Hiển thị giá ở góc dưới
+                    Positioned(
+                      bottom: 8,
+                      left: 8,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 10.w, vertical: 4.h),
+                        decoration: BoxDecoration(
+                          color: Kolors.kWhite.withOpacity(0.95),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Text(
+                          '\$${product.price.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: Kolors.kPrimary,
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
+
+              // Phần thông tin sản phẩm
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 2.h),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                padding: EdgeInsets.all(12.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      child: Text(
-                        product.title,
-                        overflow: TextOverflow.ellipsis,
-                        style: appStyle(13, Kolors.kDark, FontWeight.w600),
+                    // Tên sản phẩm
+                    Text(
+                      product.title,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: Kolors.kDark,
                       ),
                     ),
+
+                    SizedBox(height: 5.h),
+
+                    // Hiển thị rating và số lượt đánh giá
                     Row(
                       children: [
                         const Icon(
@@ -131,24 +228,29 @@ class StaggeredTileWidget extends HookWidget {
                           color: Kolors.kGold,
                           size: 14,
                         ),
-                        SizedBox(
-                          width: 5.w,
+                        SizedBox(width: 4.w),
+                        Text(
+                          product.ratings.toStringAsFixed(1),
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Kolors.kGray,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                        ReusableText(
-                            text: product.ratings.toStringAsFixed(1),
-                            style:
-                                appStyle(13, Kolors.kGray, FontWeight.normal))
+                        SizedBox(width: 5.w),
+                        Text(
+                          '• ${product.clothesType}',
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: Kolors.kGray,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 2.w),
-                child: ReusableText(
-                    text: '\$ ${product.price.toStringAsFixed(2)}',
-                    style: appStyle(17, Kolors.kDark, FontWeight.w500)),
-              )
             ],
           ),
         ),
