@@ -4,8 +4,8 @@ Dự án ứng dụng thời trang được phát triển bởi **Phan Văn Tùn
 
 ## Giới thiệu về tác giả
 - **Họ và tên**: Phan Văn Tùng
-- **Email**: phantung.work@gmail.com
-- **GitHub**: [phantung.dev](https://github.com/phantung.dev)
+- **Email**: tungmj1605@gmail.com
+- **GitHub**: [dangdungvn](https://github.com/dangdungvn)
 
 ## Tính năng chính
 
