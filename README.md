@@ -1,6 +1,11 @@
 # Fashion App - Ứng dụng Thời trang Fullstack
 
-Ứng dụng thời trang toàn diện được xây dựng với Flutter và Python, cung cấp trải nghiệm mua sắm thời trang trực tuyến hoàn chỉnh với tích hợp thanh toán.
+Dự án ứng dụng thời trang được phát triển bởi **Phan Văn Tùng**, sử dụng Flutter và Python để xây dựng một nền tảng mua sắm thời trang trực tuyến hoàn chỉnh.
+
+## Giới thiệu về tác giả
+- **Họ và tên**: Phan Văn Tùng
+- **Email**: phantung.work@gmail.com
+- **GitHub**: [phantung.dev](https://github.com/phantung.dev)
 
 ## Tính năng chính
 
@@ -103,8 +108,14 @@ Dự án sử dụng các file môi trường khác nhau cho development và pro
 
 ## Đóng góp
 
-Chúng tôi hoan nghênh mọi đóng góp cho dự án. Vui lòng tạo pull request hoặc báo cáo issues nếu bạn phát hiện bất kỳ vấn đề nào.
+Mọi đóng góp cho dự án đều được hoan nghênh. Vui lòng tạo pull request hoặc báo cáo issues nếu bạn phát hiện bất kỳ vấn đề nào.
+
+## Liên hệ
+
+Nếu bạn có bất kỳ câu hỏi hoặc góp ý nào, vui lòng liên hệ:
+- Email: phantung.work@gmail.com
+- GitHub: [phantung.dev](https://github.com/phantung.dev)
 
 ## Giấy phép
 
-Copyright © 2024. All rights reserved. 
+Copyright © 2024 Phan Văn Tùng. All rights reserved. 
