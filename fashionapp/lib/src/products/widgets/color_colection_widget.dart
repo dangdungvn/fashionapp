@@ -2,6 +2,7 @@ import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/src/products/controller/colors_sizes_notifier.dart';
 import 'package:fashionapp/src/products/controller/product_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class ColorColectionWidget extends StatelessWidget {
@@ -18,7 +19,7 @@ class ColorColectionWidget extends StatelessWidget {
     "blue": Colors.blue,
     "dark blue": Colors.indigo,
     "light blue": Colors.lightBlue,
-    "beige": Colors.brown,
+    "beige": const Color(0xFFF5F5DC),
     "pink": Colors.pink,
     "brown": Colors.brown,
     "red": Colors.red,
@@ -37,41 +38,76 @@ class ColorColectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ColorsSizesNotifier>(
       builder: (context, controller, child) {
-        return Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        return Wrap(
+          spacing: 12.w,
+          runSpacing: 10.h,
           children: List.generate(
             context.read<ProductNotifier>().product!.colors.length,
             (i) {
-              String c = context.read<ProductNotifier>().product!.colors[i];
+              String colorName =
+                  context.read<ProductNotifier>().product!.colors[i];
+              Color colorValue = getColorFromName(colorName);
+              bool isSelected = colorName == controller.colors;
+
               return GestureDetector(
                 onTap: () {
-                  controller.setColors(c);
+                  controller.setColors(colorName);
                 },
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                  child: Container(
-                    width: 40.0,
-                    height: 40.0,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: getColorFromName(c),
-                      border: Border.all(
-                        color: c == controller.colors
-                            ? Kolors.kPrimary
-                            : Kolors.kGrayLight,
-                        width: 2.0,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: c == controller.colors
+                child: Column(
+                  children: [
+                    // Color Circle
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      width: 40.w,
+                      height: 40.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: colorValue,
+                        border: Border.all(
+                          color: isSelected
                               ? Kolors.kPrimary
-                              : Kolors.kGrayLight,
-                          blurRadius: 5.0,
-                          spreadRadius: 1.0,
+                              : (colorValue == Colors.white
+                                  ? Kolors.kGrayLight
+                                  : Colors.transparent),
+                          width: 2.0,
                         ),
-                      ],
+                        boxShadow: [
+                          BoxShadow(
+                            color: isSelected
+                                ? Kolors.kPrimary.withOpacity(0.3)
+                                : Kolors.kDark.withOpacity(0.05),
+                            blurRadius: isSelected ? 8 : 4,
+                            spreadRadius: isSelected ? 2 : 0.5,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: isSelected
+                          ? Center(
+                              child: Icon(
+                                Icons.check,
+                                color: colorValue.computeLuminance() > 0.5
+                                    ? Colors.black
+                                    : Colors.white,
+                                size: 18,
+                              ),
+                            )
+                          : null,
                     ),
-                  ),
+
+                    // Color Name
+                    SizedBox(height: 5.h),
+                    Text(
+                      colorName,
+                      style: TextStyle(
+                        fontSize: 10,
+                        fontWeight:
+                            isSelected ? FontWeight.w600 : FontWeight.w400,
+                        color: isSelected ? Kolors.kPrimary : Kolors.kGray,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
               );
             },

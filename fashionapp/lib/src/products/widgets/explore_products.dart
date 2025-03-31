@@ -13,6 +13,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
 
 class ExploreProducts extends HookWidget {
   const ExploreProducts({super.key});
@@ -28,14 +29,14 @@ class ExploreProducts extends HookWidget {
     final isLoadingWishlist = resultsWishlist.isLoading;
     final refetchWishlist = resultsWishlist.refetch;
 
-    // Add header for products section
+    // Header for products section with modern design
     Widget header = Container(
       margin: EdgeInsets.only(left: 5.w, right: 5.w, bottom: 15.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            "Trending Products",
+            "Sản phẩm nổi bật",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -46,20 +47,31 @@ class ExploreProducts extends HookWidget {
           GestureDetector(
             onTap: () {
               // Navigate to all products page
+              context.push('/all-products');
             },
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 6.h),
               decoration: BoxDecoration(
-                color: Kolors.kPrimary.withOpacity(0.1),
+                color: Kolors.kPrimaryLight.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Text(
-                "View All",
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: Kolors.kPrimary,
-                ),
+              child: Row(
+                children: [
+                  const Text(
+                    "Xem tất cả",
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Kolors.kPrimary,
+                    ),
+                  ),
+                  SizedBox(width: 4.w),
+                  const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 10,
+                    color: Kolors.kPrimary,
+                  ),
+                ],
               ),
             ),
           ),
@@ -96,11 +108,28 @@ class ExploreProducts extends HookWidget {
                 ),
                 SizedBox(height: 15.h),
                 const Text(
-                  "No products found",
+                  "Không tìm thấy sản phẩm nào",
                   style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
                     color: Kolors.kGray,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 10.h),
+                Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                  decoration: BoxDecoration(
+                    color: Kolors.kPrimaryLight.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Text(
+                    "Thử lại với danh mục khác",
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: Kolors.kPrimary,
+                    ),
                   ),
                 ),
               ],
@@ -140,8 +169,8 @@ class ExploreProducts extends HookWidget {
                     },
                     i: i,
                     product: product,
-                    wishlistProduct: wishlistProduct,
                     wishlistIsLoading: isLoadingWishlist,
+                    wishlistProduct: wishlistProduct,
                     wishlistRefetch: refetchWishlist,
                   ),
                 );

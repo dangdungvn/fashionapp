@@ -11,37 +11,74 @@ class ProductSizesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Tính toán kích thước item dựa trên chiều rộng màn hình
+    final screenWidth = MediaQuery.of(context).size.width;
+    // Đảm bảo kích thước nút size không quá nhỏ hoặc quá lớn
+    final sizeButtonSize = (45.0.w).clamp(40.0, 55.0);
+
     return Consumer<ColorsSizesNotifier>(builder: (context, controller, child) {
-      return Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      final sizes = context.read<ProductNotifier>().product!.sizes;
+
+      // Tính toán số lượng kích thước tối đa trên mỗi hàng để tránh tràn
+      final itemsPerRow =
+          ((screenWidth - 32) / (sizeButtonSize + 12.w)).floor();
+
+      return Wrap(
+        spacing: 12.w,
+        runSpacing: 10.h,
         children: List.generate(
-            context.read<ProductNotifier>().product!.sizes.length, (i) {
-          String s = context.read<ProductNotifier>().product!.sizes[i];
-          return GestureDetector(
-            onTap: () {
-              controller.setSizes(s);
-            },
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-              child: Container(
-                height: 40.h,
-                width: 40.h,
+          sizes.length,
+          (i) {
+            String s = sizes[i];
+            bool isSelected = controller.sizes == s;
+
+            return GestureDetector(
+              onTap: () {
+                controller.setSizes(s);
+              },
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                height: sizeButtonSize,
+                width: sizeButtonSize,
                 decoration: BoxDecoration(
-                  color: controller.sizes == s
-                      ? Kolors.kPrimary
-                      : Kolors.kGrayLight,
-                  borderRadius: BorderRadius.circular(50),
+                  color: isSelected ? Kolors.kPrimary : Kolors.kWhite,
+                  borderRadius: BorderRadius.circular(15),
+                  border: Border.all(
+                    color: isSelected ? Kolors.kPrimary : Kolors.kGrayLight,
+                    width: 1.5,
+                  ),
+                  boxShadow: isSelected
+                      ? [
+                          BoxShadow(
+                            color: Kolors.kPrimary.withOpacity(0.3),
+                            blurRadius: 8,
+                            spreadRadius: 1,
+                          ),
+                        ]
+                      : [
+                          BoxShadow(
+                            color: Kolors.kDark.withOpacity(0.05),
+                            blurRadius: 4,
+                            spreadRadius: 0.5,
+                          ),
+                        ],
                 ),
                 child: Center(
                   child: Text(
                     s,
-                    style: appStyle(20, Kolors.kWhite, FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 14
+                          .sp
+                          .clamp(12.0, 16.0), // Đảm bảo kích thước font phù hợp
+                      fontWeight: FontWeight.w600,
+                      color: isSelected ? Kolors.kWhite : Kolors.kGray,
+                    ),
                   ),
                 ),
               ),
-            ),
-          );
-        }),
+            );
+          },
+        ),
       );
     });
   }

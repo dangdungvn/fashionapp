@@ -118,7 +118,7 @@ class _AddAddressState extends State<AddAddress> {
                     CupertinoSwitch(
                       value: addressNotifier.defaultToggle,
                       thumbColor: Kolors.kSecondaryLight,
-                      activeColor: Kolors.kPrimaryLight,
+                      activeTrackColor: Kolors.kPrimaryLight,
                       onChanged: (value) {
                         addressNotifier.setDefaultToggle(value);
                       },

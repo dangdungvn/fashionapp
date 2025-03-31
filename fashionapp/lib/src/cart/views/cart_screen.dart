@@ -152,7 +152,7 @@ class CartPage extends HookWidget {
               children: [
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 15.w),
-                  padding: EdgeInsets.only(bottom: 100.h),
+                  padding: EdgeInsets.only(bottom: 150.h),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -174,14 +174,27 @@ class CartPage extends HookWidget {
                                 horizontal: 12.w, vertical: 6.h),
                             decoration: BoxDecoration(
                               color: Kolors.kPrimary.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(16),
+                              borderRadius: BorderRadius.circular(16.r),
                             ),
-                            child: const Text(
-                              "Select All",
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                                color: Kolors.kPrimary,
+                            child: GestureDetector(
+                              onTap: () {
+                                final cartNotifier =
+                                    context.read<CartNotifier>();
+                                for (var cart in carts) {
+                                  if (!cartNotifier.selectedCartItemsId
+                                      .contains(cart.id)) {
+                                    cartNotifier.selectOrDeselect(
+                                        cart.id, cart);
+                                  }
+                                }
+                              },
+                              child: Text(
+                                "Chọn tất cả",
+                                style: TextStyle(
+                                  fontSize: 13.sp,
+                                  fontWeight: FontWeight.w600,
+                                  color: Kolors.kPrimary,
+                                ),
                               ),
                             ),
                           ),
@@ -216,6 +229,7 @@ class CartPage extends HookWidget {
                           },
                         ),
                       ),
+                      SizedBox(height: 100.h),
                     ],
                   ),
                 ),
@@ -223,85 +237,114 @@ class CartPage extends HookWidget {
                 // Checkout button
                 Consumer<CartNotifier>(
                   builder: (context, cartNotifier, child) {
-                    return Positioned(
-                      bottom: 20.h,
+                    final hasSelectedItems =
+                        cartNotifier.selectedCartItems.isNotEmpty;
+                    return AnimatedPositioned(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      bottom: hasSelectedItems ? 100.h : -100.h,
                       left: 20.w,
                       right: 20.w,
-                      child: cartNotifier.selectedCartItems.isNotEmpty
-                          ? Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 20.w, vertical: 15.h),
-                              decoration: BoxDecoration(
-                                color: Kolors.kWhite,
-                                borderRadius: BorderRadius.circular(25),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Kolors.kDark.withOpacity(0.08),
-                                    blurRadius: 15,
-                                    spreadRadius: 1,
-                                    offset: const Offset(0, 5),
-                                  ),
-                                ],
+                      child: AnimatedOpacity(
+                        duration: const Duration(milliseconds: 300),
+                        opacity: hasSelectedItems ? 1.0 : 0.0,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 20.w, vertical: 15.h),
+                          decoration: BoxDecoration(
+                            color: Kolors.kWhite,
+                            borderRadius: BorderRadius.circular(25.r),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Kolors.kDark.withOpacity(0.08),
+                                blurRadius: 15,
+                                spreadRadius: 1,
+                                offset: const Offset(0, 5),
                               ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
+                            ],
+                          ),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Order summary
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  // Order summary
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      const Text(
-                                        "Subtotal",
+                                      Text(
+                                        "Tổng tiền",
                                         style: TextStyle(
-                                          fontSize: 14,
+                                          fontSize: 14.sp,
                                           color: Kolors.kGray,
                                         ),
                                       ),
+                                      SizedBox(height: 4.h),
                                       Text(
                                         "\$${cartNotifier.totalPrice.toStringAsFixed(2)}",
-                                        style: const TextStyle(
-                                          fontSize: 16,
+                                        style: TextStyle(
+                                          fontSize: 20.sp,
                                           fontWeight: FontWeight.bold,
-                                          color: Kolors.kDark,
+                                          color: Kolors.kPrimary,
                                         ),
                                       ),
                                     ],
                                   ),
-
-                                  SizedBox(height: 15.h),
-
-                                  // Checkout button
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        context.push('/checkout');
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: Kolors.kPrimary,
-                                        foregroundColor: Kolors.kWhite,
-                                        padding: EdgeInsets.symmetric(
-                                            vertical: 15.h),
-                                        elevation: 0,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(16),
-                                        ),
-                                      ),
-                                      child: const Text(
-                                        "Proceed to Checkout",
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
+                                  Text(
+                                    "${cartNotifier.selectedCartItems.length} sản phẩm",
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
+                                      color: Kolors.kGray,
                                     ),
                                   ),
                                 ],
                               ),
-                            )
-                          : const SizedBox.shrink(),
+
+                              SizedBox(height: 15.h),
+
+                              // Nút thanh toán
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    context.push('/checkout');
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Kolors.kPrimary,
+                                    foregroundColor: Kolors.kWhite,
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 15.h),
+                                    elevation: 0,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16.r),
+                                    ),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.shopping_cart_checkout,
+                                        size: 20.sp,
+                                      ),
+                                      SizedBox(width: 8.w),
+                                      Text(
+                                        "Thanh toán ngay",
+                                        style: TextStyle(
+                                          fontSize: 16.sp,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     );
                   },
                 ),

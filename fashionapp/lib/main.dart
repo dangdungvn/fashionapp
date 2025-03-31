@@ -85,12 +85,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
     Storage().setBool('firstOpen', checkFirstRun());
     return ScreenUtilInit(
-      designSize: screenSize,
+      // Sử dụng kích thước thiết kế linh hoạt hơn cho nhiều thiết bị
+      designSize:
+          const Size(411.4, 914.9), // Kích thước thiết kế cho Pixel 7 Pro
       minTextAdapt: true,
-      splitScreenMode: false,
+      splitScreenMode: true,
       useInheritedMediaQuery: true,
       builder: (_, child) {
         return MaterialApp.router(
@@ -114,36 +115,42 @@ class MyApp extends StatelessWidget {
                 color: Kolors.kDark,
                 fontWeight: FontWeight.bold,
                 fontFamily: GoogleFonts.poppins().fontFamily,
+                fontSize: 24.sp, // Sử dụng .sp cho responsive font size
               ),
               displayMedium: TextStyle(
                 color: Kolors.kDark,
                 fontWeight: FontWeight.w600,
                 fontFamily: GoogleFonts.poppins().fontFamily,
+                fontSize: 20.sp,
               ),
               displaySmall: TextStyle(
                 color: Kolors.kDark,
                 fontWeight: FontWeight.w500,
                 fontFamily: GoogleFonts.poppins().fontFamily,
+                fontSize: 16.sp,
               ),
               bodyLarge: TextStyle(
                 color: Kolors.kDark,
                 fontFamily: GoogleFonts.poppins().fontFamily,
+                fontSize: 14.sp,
               ),
               bodyMedium: TextStyle(
                 color: Kolors.kGray,
                 fontFamily: GoogleFonts.poppins().fontFamily,
+                fontSize: 12.sp,
               ),
             ),
             appBarTheme: AppBarTheme(
               backgroundColor: Kolors.kWhite,
               elevation: 0,
               centerTitle: true,
-              iconTheme: const IconThemeData(
+              iconTheme: IconThemeData(
                 color: Kolors.kDark,
+                size: 24.sp,
               ),
               titleTextStyle: TextStyle(
                 color: Kolors.kDark,
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.w600,
                 fontFamily: GoogleFonts.poppins().fontFamily,
               ),
@@ -153,13 +160,13 @@ class MyApp extends StatelessWidget {
                 backgroundColor: Kolors.kPrimary,
                 foregroundColor: Kolors.kWhite,
                 elevation: 0,
-                padding: const EdgeInsets.symmetric(vertical: 14),
+                padding: EdgeInsets.symmetric(vertical: 14.h),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                 ),
                 textStyle: TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: 16,
+                  fontSize: 16.sp,
                   fontFamily: GoogleFonts.poppins().fontFamily,
                 ),
               ),
@@ -168,32 +175,33 @@ class MyApp extends StatelessWidget {
               color: Kolors.kWhite,
               elevation: 2,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
               ),
             ),
             inputDecorationTheme: InputDecorationTheme(
               filled: true,
               fillColor: Kolors.kWhite,
-              contentPadding: const EdgeInsets.all(16),
+              contentPadding: EdgeInsets.all(16.w),
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
                 borderSide: const BorderSide(color: Kolors.kGrayLight),
               ),
               enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
                 borderSide: const BorderSide(color: Kolors.kGrayLight),
               ),
               focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
                 borderSide: const BorderSide(color: Kolors.kPrimary),
               ),
               errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
                 borderSide: const BorderSide(color: Kolors.kRed),
               ),
               hintStyle: TextStyle(
                 color: Kolors.kGray,
                 fontFamily: GoogleFonts.poppins().fontFamily,
+                fontSize: 14.sp,
               ),
             ),
             navigationBarTheme: NavigationBarThemeData(
@@ -201,11 +209,11 @@ class MyApp extends StatelessWidget {
               indicatorColor: Kolors.kPrimary.withOpacity(0.2),
               labelTextStyle: WidgetStateProperty.all(TextStyle(
                 fontFamily: GoogleFonts.poppins().fontFamily,
-                fontSize: 12,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.w500,
               )),
-              iconTheme: WidgetStateProperty.all(const IconThemeData(
-                size: 24,
+              iconTheme: WidgetStateProperty.all(IconThemeData(
+                size: 24.sp,
               )),
             ),
           ),

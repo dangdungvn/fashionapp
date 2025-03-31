@@ -44,6 +44,7 @@ class CartNotifier with ChangeNotifier {
     _selectedCartItems.clear();
     _selectedCartItemsId.clear();
     _qty = 0;
+    _totalPrice = 0;
     notifyListeners();
   }
 
@@ -114,34 +115,41 @@ class CartNotifier with ChangeNotifier {
   }
 
   List<int> _selectedCartItemsId = [];
-
   List<int> get selectedCartItemsId => _selectedCartItemsId;
 
   List<CartModel> _selectedCartItems = [];
-
   List<CartModel> get selectedCartItems => _selectedCartItems;
 
-  double totalPrice = 0.0;
+  double _totalPrice = 0.0;
+  double get totalPrice => _totalPrice;
+
+  void _calculateTotalPrice() {
+    _totalPrice = _selectedCartItems.fold(
+        0, (sum, item) => sum + (item.product.price * item.quantity));
+    notifyListeners();
+  }
 
   void selectOrDeselect(int id, CartModel cartItem) {
     if (_selectedCartItemsId.contains(id)) {
       _selectedCartItemsId.remove(id);
       _selectedCartItems.removeWhere((i) => i.id == id);
-      totalPrice = calculateTotalPrice(_selectedCartItems);
     } else {
       _selectedCartItemsId.add(id);
       _selectedCartItems.add(cartItem);
-      totalPrice = calculateTotalPrice(_selectedCartItems);
     }
+    _calculateTotalPrice();
     notifyListeners();
   }
 
-  double calculateTotalPrice(List<CartModel> items) {
-    double tp = 0.0;
-    for (var item in items) {
-      tp += item.product.price * item.quantity;
+  void selectAll(List<CartModel> carts) {
+    for (var cart in carts) {
+      if (!_selectedCartItemsId.contains(cart.id)) {
+        _selectedCartItemsId.add(cart.id);
+        _selectedCartItems.add(cart);
+      }
     }
-    return tp;
+    _calculateTotalPrice();
+    notifyListeners();
   }
 
   String _paymentUrl = '';

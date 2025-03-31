@@ -35,7 +35,7 @@ class CartTile extends StatelessWidget {
             cartNotifier.selectOrDeselect(cart.id, cart);
           },
           child: Padding(
-            padding: EdgeInsets.only(bottom: 10.h),
+            padding: EdgeInsets.only(bottom: 8.h),
             child: Slidable(
               endActionPane: ActionPane(
                 motion: const StretchMotion(),
@@ -50,66 +50,69 @@ class CartTile extends StatelessWidget {
                     foregroundColor: Kolors.kWhite,
                     autoClose: true,
                     label: "Delete",
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(16.r),
                   )
                 ],
               ),
               child: Container(
                 width: double.infinity,
-                height: 105.h,
+                height: 100.h,
                 decoration: BoxDecoration(
                   color: Kolors.kWhite,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(16.r),
                   boxShadow: [
                     BoxShadow(
                       color: Kolors.kDark.withOpacity(0.05),
-                      blurRadius: 10,
+                      blurRadius: 8,
                       spreadRadius: 1,
-                      offset: const Offset(0, 3),
+                      offset: const Offset(0, 2),
                     ),
                   ],
                   border: isSelected
-                      ? Border.all(color: Kolors.kPrimary, width: 2)
+                      ? Border.all(color: Kolors.kPrimary, width: 1.5)
                       : null,
                 ),
                 child: Row(
                   children: [
                     // Checkbox indicator
                     Container(
-                      width: 30.w,
+                      width: 28.w,
                       decoration: BoxDecoration(
                         color: isSelected
                             ? Kolors.kPrimaryLight.withOpacity(0.2)
                             : Colors.transparent,
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          bottomLeft: Radius.circular(20),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16.r),
+                          bottomLeft: Radius.circular(16.r),
                         ),
                       ),
                       child: Center(
-                        child: Checkbox(
-                          value: isSelected,
-                          onChanged: (_) {
-                            cartNotifier.selectOrDeselect(cart.id, cart);
-                          },
-                          shape: const CircleBorder(),
-                          activeColor: Kolors.kPrimary,
-                          checkColor: Kolors.kWhite,
+                        child: Transform.scale(
+                          scale: 0.9,
+                          child: Checkbox(
+                            value: isSelected,
+                            onChanged: (_) {
+                              cartNotifier.selectOrDeselect(cart.id, cart);
+                            },
+                            shape: const CircleBorder(),
+                            activeColor: Kolors.kPrimary,
+                            checkColor: Kolors.kWhite,
+                          ),
                         ),
                       ),
                     ),
 
                     // Product image
                     Container(
-                      width: 85.w,
-                      height: 85.h,
-                      margin: EdgeInsets.all(10.w),
+                      width: 80.w,
+                      height: 80.h,
+                      margin: EdgeInsets.all(8.w),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(12.r),
                         color: Kolors.kOffWhite,
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(12.r),
                         child: CachedNetworkImage(
                           imageUrl: cart.product.imageUrls[0],
                           fit: BoxFit.cover,
@@ -121,56 +124,57 @@ class CartTile extends StatelessWidget {
                     Expanded(
                       child: Container(
                         padding: EdgeInsets.symmetric(
-                            vertical: 10.h, horizontal: 8.w),
+                            vertical: 8.h, horizontal: 6.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             // Product name
                             Text(
                               cart.product.title,
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(
-                                fontSize: 14,
+                              style: TextStyle(
+                                fontSize: 13.sp,
                                 fontWeight: FontWeight.w600,
                                 color: Kolors.kDark,
                               ),
                             ),
 
-                            SizedBox(height: 5.h),
+                            SizedBox(height: 4.h),
 
                             // Product options (size & color)
                             Row(
                               children: [
                                 Container(
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: 8.w, vertical: 3.h),
+                                      horizontal: 6.w, vertical: 2.h),
                                   decoration: BoxDecoration(
                                     color: Kolors.kGrayLight.withOpacity(0.5),
-                                    borderRadius: BorderRadius.circular(6),
+                                    borderRadius: BorderRadius.circular(4.r),
                                   ),
                                   child: Text(
                                     "Size: ${cart.size}",
-                                    style: const TextStyle(
-                                      fontSize: 10,
+                                    style: TextStyle(
+                                      fontSize: 10.sp,
                                       color: Kolors.kGray,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ),
-                                SizedBox(width: 6.w),
+                                SizedBox(width: 4.w),
                                 Container(
                                   padding: EdgeInsets.symmetric(
-                                      horizontal: 8.w, vertical: 3.h),
+                                      horizontal: 6.w, vertical: 2.h),
                                   decoration: BoxDecoration(
                                     color: Kolors.kGrayLight.withOpacity(0.5),
-                                    borderRadius: BorderRadius.circular(6),
+                                    borderRadius: BorderRadius.circular(4.r),
                                   ),
                                   child: Text(
                                     "Color: ${cart.color}",
-                                    style: const TextStyle(
-                                      fontSize: 10,
+                                    style: TextStyle(
+                                      fontSize: 10.sp,
                                       color: Kolors.kGray,
                                       fontWeight: FontWeight.w500,
                                     ),
@@ -179,7 +183,7 @@ class CartTile extends StatelessWidget {
                               ],
                             ),
 
-                            SizedBox(height: 10.h),
+                            SizedBox(height: 6.h),
 
                             // Price and quantity controller
                             Row(
@@ -188,8 +192,8 @@ class CartTile extends StatelessWidget {
                                 // Price
                                 Text(
                                   "\$${(cart.product.price * cart.quantity).toStringAsFixed(2)}",
-                                  style: const TextStyle(
-                                    fontSize: 16,
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,
                                     color: Kolors.kPrimary,
                                   ),
@@ -199,9 +203,10 @@ class CartTile extends StatelessWidget {
                                 cartNotifier.selectedCart != null &&
                                         cartNotifier.selectedCart == cart.id
                                     ? Row(
+                                        mainAxisSize: MainAxisSize.min,
                                         children: [
                                           const CartCounter(),
-                                          SizedBox(width: 8.w),
+                                          SizedBox(width: 6.w),
                                           UpdateButton(onUpdate: onUpdate),
                                         ],
                                       )
@@ -212,25 +217,26 @@ class CartTile extends StatelessWidget {
                                         },
                                         child: Container(
                                           padding: EdgeInsets.symmetric(
-                                              horizontal: 10.w, vertical: 6.h),
+                                              horizontal: 8.w, vertical: 4.h),
                                           decoration: BoxDecoration(
                                             color: Kolors.kPrimaryLight
                                                 .withOpacity(0.2),
                                             borderRadius:
-                                                BorderRadius.circular(12),
+                                                BorderRadius.circular(10.r),
                                           ),
                                           child: Row(
+                                            mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              const Icon(
+                                              Icon(
                                                 Icons.edit,
-                                                size: 14,
+                                                size: 13.sp,
                                                 color: Kolors.kPrimary,
                                               ),
                                               SizedBox(width: 4.w),
                                               Text(
                                                 "Qty: ${cart.quantity}",
-                                                style: const TextStyle(
-                                                  fontSize: 12,
+                                                style: TextStyle(
+                                                  fontSize: 11.sp,
                                                   fontWeight: FontWeight.w600,
                                                   color: Kolors.kPrimary,
                                                 ),

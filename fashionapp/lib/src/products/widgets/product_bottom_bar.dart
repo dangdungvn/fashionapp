@@ -12,15 +12,37 @@ class ProductBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Lấy thông tin về màn hình để điều chỉnh kích thước
+    final mediaQuery = MediaQuery.of(context);
+    final bottomPadding = mediaQuery.padding.bottom;
+
     return SafeArea(
       child: Container(
-        height: 80.h,
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 5.h),
+        // Chiều cao tự động điều chỉnh theo kích thước màn hình
+        height: (80.0.h).clamp(70.0, 90.0),
+        padding: EdgeInsets.only(
+          left: 20.w,
+          right: 20.w,
+          bottom: bottomPadding > 0
+              ? 5.h
+              : 10.h, // Điều chỉnh padding dựa trên inset
+          top: 5.h,
+        ),
+        decoration: BoxDecoration(
+          color: Kolors.kWhite,
+          boxShadow: [
+            BoxShadow(
+              color: Kolors.kDark.withOpacity(0.1),
+              blurRadius: 10,
+              offset: const Offset(0, -5),
+            ),
+          ],
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Price container
+            // Phần giá sản phẩm
             Container(
               padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 8.h),
               decoration: BoxDecoration(
@@ -42,8 +64,9 @@ class ProductBottomBar extends StatelessWidget {
                   SizedBox(height: 2.h),
                   Text(
                     "\$$price",
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style: TextStyle(
+                      fontSize:
+                          18.sp.clamp(16.0, 20.0), // Đảm bảo font size phù hợp
                       fontWeight: FontWeight.bold,
                       color: Kolors.kPrimary,
                     ),
@@ -52,11 +75,11 @@ class ProductBottomBar extends StatelessWidget {
               ),
             ),
 
-            // Add to cart button
+            // Nút thêm vào giỏ hàng
             Expanded(
               child: Container(
                 margin: EdgeInsets.only(left: 15.w),
-                height: 50.h,
+                height: 50.h.clamp(45.0, 60.0), // Chiều cao có giới hạn min-max
                 child: ElevatedButton(
                   onPressed: onPressed,
                   style: ElevatedButton.styleFrom(
@@ -73,22 +96,24 @@ class ProductBottomBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(6),
+                        padding: EdgeInsets.all(6.sp.clamp(4.0, 8.0)),
                         decoration: BoxDecoration(
                           color: Kolors.kWhite.withOpacity(0.3),
                           shape: BoxShape.circle,
                         ),
-                        child: const Icon(
+                        child: Icon(
                           FontAwesome.shopping_bag,
-                          size: 14,
+                          size: 14.sp.clamp(12.0, 16.0),
                           color: Kolors.kWhite,
                         ),
                       ),
                       SizedBox(width: 12.w),
-                      const Text(
+                      Text(
                         "Add to Cart",
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 16
+                              .sp
+                              .clamp(14.0, 18.0), // Đảm bảo font size phù hợp
                           fontWeight: FontWeight.w600,
                           color: Kolors.kWhite,
                         ),
