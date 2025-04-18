@@ -1,4 +1,4 @@
- # Flutter/Dart specific
+# Flutter/Dart specific
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
@@ -89,6 +89,8 @@ env/
 venv/
 ENV/
 *.sqlite3
+pybackend/**/*.pyc
+pybackend/**/__pycache__/
 
 # Environment files
 .env
@@ -106,3 +108,18 @@ ENV/
 .history
 .svn/
 migrate_working_dir/
+
+# Debug log files
+hs_err_pid*.log
+
+# Certificate files (except examples)
+*.pem
+!example*.pem
+
+# Local configuration files
+**/local.properties
+**/local.settings.json
+
+# Firebase configuration that might contain sensitive information
+**/google-services.json
+**/GoogleService-Info.plist
