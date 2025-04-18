@@ -197,7 +197,7 @@ Mọi đóng góp cho dự án đều được hoan nghênh. Vui lòng tạo pul
 
 Nếu bạn có bất kỳ câu hỏi hoặc góp ý nào, vui lòng liên hệ:
 
-- Email: phantung.work@gmail.com
+- Email: tungmj1605@gmail.com
 - GitHub: [dangdungvn](https://github.com/dangdungvn)
 
 ## 📄 Giấy phép
