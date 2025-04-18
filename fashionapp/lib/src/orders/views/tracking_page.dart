@@ -1,8 +1,6 @@
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/utils/kstrings.dart';
-import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/back_button.dart';
-import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/src/notification/controllers/notification_notifier.dart';
 import 'package:fashionapp/src/notification/views/notification_shimmer.dart';
 import 'package:fashionapp/src/notification/widgets/notification_order_tile.dart';
