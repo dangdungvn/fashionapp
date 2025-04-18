@@ -53,6 +53,7 @@ dependencies:
   fl_chart:
   custom_refresh_indicator:
   url_launcher:
+  timeline_tile: ^2.0.0
 
 dev_dependencies:
   flutter_test:

@@ -47,18 +47,21 @@ class ExpandableText extends StatelessWidget {
 
             // Hiệu ứng gradient cho text thu gọn
             if (!isExpanded)
-              Container(
-                height: 20.h,
-                width: double.infinity,
-                margin: EdgeInsets.only(top: -20.h),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Colors.white.withOpacity(0.1),
-                      Colors.white,
-                    ],
+              Transform.translate(
+                offset: Offset(0, -20.h), // Dịch chuyển lên trên 20.h
+                child: Container(
+                  height: 20.h,
+                  width: double.infinity,
+                  // margin: EdgeInsets.only(top: -20.h), // Bỏ dòng margin này đi
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.white.withOpacity(0.1),
+                        Colors.white,
+                      ],
+                    ),
                   ),
                 ),
               ),

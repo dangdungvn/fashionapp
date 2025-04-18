@@ -247,7 +247,7 @@ class CartPage extends HookWidget {
                   SafeArea(
                     child: Container(
                       margin: EdgeInsets.symmetric(horizontal: 16.w),
-                      padding: EdgeInsets.only(bottom: 150.h),
+                      padding: EdgeInsets.only(bottom: 87.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -384,7 +384,16 @@ class CartPage extends HookWidget {
                               },
                             ),
                           ),
-                          SizedBox(height: 100.h),
+                          Consumer<CartNotifier>(
+                            builder: (context, cartNotifier, child) {
+                              return SizedBox(
+                                height:
+                                    cartNotifier.selectedCartItemsId.isNotEmpty
+                                        ? 140.h
+                                        : 0,
+                              );
+                            },
+                          ),
                         ],
                       ),
                     ),

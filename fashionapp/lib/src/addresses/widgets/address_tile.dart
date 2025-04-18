@@ -1,12 +1,10 @@
 import 'package:fashionapp/common/utils/kcolors.dart';
-import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/common/widgets/change_address_modal.dart';
-import 'package:fashionapp/common/widgets/reusable_text.dart';
-import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/src/addresses/controllers/address_notifier.dart';
 import 'package:fashionapp/src/addresses/models/addresses_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iconly/iconly.dart';
 import 'package:provider/provider.dart';
 
@@ -22,123 +20,289 @@ class AddressTile extends StatelessWidget {
   final bool isCheckout;
   final void Function()? setDefault;
   final void Function()? onDelete;
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AddressNotifier>(
       builder: (context, addressNotifier, child) {
-        return ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: const CircleAvatar(
-            radius: 28,
-            backgroundColor: Kolors.kSecondaryLight,
-            child: Icon(
-              IconlyBold.location,
-              color: Kolors.kPrimaryLight,
-              size: 30,
-            ),
-          ),
-          title: ReusableText(
-            text: addressNotifier.address == null
-                ? address.addressType.toUpperCase()
-                : addressNotifier.address!.addressType.toUpperCase(),
-            style: appStyle(13, Kolors.kDark, FontWeight.w400),
-          ),
-          subtitle: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ReusableText(
-                text: addressNotifier.address == null
-                    ? address.address
-                    : addressNotifier.address!.address,
-                style: appStyle(11, Kolors.kGray, FontWeight.w400),
-              ),
-              ReusableText(
-                text: addressNotifier.address == null
-                    ? address.phone
-                    : addressNotifier.address!.phone,
-                style: appStyle(11, Kolors.kGray, FontWeight.w400),
+        final bool isDefault = addressNotifier.address == null
+            ? address.isDefault
+            : addressNotifier.address!.isDefault;
+
+        return Container(
+          decoration: BoxDecoration(
+            color: Kolors.kWhite,
+            borderRadius: BorderRadius.circular(16.r),
+            boxShadow: [
+              BoxShadow(
+                color: Kolors.kDark.withOpacity(0.05),
+                blurRadius: 8,
+                spreadRadius: 1,
+                offset: const Offset(0, 2),
               ),
             ],
+            border: isDefault
+                ? Border.all(
+                    color: Kolors.kPrimary.withOpacity(0.5), width: 1.5)
+                : null,
           ),
-          trailing: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              GestureDetector(
-                onTap: () {
-                  if (isCheckout == true) {
-                    changeAddressBottomSheet(context);
-                  } else {
-                    address.isDefault ? () {} : setDefault!();
-                  }
-                },
-                child: Container(
-                  padding: isCheckout
-                      ? EdgeInsets.symmetric(horizontal: 10.w, vertical: 8.h)
-                      : EdgeInsets.symmetric(horizontal: 10.w, vertical: 2.h),
+          child: IntrinsicHeight(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                // Status indicator (default/not default)
+                Container(
+                  width: 12.w,
                   decoration: BoxDecoration(
-                    borderRadius: kRadiusAll,
-                    color: isCheckout
-                        ? Kolors.kPrimaryLight
-                        : addressNotifier.address == null
-                            ? address.isDefault == true
-                                ? Colors.green
-                                : Kolors.kGrayLight
-                            : addressNotifier.address!.isDefault != true
-                                ? Colors.green
-                                : Kolors.kSecondaryLight,
-                  ),
-                  child: ReusableText(
-                    text: _getButtonText(isCheckout, addressNotifier, address),
-                    style: isCheckout
-                        ? appStyle(13, Kolors.kWhite, FontWeight.w400)
-                        : appStyle(11, Kolors.kWhite, FontWeight.w400),
+                    color: isDefault ? Kolors.kPrimary : Colors.transparent,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(16.r),
+                      bottomLeft: Radius.circular(16.r),
+                    ),
                   ),
                 ),
-              ),
-              isCheckout == true || address.isDefault == true
-                  ? const SizedBox.shrink()
-                  : GestureDetector(
-                      onTap: onDelete,
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 10.w, vertical: 2.h),
+
+                // Address icon and type
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(vertical: 15.h, horizontal: 10.w),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(10.w),
                         decoration: BoxDecoration(
-                          color: Kolors.kRed,
-                          borderRadius: kRadiusAll,
+                          color: Kolors.kPrimaryLight.withOpacity(0.1),
+                          shape: BoxShape.circle,
                         ),
-                        child: ReusableText(
-                          text: "Delete",
-                          style: appStyle(11, Kolors.kWhite, FontWeight.w400),
+                        child: Icon(
+                          _getAddressTypeIcon(addressNotifier, address),
+                          size: 24.sp,
+                          color: Kolors.kPrimary,
                         ),
                       ),
+                      SizedBox(height: 8.h),
+                      Text(
+                        addressNotifier.address == null
+                            ? address.addressType.toUpperCase()
+                            : addressNotifier.address!.addressType
+                                .toUpperCase(),
+                        style: GoogleFonts.poppins(
+                          fontSize: 10.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Kolors.kPrimary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Address details
+                Expanded(
+                  child: Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 15.h, horizontal: 5.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Địa chỉ",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: Kolors.kDark,
+                                    ),
+                                  ),
+                                  SizedBox(height: 8.h),
+                                  Text(
+                                    addressNotifier.address == null
+                                        ? address.address
+                                        : addressNotifier.address!.address,
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12.sp,
+                                      color: Kolors.kGray,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            if (isDefault)
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 8.w,
+                                  vertical: 4.h,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Kolors.kPrimaryLight.withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: Text(
+                                  "Mặc định",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 10.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color: Kolors.kPrimary,
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+
+                        SizedBox(height: 10.h),
+
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(4.w),
+                              decoration: BoxDecoration(
+                                color: Kolors.kPrimaryLight.withOpacity(0.1),
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                IconlyLight.call,
+                                size: 12.sp,
+                                color: Kolors.kPrimary,
+                              ),
+                            ),
+                            SizedBox(width: 5.w),
+                            Text(
+                              addressNotifier.address == null
+                                  ? address.phone
+                                  : addressNotifier.address!.phone,
+                              style: GoogleFonts.poppins(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w500,
+                                color: Kolors.kDark,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(height: 15.h),
+
+                        // Action buttons
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            if (!isDefault && !isCheckout)
+                              GestureDetector(
+                                onTap: setDefault,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 12.w,
+                                    vertical: 6.h,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Kolors.kPrimary,
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Kolors.kPrimary.withOpacity(0.2),
+                                        blurRadius: 4,
+                                        spreadRadius: 0,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Text(
+                                    "Đặt làm mặc định",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 11.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Kolors.kWhite,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            if (isCheckout)
+                              GestureDetector(
+                                onTap: () {
+                                  changeAddressBottomSheet(context);
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 12.w,
+                                    vertical: 6.h,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Kolors.kPrimary,
+                                    borderRadius: BorderRadius.circular(8.r),
+                                  ),
+                                  child: Text(
+                                    "Sửa",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 11.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Kolors.kWhite,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            if (!isDefault && !isCheckout) SizedBox(width: 8.w),
+                            if (!isDefault && !isCheckout)
+                              GestureDetector(
+                                onTap: onDelete,
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 12.w,
+                                    vertical: 6.h,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Kolors.kRed,
+                                    borderRadius: BorderRadius.circular(8.r),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Kolors.kRed.withOpacity(0.2),
+                                        blurRadius: 4,
+                                        spreadRadius: 0,
+                                        offset: const Offset(0, 2),
+                                      ),
+                                    ],
+                                  ),
+                                  child: Text(
+                                    "Xóa",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 11.sp,
+                                      fontWeight: FontWeight.w500,
+                                      color: Kolors.kWhite,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ],
                     ),
-            ],
+                  ),
+                ),
+
+                SizedBox(width: 15.w),
+              ],
+            ),
           ),
         );
       },
     );
   }
-}
 
-String _getButtonText(
-    bool isCheckout, AddressNotifier addressNotifier, AddressModel address) {
-  if (isCheckout) {
-    return "Change";
-  } else {
-    if (addressNotifier.address == null) {
-      if (address.isDefault == true) {
-        return "Default";
-      } else {
-        return "Set Default";
-      }
+  IconData _getAddressTypeIcon(
+      AddressNotifier addressNotifier, AddressModel address) {
+    final String type = addressNotifier.address == null
+        ? address.addressType.toLowerCase()
+        : addressNotifier.address!.addressType.toLowerCase();
+
+    if (type == 'home') {
+      return IconlyBold.home;
+    } else if (type == 'office') {
+      return IconlyBold.work;
     } else {
-      if (addressNotifier.address!.isDefault == true) {
-        return "Default";
-      } else {
-        return "Set Default";
-      }
+      return IconlyBold.location;
     }
   }
 }

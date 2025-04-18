@@ -81,13 +81,14 @@ class _OrdersPageState extends State<OrdersPage> with TickerProviderStateMixin {
                     labelColor: Kolors.kWhite,
                     unselectedLabelColor: Kolors.kGray,
                     labelStyle: GoogleFonts.poppins(
-                      fontSize: 14.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w600,
                     ),
                     unselectedLabelStyle: GoogleFonts.poppins(
-                      fontSize: 14.sp,
+                      fontSize: 12.sp,
                       fontWeight: FontWeight.w500,
                     ),
+                    indicatorPadding: EdgeInsets.symmetric(horizontal: -18.w),
                     tabs: const [
                       Tab(text: 'Processing'),
                       Tab(text: 'Completed'),
