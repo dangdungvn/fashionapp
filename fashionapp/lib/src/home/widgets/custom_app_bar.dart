@@ -1,6 +1,4 @@
 import 'package:fashionapp/common/utils/kcolors.dart';
-import 'package:fashionapp/common/widgets/app_style.dart';
-import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/common/widgets/shimmers/shimmer_widget.dart';
 import 'package:fashionapp/src/addresses/hooks/fetch_defaults.dart';
 import 'package:fashionapp/src/home/widgets/notification_widget.dart';

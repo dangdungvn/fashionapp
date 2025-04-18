@@ -3,10 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/utils/kstrings.dart';
-import 'package:fashionapp/common/widgets/app_style.dart';
-import 'package:fashionapp/common/widgets/custom_button.dart';
-import 'package:fashionapp/common/widgets/reusable_text.dart';
-import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/const/resource.dart';
 
 class WelcomeScreen extends StatelessWidget {

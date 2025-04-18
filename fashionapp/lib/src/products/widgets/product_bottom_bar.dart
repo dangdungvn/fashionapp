@@ -1,6 +1,4 @@
 import 'package:fashionapp/common/utils/kcolors.dart';
-import 'package:fashionapp/common/widgets/app_style.dart';
-import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';

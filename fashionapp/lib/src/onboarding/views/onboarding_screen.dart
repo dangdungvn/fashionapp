@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/src/onboarding/controllers/onboarding_notifier.dart';
 import 'package:fashionapp/src/onboarding/widgets/onboarding_page_one.dart';

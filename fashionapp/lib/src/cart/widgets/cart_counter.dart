@@ -1,9 +1,8 @@
 import 'package:fashionapp/common/utils/kcolors.dart';
-import 'package:fashionapp/common/widgets/app_style.dart';
-import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/src/cart/controllers/cart_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class CartCounter extends StatelessWidget {
@@ -16,8 +15,12 @@ class CartCounter extends StatelessWidget {
         return Container(
           height: 32.h,
           decoration: BoxDecoration(
-            color: Kolors.kPrimaryLight.withOpacity(0.15),
-            borderRadius: BorderRadius.circular(20),
+            color: Kolors.kOffWhite,
+            borderRadius: BorderRadius.circular(16.r),
+            border: Border.all(
+              color: Kolors.kGray.withOpacity(0.2),
+              width: 1,
+            ),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -29,20 +32,22 @@ class CartCounter extends StatelessWidget {
                   onTap: () {
                     cartNotifier.decrement();
                   },
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    bottomLeft: Radius.circular(20),
-                  ),
+                  borderRadius: BorderRadius.circular(16.r),
                   child: Container(
-                    width: 32.w,
-                    height: 32.h,
-                    decoration: const BoxDecoration(
+                    width: 28.w,
+                    height: 28.h,
+                    decoration: BoxDecoration(
+                      color: cartNotifier.qty <= 1
+                          ? Kolors.kGray.withOpacity(0.1)
+                          : Kolors.kPrimaryLight.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.remove,
-                      color: Kolors.kPrimary,
-                      size: 18,
+                      color: cartNotifier.qty <= 1
+                          ? Kolors.kGray
+                          : Kolors.kPrimary,
+                      size: 16,
                     ),
                   ),
                 ),
@@ -50,12 +55,12 @@ class CartCounter extends StatelessWidget {
 
               // Quantity display
               Container(
-                width: 30.w,
+                width: 32.w,
                 alignment: Alignment.center,
                 child: Text(
                   "${cartNotifier.qty}",
-                  style: const TextStyle(
-                    fontSize: 14,
+                  style: GoogleFonts.poppins(
+                    fontSize: 13.sp,
                     fontWeight: FontWeight.w600,
                     color: Kolors.kDark,
                   ),
@@ -69,20 +74,18 @@ class CartCounter extends StatelessWidget {
                   onTap: () {
                     cartNotifier.increment();
                   },
-                  borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                  ),
+                  borderRadius: BorderRadius.circular(16.r),
                   child: Container(
-                    width: 32.w,
-                    height: 32.h,
-                    decoration: const BoxDecoration(
+                    width: 28.w,
+                    height: 28.h,
+                    decoration: BoxDecoration(
+                      color: Kolors.kPrimaryLight.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.add,
                       color: Kolors.kPrimary,
-                      size: 18,
+                      size: 16,
                     ),
                   ),
                 ),

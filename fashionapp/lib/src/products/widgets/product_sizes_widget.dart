@@ -1,5 +1,4 @@
 import 'package:fashionapp/common/utils/kcolors.dart';
-import 'package:fashionapp/common/widgets/app_style.dart';
 import 'package:fashionapp/src/products/controller/colors_sizes_notifier.dart';
 import 'package:fashionapp/src/products/controller/product_notifier.dart';
 import 'package:flutter/material.dart';

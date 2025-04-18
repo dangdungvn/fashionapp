@@ -10,7 +10,6 @@ import 'package:fashionapp/src/home/views/home_screen.dart';
 import 'package:fashionapp/src/profile/views/profile_screen.dart';
 import 'package:fashionapp/src/wishlist/views/wishlist_screen.dart';
 import 'package:iconly/iconly.dart';
-import 'package:line_icons/line_icons.dart';
 import 'package:provider/provider.dart';
 
 class AppEntryPoint extends HookWidget {

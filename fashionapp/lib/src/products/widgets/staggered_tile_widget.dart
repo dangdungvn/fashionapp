@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
-import 'package:fashionapp/common/widgets/app_style.dart';
-import 'package:fashionapp/common/widgets/reusable_text.dart';
 import 'package:fashionapp/const/resource.dart';
 import 'package:fashionapp/src/products/controller/product_notifier.dart';
 import 'package:fashionapp/src/products/models/products_model.dart';
@@ -59,7 +57,7 @@ class StaggeredTileWidget extends HookWidget {
             children: [
               // Phần hình ảnh sản phẩm
               Container(
-                height: i % 2 == 0 ? 127.h : 148.h,
+                height: i % 2 == 0 ? 112.h : 123.h,
                 decoration: const BoxDecoration(
                   color: Kolors.kOffWhite,
                 ),

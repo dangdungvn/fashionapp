@@ -1,8 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
-import 'package:fashionapp/common/widgets/app_style.dart';
-import 'package:fashionapp/common/widgets/reusable_text.dart';
-import 'package:fashionapp/const/constants.dart';
 import 'package:fashionapp/src/cart/controllers/cart_notifier.dart';
 import 'package:fashionapp/src/cart/models/cart_model.dart';
 import 'package:fashionapp/src/cart/widgets/cart_counter.dart';

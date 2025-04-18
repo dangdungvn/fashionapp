@@ -4,7 +4,6 @@ import 'package:fashionapp/common/widgets/empty_screen_widget.dart';
 import 'package:fashionapp/common/widgets/login_bottom_sheet.dart';
 import 'package:fashionapp/src/products/controller/product_notifier.dart';
 import 'package:fashionapp/src/products/hooks/fetch_similar.dart';
-import 'package:fashionapp/src/products/widgets/staggered_tile_widget.dart';
 import 'package:fashionapp/src/wishlist/controllers/wishlist_notifier.dart';
 import 'package:fashionapp/src/wishlist/hooks/fetch_wishlist.dart';
 import 'package:flutter/material.dart';
