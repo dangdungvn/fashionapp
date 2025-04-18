@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     return Scaffold(
       backgroundColor: Kolors.kOffWhite,
       appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(110),
+        preferredSize: Size.fromHeight(130),
         child: CustomAppBar(),
       ),
       body: Container(

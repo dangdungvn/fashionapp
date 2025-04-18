@@ -27,7 +27,7 @@ class CustomAppBar extends HookWidget {
           const Padding(
             padding: EdgeInsets.only(left: 3),
             child: Text(
-              "Location",
+              "Địa chỉ giao hàng",
               style: TextStyle(
                 fontSize: 13,
                 color: Kolors.kGray,
@@ -41,7 +41,7 @@ class CustomAppBar extends HookWidget {
               Container(
                 padding: const EdgeInsets.all(6),
                 decoration: BoxDecoration(
-                  color: Kolors.kPrimary.withOpacity(0.1),
+                  color: Kolors.kPrimary.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
@@ -63,8 +63,12 @@ class CustomAppBar extends HookWidget {
                         width: ScreenUtil().screenWidth * 0.65,
                         child: Text(
                           address == null
-                              ? "Please select your location"
-                              : address.address,
+                              ? "Chưa có địa chỉ"
+                              : address.address.isEmpty
+                                  ? "Chưa có địa chỉ"
+                                  : address.address.length > 30
+                                      ? "${address.address.substring(0, 30)}..."
+                                      : address.address,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
@@ -102,7 +106,7 @@ class CustomAppBar extends HookWidget {
                       borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: Kolors.kDark.withOpacity(0.05),
+                          color: Kolors.kDark.withValues(alpha: 0.05),
                           blurRadius: 10,
                           spreadRadius: 1,
                         ),
@@ -117,7 +121,7 @@ class CustomAppBar extends HookWidget {
                         ),
                         SizedBox(width: 12.w),
                         const Text(
-                          "Search products",
+                          "Tìm kiếm sản phẩm",
                           style: TextStyle(
                             fontSize: 14,
                             color: Kolors.kGray,
@@ -152,7 +156,7 @@ class CustomAppBar extends HookWidget {
                     borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
-                        color: Kolors.kPrimary.withOpacity(0.25),
+                        color: Kolors.kPrimary.withValues(alpha: 0.25),
                         blurRadius: 8,
                         spreadRadius: 1,
                         offset: const Offset(0, 2),
