@@ -5,8 +5,10 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   connectivity_plus
   firebase_core
+  screen_retriever
   url_launcher_windows
   webview_universal
+  window_manager
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

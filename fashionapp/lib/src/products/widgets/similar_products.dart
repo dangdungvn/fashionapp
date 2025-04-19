@@ -31,7 +31,7 @@ class SimilarProducts extends HookWidget {
     final isLoading = results.isLoading;
     final resultsWishlist = fetchWishlist();
     final wishlistProduct = resultsWishlist.products;
-    final isLoadingWishlist = resultsWishlist.isLoading;
+    // final isLoadingWishlist = resultsWishlist.isLoading;
     final refetchWishlist = resultsWishlist.refetch;
 
     if (isLoading) {

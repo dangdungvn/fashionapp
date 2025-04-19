@@ -25,9 +25,41 @@ import 'package:fashionapp/src/onboarding/controllers/onboarding_notifier.dart';
 import 'package:fashionapp/src/splashscreen/views/splashscreen_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:io' show Platform;
+
+// Thêm import cho package window_manager trên Windows
+import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Cấu hình window_manager cho Windows
+  if (Platform.isWindows) {
+    await windowManager.ensureInitialized();
+
+    // Kích thước của Oppo A94 (dp)
+    const double width = 430; // Tương đương với dp của Oppo A94
+    const double height = 840; // Tương đương với dp của Oppo A94
+
+    // Thiết lập kích thước cố định cho cửa sổ
+    WindowOptions windowOptions = const WindowOptions(
+      size: Size(width, height),
+      center: true,
+      skipTaskbar: false,
+      titleBarStyle: TitleBarStyle.normal,
+      title: AppText.kAppName,
+      minimumSize: Size(width, height),
+      maximumSize: Size(width, height), // Cố định kích thước tối đa
+    );
+
+    await windowManager.waitUntilReadyToShow(windowOptions, () async {
+      await windowManager.show();
+      await windowManager.focus();
+      await windowManager
+          .setResizable(false); // Không cho phép thay đổi kích thước
+    });
+  }
+
   await dotenv.load(fileName: Environment.fileName);
   await GetStorage.init();
   final isFirstRun = checkFirstRun();

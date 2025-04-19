@@ -11,7 +11,7 @@ class ProductSizesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Tính toán kích thước item dựa trên chiều rộng màn hình
-    final screenWidth = MediaQuery.of(context).size.width;
+    // final screenWidth = MediaQuery.of(context).size.width;
     // Đảm bảo kích thước nút size không quá nhỏ hoặc quá lớn
     final sizeButtonSize = (45.0.w).clamp(40.0, 55.0);
 
@@ -19,8 +19,8 @@ class ProductSizesWidget extends StatelessWidget {
       final sizes = context.read<ProductNotifier>().product!.sizes;
 
       // Tính toán số lượng kích thước tối đa trên mỗi hàng để tránh tràn
-      final itemsPerRow =
-          ((screenWidth - 32) / (sizeButtonSize + 12.w)).floor();
+      // final itemsPerRow =
+      //     ((screenWidth - 32) / (sizeButtonSize + 12.w)).floor();
 
       return Wrap(
         spacing: 12.w,

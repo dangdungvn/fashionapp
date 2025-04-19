@@ -54,6 +54,7 @@ dependencies:
   custom_refresh_indicator:
   url_launcher:
   timeline_tile: ^2.0.0
+  window_manager: ^0.3.8 # Thêm package window_manager để kiểm soát kích thước cửa sổ trên Windows
 
 dev_dependencies:
   flutter_test:
