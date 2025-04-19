@@ -69,16 +69,16 @@ Dự án ứng dụng thời trang được phát triển bởi **Phan Văn Tùn
       <ul>
         <li>Flutter SDK</li>
         <li>Dart</li>
-        <li>State Management</li>
+        <li>Provider State Management</li>
         <li>Cross-platform (iOS, Android, Web)</li>
       </ul>
     </td>
     <td>
       <ul>
         <li>Python</li>
-        <li>FastAPI/Django</li>
+        <li>Django</li>
         <li>RESTful API</li>
-        <li>SQL Database</li>
+        <li>SQLite Database</li>
         <li>Auth & Security</li>
       </ul>
     </td>
