@@ -17,6 +17,8 @@ Dự án ứng dụng thời trang được phát triển bởi **Phan Văn Tùn
 
 ## 📋 Mục lục
 
+---
+
 - [Giới thiệu](#-fashion-app---ứng-dụng-thời-trang-fullstack)
 - [Tính năng chính](#-tính-năng-chính)
 - [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
@@ -28,6 +30,8 @@ Dự án ứng dụng thời trang được phát triển bởi **Phan Văn Tùn
 - [Tác giả](#-tác-giả)
 - [Liên hệ](#-liên-hệ)
 - [Giấy phép](#-giấy-phép)
+
+---
 
 ## 🌟 Tính năng chính
 
@@ -49,6 +53,8 @@ Dự án ứng dụng thời trang được phát triển bởi **Phan Văn Tùn
     </td>
   </tr>
 </table>
+
+---
 
 ## 💻 Công nghệ sử dụng
 
@@ -85,6 +91,8 @@ Dự án ứng dụng thời trang được phát triển bởi **Phan Văn Tùn
     </td>
   </tr>
 </table>
+
+---
 
 ## 🚀 Cài đặt và Chạy
 
@@ -127,6 +135,8 @@ cd fashion_backend
 python manage.py runserver
 ```
 
+---
+
 ## 📂 Cấu trúc dự án
 
 ```
@@ -143,12 +153,16 @@ fullstack-fashionapp/
 └── fashion_payment/     # Payment integration module
 ```
 
+---
+
 ## 🔧 Môi trường
 
 Dự án sử dụng các file môi trường khác nhau cho development và production:
 
 - `.env.development`: Cấu hình cho môi trường phát triển
 - `.env.production`: Cấu hình cho môi trường production
+
+---
 
 ## 📱 Ảnh giới thiệu ứng dụng
 
@@ -183,9 +197,13 @@ Dự án sử dụng các file môi trường khác nhau cho development và pro
   <img src="fashionapp/assets/images/readme_add_address_screen.jpg" width="250" alt="Thêm địa chỉ"/>
 </div>
 
+---
+
 ## 🤝 Đóng góp
 
 Mọi đóng góp cho dự án đều được hoan nghênh. Vui lòng tạo pull request hoặc báo cáo issues nếu bạn phát hiện bất kỳ vấn đề nào.
+
+---
 
 ## 👨‍💻 Tác giả
 
@@ -193,12 +211,16 @@ Mọi đóng góp cho dự án đều được hoan nghênh. Vui lòng tạo pul
 - **Email**: tungmj1605@gmail.com
 - **GitHub**: [dangdungvn](https://github.com/dangdungvn)
 
+---
+
 ## 📧 Liên hệ
 
 Nếu bạn có bất kỳ câu hỏi hoặc góp ý nào, vui lòng liên hệ:
 
 - Email: tungmj1605@gmail.com
 - GitHub: [dangdungvn](https://github.com/dangdungvn)
+
+---
 
 ## 📄 Giấy phép
 
