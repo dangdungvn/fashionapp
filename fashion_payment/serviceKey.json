@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "flutter-foodly-final-7d6ce",
+  "private_key_id": "4bec2caab6e24fd41e036c64f83798bc93a80bc7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDauqBTmip7FjVv\nfThnWBNCInnqYd0gNRrPNkssxB9nkgSBhBwO7bFv+gEANcmW7nBoiiW4dgmHP03c\nooSwv0vrQ7u2ZeyprzfrwecTTVyT0Yw19JP3LIi9k4VfbaWOJCAGyzFVaVNmZCAo\nI0ovtinVkT971KJ2Mp4dsrseTzu687OuERKXChTrL+p/KmKNw0eFAxW8sSy9thkK\nn6Magk5Shb34deNzipAgbdzq3CY4IF8UKfdmMu0c/KbgD7uJrjUioWbBkWsgmM2i\nJpfaoW4LmItZc3B2cYkbowIncy+nD63EBivQWOIuAjoaqivGh1Fz+uo6+knlQCk5\n8GRcdn/FAgMBAAECggEAEZiGMaOLJlK/jWP/8m8HQZXqGTJdP8GLPL8r5gKIWjnI\nwK3i30qSMHq8COB1gqhU2lFpaRZJ0ZuvRQASokYJXU2aH2QXWVaIrkpvhJcqdZPG\nbp1p0oO+eQMR7X7cciZdfd5rw2i74QFOBZyX07sY+3QkrMQK0Re6WOjvclKXxgQT\nDW/2PKGVvqmFtQFP0GhwscpJ/Z1D0SPDH3PcEH7fVwZH0gRpw3ssltiA8CJcmHOE\n9RXGlengo1vLiRF4EbzQyIJRAaAMof+QbsEESzPg6LyZCv1KKV4phrdbxHpmG7fu\nc+cSnj5BucwOYZGI3ipRbSFPRHBrClRHyXysyXZQ4wKBgQD9INZ1m/68ta2wUm3h\nWadfg6THYOIxDdSNeUMdw+UQFHXyCsverkesDChjlNh6IO09Aaf8cTMLdHHAKCkd\no9nR3pynO78UwRV3SAuLL4Zc9IdeE76+o2FK6LwAz3wUc2hEAzbSDJE1GMbHX0LZ\nWOyBafya+F/6AOstV7fg1glkvwKBgQDdNeHsdrgh1mvddDxGVXadGFxh7oblTIFq\nASwugFoY0XNF3VJNnGt9OgUU9EE5HfOgCClx2POeTGrPbxLJ7chJuaaer1fZJH+u\nxll5orSCWf6Mv0B5d2/jlNbP8/hv9+L3yDKNJZqZw0VL68MjV7A+/nlVXcLoGQAo\nUQFQyNroewKBgQD0Kei0KXTesqCHo/s5lDFOgL1BVMLabmzIyl9jJsKdcB8VCjT8\n5z9bRZ7v73Og2oH8hsxzRP3n3rqakCKY5KQHPKP+7DK04krCdEwuRfllULoClSk4\n2n/OshAm9/zH/Upl0HPgyR6ICQ404j6pSI1Zh9KR6WMq1BgF9Mb5qXwGIQKBgQCt\nS0Hi6hpTv9OemCmD+/3BEc2FlsQsq+OSNLr07u4mFSdV6w1H6as3XhWPFc5mvXUW\nwG4fVxN6xmjCekRg1puaTgses0SBwpsYQyDjLjh1CaVlg4ox3gRUaExker78kFhJ\nPpeDhZr4rEYENP0ZGd/jaZ2J57sB8lvyOYtrSv5bMwKBgQC22nzbY9sdzZ1In7jv\nXeJhY1WycNbDXFo8Q4Pv5eiIZ2Pw14MvqPmxLFkW20qyaI8yj7gyApKNHOKSqDls\naUKiVvXd+KB5o2RJBYVKzmHeueiyNmjzajbKA8Ru3X74x4krQbuFDK49h16Fgs+Y\njs2c8TowFm4Ptfnwvx8TezuM6w==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-zz6d0@flutter-foodly-final-7d6ce.iam.gserviceaccount.com",
+  "client_id": "103485438886058459483",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-zz6d0%40flutter-foodly-final-7d6ce.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
