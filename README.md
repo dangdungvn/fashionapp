@@ -22,6 +22,7 @@ Dự án ứng dụng thời trang được phát triển bởi **Phan Văn Tùn
 - [Giới thiệu](#-fashion-app---ứng-dụng-thời-trang-fullstack)
 - [Tính năng chính](#-tính-năng-chính)
 - [Công nghệ sử dụng](#-công-nghệ-sử-dụng)
+- [Tải xuống](#-tải-xuống)
 - [Cài đặt và Chạy](#-cài-đặt-và-chạy)
 - [Cấu trúc dự án](#-cấu-trúc-dự-án)
 - [Môi trường](#-môi-trường)
@@ -91,6 +92,15 @@ Dự án ứng dụng thời trang được phát triển bởi **Phan Văn Tùn
     </td>
   </tr>
 </table>
+
+---
+
+## 📥 Tải xuống
+
+Bạn có thể tải xuống ứng dụng đã được build:
+
+- [Phiên bản Android (APK)](https://utteduvn-my.sharepoint.com/:u:/g/personal/tung73dcht22294_st_utt_edu_vn/EduJZtKxOJZMqY1zXbW5A74BYV-Ygdnvhm_uukDZzEx95g?e=2JH2bI)
+- [Phiên bản Windows](https://utteduvn-my.sharepoint.com/:u:/g/personal/tung73dcht22294_st_utt_edu_vn/EfLCvGtuEKtCmBv1_OBxU4cBMxSggppUzqtj5AvjBrAXSg?e=le4LHm)
 
 ---
 
