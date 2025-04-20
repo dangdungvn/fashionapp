@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/src/onboarding/controllers/onboarding_notifier.dart';
 import 'package:fashionapp/src/onboarding/widgets/onboarding_page_one.dart';
@@ -47,6 +46,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isSmallScreen = screenHeight < 700;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -66,17 +69,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
           context.watch<OnboardingNotifier>().selectedPage == 2
               ? const SizedBox.shrink()
               : Positioned(
-                  bottom: 30.h,
+                  bottom: isSmallScreen ? 20 : 30,
                   left: 0,
                   right: 0,
                   child: FadeTransition(
                     opacity: _fadeAnimation,
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 25.w),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: screenWidth * 0.06),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          // Nút quay lại
                           GestureDetector(
                             onTap: () {
                               if (context
@@ -94,8 +99,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                               }
                             },
                             child: Container(
-                              width: 50,
-                              height: 50,
+                              width: 45,
+                              height: 45,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: Kolors.kWhite,
@@ -115,44 +120,55 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                                         0
                                     ? Kolors.kPrimary
                                     : Kolors.kGrayLight,
-                                size: 24,
+                                size: 20,
                               ),
                             ),
                           ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 15, vertical: 10),
-                            decoration: BoxDecoration(
-                              color: Kolors.kWhite,
-                              borderRadius: BorderRadius.circular(50),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Kolors.kDark.withOpacity(0.05),
-                                  blurRadius: 10,
-                                  spreadRadius: 1,
-                                ),
-                              ],
-                            ),
-                            child: PageViewDotIndicator(
-                              currentItem: context
-                                  .watch<OnboardingNotifier>()
-                                  .selectedPage,
-                              count: 3,
-                              unselectedColor: Kolors.kGrayLight,
-                              selectedColor: Kolors.kPrimary,
-                              size: const Size(8, 8),
-                              unselectedSize: const Size(6, 6),
-                              duration: const Duration(milliseconds: 300),
-                              margin: const EdgeInsets.symmetric(horizontal: 5),
-                              onItemClicked: (index) {
-                                _pageController.animateToPage(
-                                  index,
-                                  duration: const Duration(milliseconds: 400),
-                                  curve: Curves.easeInOut,
-                                );
-                              },
+
+                          // Chỉ báo trang - được bọc trong Flexible để có thể co giãn
+                          Flexible(
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: isSmallScreen ? 8 : 10,
+                                  vertical: 6),
+                              margin: EdgeInsets.symmetric(horizontal: 10),
+                              decoration: BoxDecoration(
+                                color: Kolors.kWhite,
+                                borderRadius: BorderRadius.circular(50),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Kolors.kDark.withOpacity(0.05),
+                                    blurRadius: 10,
+                                    spreadRadius: 1,
+                                  ),
+                                ],
+                              ),
+                              child: PageViewDotIndicator(
+                                currentItem: context
+                                    .watch<OnboardingNotifier>()
+                                    .selectedPage,
+                                count: 3,
+                                unselectedColor: Kolors.kGrayLight,
+                                selectedColor: Kolors.kPrimary,
+                                size: Size(isSmallScreen ? 7 : 8,
+                                    isSmallScreen ? 7 : 8),
+                                unselectedSize: Size(isSmallScreen ? 5 : 6,
+                                    isSmallScreen ? 5 : 6),
+                                duration: const Duration(milliseconds: 300),
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: isSmallScreen ? 3 : 5),
+                                onItemClicked: (index) {
+                                  _pageController.animateToPage(
+                                    index,
+                                    duration: const Duration(milliseconds: 400),
+                                    curve: Curves.easeInOut,
+                                  );
+                                },
+                              ),
                             ),
                           ),
+
+                          // Nút tiếp theo
                           GestureDetector(
                             onTap: () {
                               if (context
@@ -170,8 +186,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                               }
                             },
                             child: Container(
-                              width: 50,
-                              height: 50,
+                              width: 45,
+                              height: 45,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 gradient: const LinearGradient(
@@ -191,7 +207,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen>
                               child: const Icon(
                                 Icons.arrow_forward_rounded,
                                 color: Kolors.kWhite,
-                                size: 24,
+                                size: 20,
                               ),
                             ),
                           ),

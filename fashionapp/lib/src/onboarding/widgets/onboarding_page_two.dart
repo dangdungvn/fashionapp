@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/utils/kstrings.dart';
 import 'package:fashionapp/const/resource.dart';
@@ -8,9 +7,13 @@ class OnboardingScreenTwo extends StatelessWidget {
   const OnboardingScreenTwo({super.key});
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final bool isSmallScreen = screenHeight < 700;
+
     return Container(
-      width: ScreenUtil().screenWidth,
-      height: ScreenUtil().screenHeight,
+      width: screenWidth,
+      height: screenHeight,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topRight,
@@ -29,8 +32,8 @@ class OnboardingScreenTwo extends StatelessWidget {
             top: 60,
             left: -30,
             child: Container(
-              width: 150,
-              height: 150,
+              width: screenWidth * 0.35,
+              height: screenWidth * 0.35,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Kolors.kPrimary.withOpacity(0.3),
@@ -41,8 +44,8 @@ class OnboardingScreenTwo extends StatelessWidget {
             bottom: 120,
             right: -60,
             child: Container(
-              width: 180,
-              height: 180,
+              width: screenWidth * 0.4,
+              height: screenWidth * 0.4,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Kolors.kAccent.withOpacity(0.25),
@@ -55,25 +58,25 @@ class OnboardingScreenTwo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: isSmallScreen ? 20 : 30),
               // Title
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: const Text(
+                margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                child: Text(
                   "Find Your Favorites",
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: isSmallScreen ? 26 : 28,
                     fontWeight: FontWeight.bold,
                     color: Kolors.kDark,
                   ),
                   textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: isSmallScreen ? 20 : 30),
               // Image with refined design
               Container(
-                width: ScreenUtil().screenWidth * 0.85,
-                height: ScreenUtil().screenHeight * 0.45,
+                width: screenWidth * 0.85,
+                height: screenHeight * (isSmallScreen ? 0.40 : 0.45),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
@@ -96,9 +99,11 @@ class OnboardingScreenTwo extends StatelessWidget {
               const Spacer(),
               // Description in a styled container
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 30),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
+                margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth * 0.06,
+                  vertical: isSmallScreen ? 20 : 30,
+                ),
                 decoration: BoxDecoration(
                   color: Kolors.kWhite.withOpacity(0.95),
                   borderRadius: BorderRadius.circular(20),
@@ -110,22 +115,22 @@ class OnboardingScreenTwo extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Column(
+                child: Column(
                   children: [
                     Text(
                       "Save Your Favorites",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: isSmallScreen ? 17 : 18,
                         fontWeight: FontWeight.w600,
                         color: Kolors.kDark,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    SizedBox(height: isSmallScreen ? 8 : 10),
                     Text(
                       AppText.kOnboardWishListMessage,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: isSmallScreen ? 15 : 16,
                         height: 1.5,
                         color: Kolors.kGray,
                         fontWeight: FontWeight.w400,
@@ -134,7 +139,7 @@ class OnboardingScreenTwo extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 80),
+              SizedBox(height: isSmallScreen ? 65 : 80),
             ],
           ),
         ],

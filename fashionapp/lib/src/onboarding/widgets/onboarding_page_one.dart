@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fashionapp/common/utils/kcolors.dart';
 import 'package:fashionapp/common/utils/kstrings.dart';
 import 'package:fashionapp/const/constants.dart';
@@ -9,9 +8,13 @@ class OnboardingScreenOne extends StatelessWidget {
   const OnboardingScreenOne({super.key});
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final bool isSmallScreen = screenHeight < 700;
+
     return Container(
-      width: ScreenUtil().screenWidth,
-      height: ScreenUtil().screenHeight,
+      width: screenWidth,
+      height: screenHeight,
       decoration: BoxDecoration(
         gradient: kGradient,
       ),
@@ -22,8 +25,8 @@ class OnboardingScreenOne extends StatelessWidget {
             top: -50,
             right: -30,
             child: Container(
-              width: 200,
-              height: 200,
+              width: screenWidth * 0.45,
+              height: screenWidth * 0.45,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Kolors.kAccent.withOpacity(0.3),
@@ -34,8 +37,8 @@ class OnboardingScreenOne extends StatelessWidget {
             bottom: -80,
             left: -50,
             child: Container(
-              width: 250,
-              height: 250,
+              width: screenWidth * 0.55,
+              height: screenWidth * 0.55,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Kolors.kPrimaryLight.withOpacity(0.4),
@@ -47,11 +50,11 @@ class OnboardingScreenOne extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 40),
+              SizedBox(height: isSmallScreen ? 30 : 40),
               // Image with shadow effect
               Container(
-                width: ScreenUtil().screenWidth * 0.85,
-                height: ScreenUtil().screenHeight * 0.45,
+                width: screenWidth * 0.85,
+                height: screenHeight * (isSmallScreen ? 0.40 : 0.45),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
@@ -73,23 +76,25 @@ class OnboardingScreenOne extends StatelessWidget {
               const Spacer(),
               // Title
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 20),
-                child: const Text(
+                margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                child: Text(
                   "Discover Latest Trends",
                   style: TextStyle(
-                    fontSize: 28,
+                    fontSize: isSmallScreen ? 26 : 28,
                     fontWeight: FontWeight.bold,
                     color: Kolors.kDark,
                   ),
                   textAlign: TextAlign.center,
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: isSmallScreen ? 15 : 20),
               // Description
               Container(
-                margin: const EdgeInsets.symmetric(horizontal: 30),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.08),
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth * 0.05,
+                  vertical: isSmallScreen ? 20 : 30,
+                ),
                 decoration: BoxDecoration(
                   color: Kolors.kWhite.withOpacity(0.9),
                   borderRadius: BorderRadius.circular(20),
@@ -101,18 +106,18 @@ class OnboardingScreenOne extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Text(
+                child: Text(
                   AppText.kOnboardHome,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: isSmallScreen ? 15 : 16,
                     height: 1.5,
                     color: Kolors.kGray,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
               ),
-              const SizedBox(height: 80),
+              SizedBox(height: isSmallScreen ? 65 : 80),
             ],
           ),
         ],

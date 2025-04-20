@@ -1,4 +1,3 @@
-import 'package:fashionapp/common/services/storage.dart';
 import 'package:fashionapp/src/addresses/controllers/address_notifier.dart';
 import 'package:fashionapp/src/auth/controllers/auth_notifier.dart';
 import 'package:fashionapp/src/auth/controllers/password_notifier.dart';
@@ -103,9 +102,9 @@ void main() async {
 
 bool checkFirstRun() {
   final box = GetStorage();
-  bool isFirstRun = box.read('isFirstRun') ?? true; // Mặc định là true
+  bool isFirstRun = box.read('firstOpen') ?? true; // Mặc định là true
   if (isFirstRun) {
-    box.write('isFirstRun', false); // Đánh dấu không còn là lần đầu tiên
+    box.write('firstOpen', false); // Đánh dấu không còn là lần đầu tiên
   }
   return isFirstRun;
 }
@@ -117,7 +116,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Storage().setBool('firstOpen', checkFirstRun());
+    // Lưu lại giá trị từ tham số isFirstRun, KHÔNG đặt firstOpen thành false
+    GetStorage().write('firstOpen', true);
     return ScreenUtilInit(
       // Sử dụng kích thước thiết kế cố định thay vì theo màn hình hiện tại
       designSize:

@@ -43,6 +43,8 @@ class _SplashScreenState extends State<SplashScreen>
     await Future.delayed(const Duration(seconds: 3), () {
       bool isFirstOpen = Storage().getBool('firstOpen') ?? true;
       if (isFirstOpen) {
+        // Đảm bảo cập nhật giá trị sau khi sử dụng
+        Storage().setBool('firstOpen', false);
         GoRouter.of(context).go('/onboarding');
       } else {
         GoRouter.of(context).go('/home');
