@@ -6,7 +6,6 @@ import 'package:fashionapp/src/onboarding/widgets/onboarding_page_two.dart';
 import 'package:fashionapp/src/onboarding/widgets/welcome_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:page_view_dot_indicator/page_view_dot_indicator.dart';
-import 'package:lottie/lottie.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({super.key});
