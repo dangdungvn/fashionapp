@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
+import 'dart:io' show Platform;
+import 'package:webview_windows/webview_windows.dart' as win_webview;
 
 class PaymentWebView extends StatefulWidget {
   const PaymentWebView({super.key});
@@ -17,12 +19,48 @@ class PaymentWebView extends StatefulWidget {
 
 class _PaymentWebViewState extends State<PaymentWebView> {
   late final WebViewController _controller;
+  win_webview.WebviewController? _windowsController;
+  bool _isWindows = false;
 
   @override
   void initState() {
     final cartNotifier = Provider.of<CartNotifier>(context, listen: false);
     super.initState();
 
+    if (Platform.isWindows) {
+      _isWindows = true;
+      _initWindowsWebView(cartNotifier);
+    } else {
+      _initMobileWebView(cartNotifier);
+    }
+  }
+
+  Future<void> _initWindowsWebView(CartNotifier cartNotifier) async {
+    try {
+      _windowsController = win_webview.WebviewController();
+      await _windowsController!.initialize();
+      await _windowsController!.loadUrl(cartNotifier.paymentUrl);
+
+      _windowsController!.url.listen((url) {
+        debugPrint('Windows WebView URL changed: $url');
+        cartNotifier.setSuccessUrl(url);
+      });
+
+      if (!mounted) return;
+      setState(() {});
+    } catch (e) {
+      debugPrint('Error initializing Windows WebView: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+              'Không thể khởi tạo thanh toán trên nền tảng Windows. Vui lòng thử trên thiết bị di động.'),
+          duration: Duration(seconds: 5),
+        ),
+      );
+    }
+  }
+
+  void _initMobileWebView(CartNotifier cartNotifier) {
     late final PlatformWebViewControllerCreationParams params;
     if (WebViewPlatform.instance is WebKitWebViewPlatform) {
       params = WebKitWebViewControllerCreationParams(
@@ -62,17 +100,23 @@ class _PaymentWebViewState extends State<PaymentWebView> {
           );
         },
       )
-      ..loadRequest(Uri.parse(context.read<CartNotifier>().paymentUrl));
+      ..loadRequest(Uri.parse(cartNotifier.paymentUrl));
 
-    // #docregion platform_features
     if (controller.platform is AndroidWebViewController) {
       AndroidWebViewController.enableDebugging(true);
       (controller.platform as AndroidWebViewController)
           .setMediaPlaybackRequiresUserGesture(false);
     }
-    // #enddocregion platform_features
 
     _controller = controller;
+  }
+
+  @override
+  void dispose() {
+    if (_isWindows && _windowsController != null) {
+      _windowsController!.dispose();
+    }
+    super.dispose();
   }
 
   @override
@@ -82,17 +126,39 @@ class _PaymentWebViewState extends State<PaymentWebView> {
         if (cartNotifier.success.contains('checkout-success')) {
           return const SuccessfulPayment();
         } else if (cartNotifier.success.contains('cancel')) {
-          // context.read<AddressNotifier>().clearAddress();
           return const FailedPayment();
         }
 
         return Scaffold(
-            backgroundColor: Colors.white,
-            body: Padding(
-              padding: EdgeInsets.only(top: 60.h),
-              child: WebViewWidget(controller: _controller),
-            ));
+          backgroundColor: Colors.white,
+          body: Padding(
+            padding: EdgeInsets.only(top: 60.h),
+            child: _buildWebView(),
+          ),
+        );
       },
     );
+  }
+
+  Widget _buildWebView() {
+    if (_isWindows) {
+      if (_windowsController != null &&
+          _windowsController!.value.isInitialized) {
+        return win_webview.Webview(_windowsController!);
+      } else {
+        return const Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              CircularProgressIndicator(),
+              SizedBox(height: 16),
+              Text('Đang khởi tạo thanh toán...'),
+            ],
+          ),
+        );
+      }
+    } else {
+      return WebViewWidget(controller: _controller);
+    }
   }
 }

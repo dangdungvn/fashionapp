@@ -7,7 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   firebase_core
   screen_retriever
   url_launcher_windows
-  webview_universal
+  webview_windows
   window_manager
 )
 
