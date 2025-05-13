@@ -26,6 +26,7 @@ Dự án ứng dụng thời trang được phát triển bởi **Phan Văn Tùn
 - [Cài đặt và Chạy](#-cài-đặt-và-chạy)
 - [Cấu trúc dự án](#-cấu-trúc-dự-án)
 - [Môi trường](#-môi-trường)
+- [API Schema](#-api-schema)
 - [Ảnh giới thiệu ứng dụng](#-ảnh-giới-thiệu-ứng-dụng)
 - [Đóng góp](#-đóng-góp)
 - [Tác giả](#-tác-giả)
@@ -171,6 +172,80 @@ Dự án sử dụng các file môi trường khác nhau cho development và pro
 
 - `.env.development`: Cấu hình cho môi trường phát triển
 - `.env.production`: Cấu hình cho môi trường production
+
+---
+
+## 🔌 API Schema
+
+### Tổng quan về API
+
+Ứng dụng sử dụng RESTful API được xây dựng trên Django để giao tiếp giữa frontend và backend. API cung cấp các endpoints cho các chức năng chính của ứng dụng.
+
+### Các Endpoint API chính
+
+<details>
+<summary>🛍️ Quản lý sản phẩm</summary>
+
+- `GET /api/products/`: Lấy danh sách sản phẩm
+- `GET /api/products/{id}/`: Lấy thông tin chi tiết của một sản phẩm
+- `GET /api/products/byType/`: Lấy sản phẩm theo loại
+- `GET /api/products/categories/`: Lấy danh sách danh mục
+- `GET /api/products/popular/`: Lấy sản phẩm phổ biến
+- `GET /api/products/search/`: Tìm kiếm sản phẩm
+
+</details>
+
+<details>
+<summary>🛒 Giỏ hàng</summary>
+
+- `GET /api/cart/me/`: Lấy giỏ hàng của người dùng hiện tại
+- `POST /api/cart/add/`: Thêm sản phẩm vào giỏ hàng
+- `DELETE /api/cart/delete/`: Xóa sản phẩm khỏi giỏ hàng
+- `PATCH /api/cart/update/`: Cập nhật số lượng sản phẩm
+- `GET /api/cart/count/`: Lấy số lượng sản phẩm trong giỏ hàng
+
+</details>
+
+<details>
+<summary>📦 Đơn hàng</summary>
+
+- `POST /api/orders/add`: Tạo đơn hàng mới
+- `GET /api/orders/me/`: Lấy danh sách đơn hàng của người dùng
+- `GET /api/orders/single/`: Lấy thông tin chi tiết một đơn hàng
+- `GET /api/orders/statistics/`: Lấy thống kê đơn hàng
+
+</details>
+
+<details>
+<summary>👤 Xác thực người dùng</summary>
+
+- `POST /auth/token/login/`: Đăng nhập và lấy token
+- `POST /auth/token/logout/`: Đăng xuất
+- `POST /auth/users/`: Đăng ký người dùng mới
+- `GET /auth/users/me/`: Lấy thông tin người dùng hiện tại
+- `PATCH /auth/users/me/`: Cập nhật thông tin người dùng
+
+</details>
+
+<details>
+<summary>📍 Địa chỉ</summary>
+
+- `GET /api/address/addresslist/`: Lấy danh sách địa chỉ
+- `POST /api/address/add/`: Thêm địa chỉ mới
+- `PATCH /api/address/default/`: Đặt địa chỉ mặc định
+- `DELETE /api/address/delete/`: Xóa địa chỉ
+
+</details>
+
+### Tài liệu API đầy đủ
+
+Để xem tài liệu API đầy đủ, bạn có thể truy cập endpoint sau khi đã chạy backend:
+
+```
+http://localhost:8000/api/schema/
+```
+
+Hoặc sử dụng file `schema.json` tại thư mục gốc của dự án.
 
 ---
 
