@@ -9,25 +9,22 @@ const stripe = Stripe(process.env.STRIPE_SECRET);
 const router = express.Router();
 
 const checkoutSuccessPage = fs.readFileSync(
-    path.join(__dirname, 'checkout-success.html')
-  );
-  
-  router.get("/checkout-success", (req, res) => {
-    res.set("Content-Type", "text/html");
-    res.send(checkoutSuccessPage);
-  });
+  path.join(__dirname, "checkout-success.html")
+);
 
-  const checkoutCancel = fs.readFileSync(
-    path.join(__dirname, 'cancel.html')
-  );
-  
-  router.get("/cancel", (req, res) => {
-    res.set("Content-Type", "text/html");
-    res.send(checkoutCancel);
-  });
+router.get("/checkout-success", (req, res) => {
+  res.set("Content-Type", "text/html");
+  res.send(checkoutSuccessPage);
+});
 
+const checkoutCancel = fs.readFileSync(path.join(__dirname, "cancel.html"));
 
-// https://e0e5-146-70-95-181.ngrok-free.app/stripe/create-checkout-session
+router.get("/cancel", (req, res) => {
+  res.set("Content-Type", "text/html");
+  res.send(checkoutCancel);
+});
+
+// http://20.255.56.110:3003/stripe/create-checkout-session
 router.post("/create-checkout-session", async (req, res) => {
   const customer = await stripe.customers.create({
     metadata: {
@@ -37,8 +34,6 @@ router.post("/create-checkout-session", async (req, res) => {
       cart: JSON.stringify(req.body.cartItems),
     },
   });
-
-
 
   const deliveryFee = 1000; // Assuming delivery fee is $10.00
   const deliveryFeeItem = {
@@ -51,7 +46,7 @@ router.post("/create-checkout-session", async (req, res) => {
     },
     quantity: 1,
   };
- 
+
   const lineItems = req.body.cartItems.map((item) => {
     return {
       price_data: {
@@ -72,23 +67,20 @@ router.post("/create-checkout-session", async (req, res) => {
 
   lineItems.push(deliveryFeeItem);
 
-
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
-   
-    
+
     phone_number_collection: {
       enabled: false,
     },
     line_items: lineItems, // Use lineItems instead of line_items
     mode: "payment",
     customer: customer.id,
-    success_url: "https://e0e5-146-70-95-181.ngrok-free.app/stripe/checkout-success",
-    cancel_url:  "https://e0e5-146-70-95-181.ngrok-free.app/stripe/cancel",
+    success_url: "http://20.255.56.110:3003/stripe/checkout-success",
+    cancel_url: "http://20.255.56.110:3003/stripe/cancel",
   });
 
   res.send({ url: session.url });
 });
-
 
 module.exports = router;
