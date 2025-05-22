@@ -100,8 +100,8 @@ Dự án ứng dụng thời trang được phát triển bởi **Phan Văn Tùn
 
 Bạn có thể tải xuống ứng dụng đã được build:
 
-- [Phiên bản Android (APK)](https://utteduvn-my.sharepoint.com/:u:/g/personal/tung73dcht22294_st_utt_edu_vn/EduJZtKxOJZMqY1zXbW5A74BYV-Ygdnvhm_uukDZzEx95g?e=2JH2bI)
-- [Phiên bản Windows](https://utteduvn-my.sharepoint.com/:u:/g/personal/tung73dcht22294_st_utt_edu_vn/EfLCvGtuEKtCmBv1_OBxU4cBMxSggppUzqtj5AvjBrAXSg?e=le4LHm)
+- [Phiên bản Android (APK)](https://github.com/dangdungvn/fashionapp/releases/download/1.0.0/app-release.apk)
+- [Phiên bản Windows](https://github.com/dangdungvn/fashionapp/releases/download/1.0.0/Release.rar)
 
 ---
 
