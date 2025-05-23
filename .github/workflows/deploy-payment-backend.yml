@@ -1,0 +1,48 @@
+name: Deploy Payment Backend
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "fashion_payment/**"
+  workflow_dispatch:
+
+jobs:
+  deploy-payment-backend:
+    name: Deploy Node.js Payment Backend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Connect to Azure VM and deploy Payment backend
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.AZURE_VM_HOST }}
+          username: ${{ secrets.AZURE_VM_USERNAME }}
+          key: ${{ secrets.AZURE_VM_SSH_KEY }}
+          port: ${{ secrets.AZURE_VM_PORT }}
+          script: |
+            echo "Connected to Azure VM. Starting Node.js payment backend deployment process..."
+
+            # Đi đến thư mục chứa repository
+            cd ${{ secrets.PROJECT_PATH }}
+
+            # Pull code mới từ GitHub
+            git pull
+
+            # Đi đến thư mục fashion_payment
+            cd ${{ secrets.PROJECT_PATH }}/fashion_payment
+
+            # Cài đặt dependencies nếu có thay đổi trong package.json
+            if git diff --name-only HEAD^ HEAD | grep -q "fashion_payment/package.json"; then
+              echo "Installing Node.js dependencies..."
+              npm install
+            fi
+
+            # Restart Node.js payment backend
+            echo "Restarting Node.js payment backend..."
+            node run_azure_server.js restart
+
+            echo "Node.js payment backend deployed successfully."
