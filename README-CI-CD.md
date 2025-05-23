@@ -1,78 +1,81 @@
-# Hướng dẫn thiết lập GitHub Actions cho dự án Fashion App
+# GitHub Actions Setup Guide for Fashion App
 
-## Giới thiệu
+## Introduction
 
-Tài liệu này hướng dẫn cách thiết lập GitHub Actions để tự động triển khai các backend của Fashion App (pybackend và fashion_payment) lên Azure VM khi có code mới được push lên GitHub.
+This document guides you through setting up GitHub Actions to automatically deploy Fashion App backends (pybackend and fashion_payment) to an Azure VM when new code is pushed to GitHub.
 
-## Các bước thiết lập
+## Setup Steps
 
-### 1. Thiết lập SSH Key
+### 1. SSH Key Setup
 
-Bạn đã có SSH key từ Azure VM để kết nối đến server. Bây giờ chúng ta cần sử dụng key này để GitHub Actions có thể kết nối tới VM.
+You already have an SSH key from your Azure VM to connect to the server. Now we need to use this key to allow GitHub Actions to connect to the VM.
 
-#### Chuẩn bị key cho GitHub Actions:
+#### Preparing the key for GitHub Actions
 
-1. Mở file private key đã tải về từ Azure VM (thường có đuôi `.pem`)
-2. Copy toàn bộ nội dung file này, bao gồm cả header (`-----BEGIN RSA PRIVATE KEY-----`) và footer (`-----END RSA PRIVATE KEY-----`)
+1. Open the private key file downloaded from Azure VM (usually with `.pem` extension)
+2. Copy the entire content of this file, including both the header (`-----BEGIN RSA PRIVATE KEY-----`) and footer (`-----END RSA PRIVATE KEY-----`)
 
-### 2. Thiết lập GitHub Secrets
+### 2. Setting up GitHub Secrets
 
-Trong repository GitHub của bạn, thêm các secrets sau:
+In your GitHub repository, add the following secrets:
 
-1. Đi đến repository > Settings > Secrets and variables > Actions
-2. Thêm các secrets sau:
-   - `AZURE_VM_HOST`: Địa chỉ IP của Azure VM
-   - `AZURE_VM_USERNAME`: Username đăng nhập SSH (thường là adminuser trên Azure VM)
-   - `AZURE_VM_SSH_KEY`: Nội dung private SSH key đã copy ở bước 1
-   - `AZURE_VM_PORT`: Cổng SSH (thường là 22)
-   - `PROJECT_PATH`: Đường dẫn đến thư mục project trên Azure VM (ví dụ: `/home/adminuser/fullstack-fashionapp`)
+1. Go to repository > Settings > Secrets and variables > Actions
+2. Add these secrets:
+   - `AZURE_VM_HOST`: IP address of your Azure VM
+   - `AZURE_VM_USERNAME`: SSH login username (usually adminuser on Azure VM)
+   - `AZURE_VM_SSH_KEY`: Content of the private SSH key copied in step 1
+   - `AZURE_VM_PORT`: SSH port (usually 22)
+   - `PROJECT_PATH`: Path to the project folder on Azure VM (example: `/home/adminuser/fullstack-fashionapp`)
 
-### 3. Thiết lập Git trên Azure VM
+### 3. Setting up Git on Azure VM
 
-1. Login vào Azure VM:
+1. Login to Azure VM:
+
    ```bash
    ssh adminuser@your-azure-vm-ip
    ```
 
-2. Nếu chưa clone repository, thực hiện các lệnh sau:
+2. If you haven't cloned the repository yet, run these commands:
+
    ```bash
-   # Tạo thư mục cho project nếu chưa có
+   # Create project directory if it doesn't exist
    mkdir -p /path/to/project/folder
    cd /path/to/project/folder
    
-   # Clone repository từ GitHub
+   # Clone repository from GitHub
    git clone https://github.com/your-username/fullstack-fashionapp.git
    ```
 
-3. Thiết lập credentials để không cần nhập password khi pull code:
+3. Set up credentials to avoid entering password when pulling code:
+
    ```bash
    cd fullstack-fashionapp
    git config --global credential.helper store
-   git pull  # Nhập username/password để lưu vào credential store
+   git pull  # Enter username/password to save in credential store
    ```
 
-### 4. Kiểm tra Workflow
+### 4. Checking the Workflow
 
-Workflows đã được thiết lập để chạy khi có push vào nhánh `master`. Bạn có thể kích hoạt thủ công bằng cách:
+Workflows are set to run when code is pushed to the `master` branch. You can trigger them manually by:
 
-1. Đi đến tab Actions trong repository GitHub
-2. Chọn workflow "Deploy to Azure VM" 
-3. Click nút "Run workflow"
-4. Chọn nhánh `master` và click "Run workflow"
+1. Going to the Actions tab in GitHub repository
+2. Selecting the "Deploy to Azure VM" workflow
+3. Clicking the "Run workflow" button
+4. Selecting the `master` branch and clicking "Run workflow"
 
-## Tài liệu tham khảo
+## References
 
-- [Tài liệu GitHub Actions](https://docs.github.com/en/actions)
+- [GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [SSH Action](https://github.com/appleboy/ssh-action)
 
-## Cách kiểm tra trạng thái các backend
+## How to check backend status
 
-Sau khi workflow hoàn tất, bạn có thể kiểm tra trạng thái các backend:
+After the workflow completes, you can check the status of the backends:
 
 ```bash
-# Kiểm tra Python backend
+# Check Python backend
 ssh adminuser@your-azure-vm-ip "cd /path/to/project/pybackend && python run_azure_server.py --action status"
 
-# Kiểm tra Node.js backend
+# Check Node.js backend
 ssh adminuser@your-azure-vm-ip "cd /path/to/project/fashion_payment && node run_azure_server.js status"
 ```
