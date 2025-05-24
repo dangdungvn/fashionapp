@@ -102,7 +102,7 @@ app.listen(process.env.PORT || port, () =>
 
 const createOrder = async (payload, accessToken, fcm) => {
   try {
-    const response = await fetch("http://20.255.56.110:8000/api/orders/add", {
+    const response = await fetch(`${process.env.API_BASE_URL}/api/orders/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

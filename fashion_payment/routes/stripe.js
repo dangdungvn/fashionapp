@@ -24,7 +24,7 @@ router.get("/cancel", (req, res) => {
   res.send(checkoutCancel);
 });
 
-// http://20.255.56.110:3003/stripe/create-checkout-session
+// ${process.env.PAYMENT_SERVER_URL}/stripe/create-checkout-session
 router.post("/create-checkout-session", async (req, res) => {
   const customer = await stripe.customers.create({
     metadata: {
@@ -76,8 +76,8 @@ router.post("/create-checkout-session", async (req, res) => {
     line_items: lineItems, // Use lineItems instead of line_items
     mode: "payment",
     customer: customer.id,
-    success_url: "http://20.255.56.110:3003/stripe/checkout-success",
-    cancel_url: "http://20.255.56.110:3003/stripe/cancel",
+    success_url: `${process.env.PAYMENT_SERVER_URL}/stripe/checkout-success`,
+    cancel_url: `${process.env.PAYMENT_SERVER_URL}/stripe/cancel`,
   });
 
   res.send({ url: session.url });
