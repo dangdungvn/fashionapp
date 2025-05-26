@@ -1,12 +1,6 @@
 name: Deploy to Azure VM
 
 on:
-  # push:
-  #   branches: [master]
-  #   paths:
-  #     - "pybackend/**"
-  #     - "fashion_payment/**"
-  #     - ".github/workflows/**"
   workflow_dispatch:
     inputs:
       deploy_python:
@@ -43,10 +37,8 @@ jobs:
             cd ${{ secrets.PROJECT_PATH }}
 
             # Pull code mới từ GitHub
-            git pull
-
-            # Deploy Python Backend (nếu được chọn)
-            if [[ "${{ github.event_name == 'workflow_dispatch' && github.event.inputs.deploy_python == 'true' || github.event_name == 'push' }}" == "true" ]]; then
+            git pull            # Deploy Python Backend (nếu được chọn)
+            if [[ "${{ github.event.inputs.deploy_python == 'true' }}" == "true" ]]; then
               echo "Deploying Python backend..."
               cd ${{ secrets.PROJECT_PATH }}/pybackend
               
@@ -61,10 +53,8 @@ jobs:
               python run_azure_server.py --action restart --server uvicorn
               
               echo "Python backend deployed successfully."
-            fi
-
-            # Deploy Node.js Payment Backend (nếu được chọn)
-            if [[ "${{ github.event_name == 'workflow_dispatch' && github.event.inputs.deploy_node == 'true' || github.event_name == 'push' }}" == "true" ]]; then
+            fi            # Deploy Node.js Payment Backend (nếu được chọn)
+            if [[ "${{ github.event.inputs.deploy_node == 'true' }}" == "true" ]]; then
               echo "Deploying Node.js payment backend..."
               cd ${{ secrets.PROJECT_PATH }}/fashion_payment
               
