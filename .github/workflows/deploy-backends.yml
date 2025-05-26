@@ -1,12 +1,12 @@
 name: Deploy to Azure VM
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - "pybackend/**"
-      - "fashion_payment/**"
-      - ".github/workflows/**"
+  # push:
+  #   branches: [master]
+  #   paths:
+  #     - "pybackend/**"
+  #     - "fashion_payment/**"
+  #     - ".github/workflows/**"
   workflow_dispatch:
     inputs:
       deploy_python:
