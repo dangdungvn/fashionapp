@@ -25,8 +25,14 @@ class AddAddress(APIView):
             addressType=data["addressType"],
         )
 
-        if user_address.isDefault == True:
-            models.Address.objects.filter(userId=request.user).update(isDefault=False)
+        if user_address.isDefault:
+            # Unset the default flag from all other addresses of the user
+            (
+                models.Address.objects
+                .filter(userId=request.user)
+                .exclude(id=user_address.id)
+                .update(isDefault=False)
+            )
 
         user_address.save()
 
