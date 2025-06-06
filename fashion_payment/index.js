@@ -12,6 +12,9 @@ dotenv.config();
 const stripe = Stripe(process.env.STRIPE_SECRET);
 const endpointSecret = process.env.ENDPOINT_SECRET;
 
+// Default to port 3000 if no environment variable is provided
+const port = process.env.PORT || 3000;
+
 fireBaseConnection();
 
 app.post(
@@ -96,8 +99,8 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 
 app.use("/stripe", stripeRouter);
 
-app.listen(process.env.PORT || port, () =>
-  console.log(`App listening on port ${process.env.PORT}!`)
+app.listen(port, () =>
+  console.log(`App listening on port ${port}!`)
 );
 
 const createOrder = async (payload, accessToken, fcm) => {
