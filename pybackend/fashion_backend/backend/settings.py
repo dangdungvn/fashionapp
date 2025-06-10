@@ -155,21 +155,21 @@ CORS_ALLOW_CREDENTIALS = True
 # SESSION_COOKIE_SAMESITE = "None"
 # SESSION_COOKIE_SECURE = True
 
-# CORS_ALLOW_HEADERS = [
-#     "content-type",
-#     "authorization",
-#     "x-csrftoken",
-#     "accept",
-#     "origin",
-# ]
-# CORS_ALLOW_METHODS = [
-#     "GET",
-#     "POST",
-#     "PUT",
-#     "PATCH",
-#     "DELETE",
-#     "OPTIONS",
-# ]
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "authorization",
+    "x-csrftoken",
+    "accept",
+    "origin",
+]
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
+]
 SPECTACULAR_SETTINGS = {
     "TITLE": "Your Project API",
     "DESCRIPTION": "Your project description",
