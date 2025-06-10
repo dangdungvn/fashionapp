@@ -144,8 +144,8 @@ ALLOWED_HOSTS = ["*"]
 #     "https://positively-genuine-lioness.ngrok-free.app",
 #     "https://real-apparently-wombat.ngrok-free.app",
 # ]
-# CORS_ALLOW_ALL_ORIGINS = True
-# CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 
 # CSRF_COOKIE_SAMESITE = "None"
 # CSRF_COOKIE_SECURE = True
