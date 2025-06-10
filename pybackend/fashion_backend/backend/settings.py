@@ -8,6 +8,10 @@ SECRET_KEY = "django-insecure-&a#c)q$s9m2d9-&5b)mhc9xx2is@6_uj#ns@*0_@qfg4!$x5o7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = [
+    "*",
+]  # Thay bằng IP/domain thực tế của VM Azure
+
 
 # Application definition
 
@@ -147,29 +151,16 @@ ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
-# CSRF_COOKIE_SAMESITE = "None"
-# CSRF_COOKIE_SECURE = True
-# CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPONLY = True
 
-# SESSION_COOKIE_HTTPONLY = True
-# SESSION_COOKIE_SAMESITE = "None"
-# SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = "Lax"
+SESSION_COOKIE_SECURE = False
 
-CORS_ALLOW_HEADERS = [
-    "content-type",
-    "authorization",
-    "x-csrftoken",
-    "accept",
-    "origin",
-]
-CORS_ALLOW_METHODS = [
-    "GET",
-    "POST",
-    "PUT",
-    "PATCH",
-    "DELETE",
-    "OPTIONS",
-]
+CORS_ALLOW_HEADERS = ["*"]
+CORS_ALLOW_METHODS = ["*"]
 SPECTACULAR_SETTINGS = {
     "TITLE": "Your Project API",
     "DESCRIPTION": "Your project description",
