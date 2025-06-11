@@ -45,28 +45,23 @@ jobs:
           script: |
             echo "Connected to Azure VM. Starting Python backend deployment process..."
 
-            # Đi đến thư mục chứa repository
             cd ${{ secrets.PROJECT_PATH }}
-
-            # Pull code mới từ GitHub
             git pull
+            cd pybackend
 
-            # Đi đến thư mục pybackend
-            cd ${{ secrets.PROJECT_PATH }}/pybackend
-
-            # Cài đặt dependencies nếu có thay đổi trong requirements.txt
-            if git diff --name-only HEAD^ HEAD | grep -q "pybackend/requirements.txt"; then
-              echo "Installing Python dependencies..."
-              pip install -r requirements.txt
+            # Kích hoạt virtualenv nếu có
+            if [ -d "venv" ]; then
+              source venv/bin/activate
             fi
 
-            # Xác định các tham số cho restart command
-            SERVER_TYPE="${{ github.event.inputs.server_type || 'uvicorn' }}"
-            SSL_FLAG="${{ github.event.inputs.use_ssl == 'true' && '--ssl' || '' }}"
-            MIGRATIONS_FLAG="${{ github.event.inputs.skip_migrations == 'true' && '--skip-migrations' || '' }}"
+            cd fashion_backend/backend
 
-            # Restart Python backend
-            echo "Restarting Python backend with server type: $SERVER_TYPE"
-            python run_azure_server.py --action restart --server $SERVER_TYPE $SSL_FLAG $MIGRATIONS_FLAG
+            # Tạo hoặc attach vào tmux session tên runserver
+            if ! tmux has-session -t runserver 2>/dev/null; then
+              tmux new-session -d -s runserver
+            fi
 
-            echo "Python backend deployed successfully."
+            # Chạy lệnh trong tmux session
+            tmux send-keys -t runserver "python manage.py runserver 0.0.0.0:8000" C-m
+
+            echo "Python backend started in tmux session 'runserver'."
