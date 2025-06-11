@@ -153,7 +153,6 @@ CORS_ALLOW_METHODS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5500",
     "http://127.0.0.1:5500",
-    "*",
 ]
 
 # Cookie settings: mở hoàn toàn
