@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",  # Đảm bảo nằm ở đầu
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -146,8 +146,9 @@ JAZZMIN_UI_TWEAKS = {
 ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = ["*"]
-CORS_ALLOW_METHODS = ["*"]
+# Để mặc định headers/methods hoặc liệt kê cụ thể nếu cần
+# CORS_ALLOW_HEADERS = ["*"]
+# CORS_ALLOW_METHODS = ["*"]
 
 # Nếu frontend chạy ở localhost, thêm nó vào đây để CSRF không bị chặn
 CSRF_TRUSTED_ORIGINS = [
@@ -155,7 +156,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:5500",
 ]
 
-# Cookie settings: mở hoàn toàn
+# Cookie settings: chỉ dùng None khi SECURE=True
 CSRF_COOKIE_SAMESITE = "None"
 CSRF_COOKIE_SECURE = False
 CSRF_COOKIE_HTTPONLY = False
