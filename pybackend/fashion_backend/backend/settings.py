@@ -10,6 +10,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "*",
+    "20.255.56.110",
+    "127.0.0.1",
+    "localhost",
 ]  # Thay bằng IP/domain thực tế của VM Azure
 
 
@@ -143,26 +146,34 @@ JAZZMIN_UI_TWEAKS = {
     "theme": "journal",
     # "dark_mode_theme": "darkly",
 }
-ALLOWED_HOSTS = ["*"]
-CORS_ALLOW_ALL_ORIGINS = True
+ALLOWED_HOSTS = [
+    "*",
+    "20.255.56.110",
+    "127.0.0.1",
+    "localhost",
+]
+# CORS_ALLOW_ALL_ORIGINS = True  # Không dùng khi CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = ["*"]
 CORS_ALLOW_METHODS = ["*"]
 
-# Nếu frontend chạy ở localhost, thêm nó vào đây để CSRF không bị chặn
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5500",
     "http://127.0.0.1:5500",
+    "http://localhost:5500",
+    "http://20.255.56.110:8000",
 ]
 
-# Cookie settings: mở hoàn toàn
-CSRF_COOKIE_SAMESITE = "None"
+CSRF_COOKIE_SAMESITE = "Lax"
 CSRF_COOKIE_SECURE = False
-CSRF_COOKIE_HTTPONLY = False
+# CSRF_COOKIE_HTTPONLY = False  # Có thể bỏ dòng này, để mặc định
 
-SESSION_COOKIE_SAMESITE = "None"
+SESSION_COOKIE_SAMESITE = "Lax"
 SESSION_COOKIE_SECURE = False
-SESSION_COOKIE_HTTPONLY = False
+# SESSION_COOKIE_HTTPONLY = False  # Có thể bỏ dòng này, để mặc định
 SPECTACULAR_SETTINGS = {
     "TITLE": "Your Project API",
     "DESCRIPTION": "Your project description",
