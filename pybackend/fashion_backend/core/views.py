@@ -9,10 +9,10 @@ from django.db.models import Q
 from rest_framework.pagination import PageNumberPagination
 
 
-class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 5
-    page_size_query_param = "page_size"
-    max_page_size = 100
+# class StandardResultsSetPagination(PageNumberPagination):
+#     page_size = 5
+#     page_size_query_param = "page_size"
+#     max_page_size = 100
 
 
 class CategoryList(generics.ListAPIView):
@@ -39,7 +39,7 @@ class BrandList(generics.ListAPIView):
 
 class ProductList(generics.ListAPIView):
     serializer_class = serializers.ProductSerializer
-    pagination_class = StandardResultsSetPagination
+    # pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         queryset = models.Product.objects.all()
