@@ -1,6 +1,7 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.permissions import IsAdminUser
 from . import models, serializers
 from django.db.models import Count
 import random
@@ -142,3 +143,86 @@ class FilterProductsByCategory(APIView):
             return Response(
                 {"message": "No query provided"}, status=status.HTTP_400_BAD_REQUEST
             )
+
+
+# CRUD operations for Category (Admin only)
+class CategoryCreateView(generics.CreateAPIView):
+    """
+    Tạo category mới - chỉ admin
+    """
+
+    serializer_class = serializers.CategorySerializer
+    queryset = models.Category.objects.all()
+    permission_classes = [IsAdminUser]
+
+
+class CategoryUpdateView(generics.UpdateAPIView):
+    """
+    Cập nhật category - chỉ admin
+    """
+
+    serializer_class = serializers.CategorySerializer
+    queryset = models.Category.objects.all()
+    permission_classes = [IsAdminUser]
+    lookup_field = "id"
+
+
+class CategoryDeleteView(generics.DestroyAPIView):
+    """
+    Xóa category - chỉ admin
+    """
+
+    serializer_class = serializers.CategorySerializer
+    queryset = models.Category.objects.all()
+    permission_classes = [IsAdminUser]
+    lookup_field = "id"
+
+    def destroy(self, request, *args, **kwargs):
+        try:
+            instance = self.get_object()
+            # Kiểm tra xem có sản phẩm nào đang sử dụng category này không
+            products_count = models.Product.objects.filter(category=instance).count()
+            if products_count > 0:
+                return Response(
+                    {
+                        "message": f"Không thể xóa category này vì có {products_count} sản phẩm đang sử dụng."
+                    },
+                    status=status.HTTP_400_BAD_REQUEST,
+                )
+            self.perform_destroy(instance)
+            return Response(
+                {"message": "Category đã được xóa thành công."},
+                status=status.HTTP_204_NO_CONTENT,
+            )
+        except models.Category.DoesNotExist:
+            return Response(
+                {"message": "Category không tồn tại."}, status=status.HTTP_404_NOT_FOUND
+            )
+
+
+class CategoryDetailView(generics.RetrieveAPIView):
+    """
+    Lấy thông tin chi tiết của một category
+    """
+
+    serializer_class = serializers.CategorySerializer
+    queryset = models.Category.objects.all()
+    lookup_field = "id"
+
+
+class AdminCheckView(APIView):
+    """
+    Kiểm tra xem user có phải admin không
+    """
+
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        return Response(
+            {
+                "message": "Bạn có quyền admin",
+                "username": request.user.username,
+                "is_admin": request.user.is_staff,
+                "is_superuser": request.user.is_superuser,
+            }
+        )
