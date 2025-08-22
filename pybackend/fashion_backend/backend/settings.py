@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",  # Đảm bảo nằm ở đầu
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -138,33 +138,29 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
     ),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    # "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    # "PAGE_SIZE": 5,
 }
 JAZZMIN_UI_TWEAKS = {
     "theme": "journal",
     # "dark_mode_theme": "darkly",
 }
 ALLOWED_HOSTS = ["*"]
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://positively-genuine-lioness.ngrok-free.app",
+#     "https://real-apparently-wombat.ngrok-free.app",
+# ]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-# Để mặc định headers/methods hoặc liệt kê cụ thể nếu cần
+
+CSRF_COOKIE_SAMESITE = "Lax"
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPONLY = True
+
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = "Lax"
+SESSION_COOKIE_SECURE = False
+
 CORS_ALLOW_HEADERS = ["*"]
 CORS_ALLOW_METHODS = ["*"]
-
-# Nếu frontend chạy ở localhost, thêm nó vào đây để CSRF không bị chặn
-CSRF_TRUSTED_ORIGINS = [
-    "http://20.255.56.110:8000",
-]
-
-# Cookie settings: chỉ dùng None khi SECURE=True
-CSRF_COOKIE_SAMESITE = "None"
-CSRF_COOKIE_SECURE = False
-CSRF_COOKIE_HTTPONLY = False
-
-SESSION_COOKIE_SAMESITE = "None"
-SESSION_COOKIE_SECURE = False
-SESSION_COOKIE_HTTPONLY = False
 SPECTACULAR_SETTINGS = {
     "TITLE": "Your Project API",
     "DESCRIPTION": "Your project description",
