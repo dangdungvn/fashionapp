@@ -154,8 +154,7 @@ CORS_ALLOW_METHODS = ["*"]
 
 # Nếu frontend chạy ở localhost, thêm nó vào đây để CSRF không bị chặn
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5500",
-    "http://127.0.0.1:5500",
+    "http://20.255.56.110:8000",
 ]
 
 # Cookie settings: chỉ dùng None khi SECURE=True
