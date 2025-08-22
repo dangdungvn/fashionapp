@@ -39,7 +39,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware",  # Đảm bảo nằm ở đầu
+    # "corsheaders.middleware.CorsMiddleware",  # Đảm bảo nằm ở đầu
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -149,8 +149,8 @@ ALLOWED_HOSTS = ["*"]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 # Để mặc định headers/methods hoặc liệt kê cụ thể nếu cần
-# CORS_ALLOW_HEADERS = ["*"]
-# CORS_ALLOW_METHODS = ["*"]
+CORS_ALLOW_HEADERS = ["*"]
+CORS_ALLOW_METHODS = ["*"]
 
 # Nếu frontend chạy ở localhost, thêm nó vào đây để CSRF không bị chặn
 CSRF_TRUSTED_ORIGINS = [
